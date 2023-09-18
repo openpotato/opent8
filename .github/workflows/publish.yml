@@ -1,0 +1,18 @@
+name: publish 
+on:
+  push:
+    branches: 
+      - main
+jobs:
+  deploy:
+    name: Build and publish MkDocs website
+    if: github.event.repository.fork == false    
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material mkdocs-minify-plugin
+      - run: mkdocs gh-deploy --force
+        working-directory: website

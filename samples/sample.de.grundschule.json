@@ -1,0 +1,1195 @@
+{
+  "opent8": "0.0.1",
+  "info": {
+    "title": "Stundenplan 2023/2024",
+    "description": "Stundenplan für das Schuljahr 2023/2024",
+    "summary": "Der aktuelle Stundenplan für eine Grundschule (Jahrgangsstufe 1).",
+    "publishedAt": "2023-09-01T12:00:00",
+    "publishedFrom": "Meine-Grundschule, Berlin",
+    "source": {
+      "name": "MyTimeTableApp",
+      "version": "1.0"
+    }
+  },
+  "rooms": [
+    {
+      "id": "100",
+      "code": "100",
+      "name": "Raum 100",
+      "building": {
+        "refId": "HG"
+      }
+    },
+    {
+      "id": "101",
+      "code": "101",
+      "name": "Raum 101",
+      "building": {
+        "refId": "HG"
+      }
+    },
+    {
+      "id": "200",
+      "code": "200",
+      "name": "Musikraum 200",
+      "building": {
+        "refId": "NG"
+      }
+    },
+    {
+      "id": "Halle",
+      "code": "Halle",
+      "name": "Sporthalle"
+    }
+  ],
+  "buildings": [
+    {
+      "id": "HG",
+      "code": "HG",
+      "name": "Hauptgebäude"
+    },
+    {
+      "id": "NG",
+      "code": "NG",
+      "name": "Nebengebäude"
+    }
+  ],
+  "supervisionAreas": [
+    {
+      "id": "Hof",
+      "code": "Hof",
+      "name": "Pausenhof"
+    }
+  ],
+  "subjects": [
+    {
+      "id": "DE",
+      "code": "DE",
+      "name": "Deutsch"
+    },
+    {
+      "id": "MA",
+      "code": "DE",
+      "name": "Mathematik"
+    },
+    {
+      "id": "MU",
+      "code": "DE",
+      "name": "Musik"
+    },
+    {
+      "id": "BK",
+      "code": "BK",
+      "name": "Bildende Kunst"
+    },
+    {
+      "id": "SK",
+      "code": "SK",
+      "name": "Sachkunde"
+    },
+    {
+      "id": "RE",
+      "code": "RE",
+      "name": "Religion"
+    },
+    {
+      "id": "LK",
+      "code": "LK",
+      "name": "Lebenskunde"
+    },
+    {
+      "id": "SP",
+      "code": "SP",
+      "name": "Sport"
+    }
+  ],
+  "persons": [
+    {
+      "id": "Max",
+      "code": "Max",
+      "lastName": "Mustermann",
+      "firstName": "Max"
+    },
+    {
+      "id": "Eli",
+      "code": "Eli",
+      "lastName": "Musterfrau",
+      "firstName": "Elisabeth"
+    },
+    {
+      "id": "Jon",
+      "code": "Jon",
+      "lastName": "Schmidt",
+      "firstName": "Jonas"
+    },
+    {
+      "id": "Mia",
+      "code": "Mia",
+      "lastName": "Berger",
+      "firstName": "Mia"
+    },
+    {
+      "id": "Leo",
+      "code": "Leo",
+      "lastName": "Meister",
+      "firstName": "Leopold"
+    }
+  ],
+  "roles": [
+    {
+      "id": "LER",
+      "code": "LER",
+      "key": "DE.LEHR",
+      "name": {
+        "singular": "Lehrer*in",
+        "plural": "Lehrer*innen"
+      }
+    },
+    {
+      "id": "ERZ",
+      "code": "ERZ",
+      "key": "DE.ERZI",
+      "name": {
+        "singular": "Erzieher*in",
+        "plural": "Erzieher*innen"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "1a",
+      "code": "1a",
+      "name": "Klasse 1a",
+      "groupType": {
+        "refId": "KLA"
+      }
+    },
+    {
+      "id": "1b",
+      "code": "1b",
+      "name": "Klasse 1b",
+      "groupType": {
+        "refId": "KLA"
+      }
+    }
+  ],
+  "groupTypes": [
+    {
+      "id": "KLA",
+      "code": "KLA",
+      "key": "DE.KLAS",
+      "name": {
+        "singular": "Klasse",
+        "plural": "Klassen"
+      }
+    }
+  ],
+  "courses": [
+    {
+      "id": "DE-1A",
+      "code": "DE",
+      "name": "Deutsch",
+      "subject": {
+        "refId": "DE"
+      },
+      "groups": [
+        {
+          "refId": "1a"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Max",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "DE-1B",
+      "code": "DE",
+      "name": "Deutsch",
+      "subject": {
+        "refId": "DE"
+      },
+      "groups": [
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Eli",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "MA-1A",
+      "code": "MA",
+      "name": "Mathematik",
+      "subject": {
+        "refId": "MA"
+      },
+      "groups": [
+        {
+          "refId": "1a"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Max",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "MA-1B",
+      "code": "MA",
+      "name": "Mathematik",
+      "subject": {
+        "refId": "MA"
+      },
+      "groups": [
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Eli",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "BK-1A",
+      "code": "BK",
+      "name": "Kunst",
+      "subject": {
+        "refId": "BK"
+      },
+      "groups": [
+        {
+          "refId": "1a"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Max",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "BK-1B",
+      "code": "BK",
+      "name": "Kunst",
+      "subject": {
+        "refId": "BK"
+      },
+      "groups": [
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Eli",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "MU-1A",
+      "code": "MU",
+      "name": "Musik",
+      "subject": {
+        "refId": "MU"
+      },
+      "groups": [
+        {
+          "refId": "1a"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Max",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "MU-1B",
+      "code": "MU",
+      "name": "Musik",
+      "subject": {
+        "refId": "MU"
+      },
+      "groups": [
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Eli",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "SK-1A",
+      "code": "SK",
+      "name": "Sachkunde",
+      "subject": {
+        "refId": "SK"
+      },
+      "groups": [
+        {
+          "refId": "1a"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Max",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "SK-1B",
+      "code": "SK",
+      "name": "Sachkunde",
+      "subject": {
+        "refId": "SK"
+      },
+      "groups": [
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Eli",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "SP-1",
+      "code": "SP-1",
+      "name": "Sport",
+      "subject": {
+        "refId": "SP"
+      },
+      "groups": [
+        {
+          "refId": "1a"
+        },
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Max",
+          "role": {
+            "refId": "LER"
+          }
+        },
+        {
+          "refId": "Eli",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "RE-1",
+      "code": "RE-1",
+      "name": "Religion",
+      "subject": {
+        "refId": "RE"
+      },
+      "groups": [
+        {
+          "refId": "1a"
+        },
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Mia",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "LK-1",
+      "code": "LK-1",
+      "name": "Lebenskunde",
+      "subject": {
+        "refId": "LK"
+      },
+      "groups": [
+        {
+          "refId": "1a"
+        },
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Jon",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "KR-1A",
+      "code": "KR",
+      "name": "Klassenrat",
+      "groups": [
+        {
+          "refId": "1a"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Max",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    },
+    {
+      "id": "KR/1B",
+      "code": "KR",
+      "name": "Klassenrat",
+      "groups": [
+        {
+          "refId": "1b"
+        }
+      ],
+      "attendees": [
+        {
+          "refId": "Eli",
+          "role": {
+            "refId": "LER"
+          }
+        }
+      ]
+    }
+  ],
+  "timeFrames": [
+    {
+      "id": "default",
+      "code": "Unterricht",
+      "name": "Unterrichtsraster",
+      "scopeOfWeek": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "timeSlots": [
+        {
+          "code": "1",
+          "label": "1. Stunde",
+          "startTime": "08:00:00",
+          "endTime": "08:45:00"
+        },
+        {
+          "code": "2",
+          "label": "2. Stunde",
+          "startTime": "09:05:00",
+          "endTime": "09:50:00"
+        },
+        {
+          "code": "3",
+          "label": "3. Stunde",
+          "startTime": "10:10:00",
+          "endTime": "10:55:00"
+        },
+        {
+          "code": "4",
+          "label": "4. Stunde",
+          "startTime": "11:00:00",
+          "endTime": "11:45:00"
+        },
+        {
+          "code": "5",
+          "label": "5. Stunde",
+          "startTime": "12:20:00",
+          "endTime": "13:05:00"
+        }
+      ]
+    },
+    {
+      "id": "break",
+      "code": "Pausen",
+      "name": "Pausenraster",
+      "scopeOfWeek": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "timeSlots": [
+        {
+          "code": "Frühstück",
+          "label": "Frühstück",
+          "startTime": "08:45:00",
+          "endTime": "09:05:00"
+        },
+        {
+          "code": "Hofpause-1",
+          "label": "Hofpause",
+          "startTime": "09:50:00",
+          "endTime": "10:10:00"
+        },
+        {
+          "code": "Pause",
+          "label": "Kleine Pause",
+          "startTime": "10:55:00",
+          "endTime": "11:00:00"
+        },
+        {
+          "code": "Hofpause-2",
+          "label": "Hofpause",
+          "startTime": "11:45:00",
+          "endTime": "12:20:00"
+        },
+        {
+          "code": "Mittag",
+          "label": "Mittagessen",
+          "startTime": "13:05:00",
+          "endTime": "14:00:00"
+        }
+      ]
+    }
+  ],
+  "schedule": {
+    "validFrom": "2023-09-04",
+    "validTo": "2024-02-02",
+    "defaultTimeFrame": {
+      "refId": "default"
+    },
+    "scheduleElements": [
+      {
+        "type": "lesson",
+        "id": "DE-1A",
+        "code": "DE",
+        "course": {
+          "refId": "DE-1A"
+        },
+        "rooms": [
+          {
+            "refId": "100"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T09:05:00",
+            "endTimepoint": "2023-09-04T09:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T09:05:00",
+            "endTimepoint": "2023-09-05T09:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T09:05:00",
+            "endTimepoint": "2023-09-06T09:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T10:10:00",
+            "endTimepoint": "2023-09-06T10:55:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T08:00:00",
+            "endTimepoint": "2023-09-07T08:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-08T09:05:00",
+            "endTimepoint": "2023-09-08T09:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-08T10:10:00",
+            "endTimepoint": "2023-09-08T10:55:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "MA-1A",
+        "code": "MA",
+        "course": {
+          "refId": "MA-1A"
+        },
+        "rooms": [
+          {
+            "refId": "100"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T10:10:00",
+            "endTimepoint": "2023-09-04T10:55:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T10:10:00",
+            "endTimepoint": "2023-09-05T10:55:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T08:00:00",
+            "endTimepoint": "2023-09-06T08:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T09:05:00",
+            "endTimepoint": "2023-09-07T05:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-08T08:00:00",
+            "endTimepoint": "2023-09-08T08:45:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "BK-1A",
+        "code": "BK",
+        "course": {
+          "refId": "BK-1A"
+        },
+        "rooms": [
+          {
+            "refId": "100"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T11:00:00",
+            "endTimepoint": "2023-09-04T11:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T12:20:00",
+            "endTimepoint": "2023-09-04T13:05:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "MU-1A",
+        "code": "MU",
+        "course": {
+          "refId": "MU-1A"
+        },
+        "rooms": [
+          {
+            "refId": "200"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T11:00:00",
+            "endTimepoint": "2023-09-06T11:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T12:20:00",
+            "endTimepoint": "2023-09-07T13:05:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "SK-1A",
+        "code": "SK",
+        "course": {
+          "refId": "SK-1A"
+        },
+        "rooms": [
+          {
+            "refId": "100"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T11:00:00",
+            "endTimepoint": "2023-09-05T11:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T10:10:00",
+            "endTimepoint": "2023-09-07T10:55:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "KR-1A",
+        "code": "KR",
+        "description": "Dieser Unterricht findet nicht immer statt",
+        "course": {
+          "refId": "KR-1A"
+        },
+        "rooms": [
+          {
+            "refId": "100"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-08T11:00:00",
+            "endTimepoint": "2023-09-08T11:45:00",
+            "weeks": [
+              "2023:36,38,40,42,44,46,48,50",
+              "2024:1-4"
+            ]
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "DE-1B",
+        "code": "DE",
+        "course": {
+          "refId": "DE-1B"
+        },
+        "rooms": [
+          {
+            "refId": "101"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T09:05:00",
+            "endTimepoint": "2023-09-04T09:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T10:10:00",
+            "endTimepoint": "2023-09-04T10:55:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T09:05:00",
+            "endTimepoint": "2023-09-05T09:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T10:10:00",
+            "endTimepoint": "2023-09-05T10:55:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T09:05:00",
+            "endTimepoint": "2023-09-06T09:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-08-07T08:00:00",
+            "endTimepoint": "2023-08-07T08:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-08T09:05:00",
+            "endTimepoint": "2023-09-08T09:50:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "MA-1B",
+        "code": "MA",
+        "course": {
+          "refId": "MA-1B"
+        },
+        "rooms": [
+          {
+            "refId": "101"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T08:00:00",
+            "endTimepoint": "2023-09-04T08:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T08:00:00",
+            "endTimepoint": "2023-09-05T08:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T10:10:00",
+            "endTimepoint": "2023-09-06T10:55:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T09:05:00",
+            "endTimepoint": "2023-09-07T05:50:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-08T10:10:00",
+            "endTimepoint": "2023-09-08T10:55:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "BK-1B",
+        "code": "BK",
+        "course": {
+          "refId": "BK-1B"
+        },
+        "rooms": [
+          {
+            "refId": "101"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T11:00:00",
+            "endTimepoint": "2023-09-06T11:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T12:20:00",
+            "endTimepoint": "2023-09-06T13:05:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "MU-1B",
+        "code": "MU",
+        "course": {
+          "refId": "MU-1B"
+        },
+        "rooms": [
+          {
+            "refId": "200"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T11:00:00",
+            "endTimepoint": "2023-09-05T11:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T10:10:00",
+            "endTimepoint": "2023-09-07T10:55:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "SK-1B",
+        "code": "SK",
+        "course": {
+          "refId": "SK-1B"
+        },
+        "rooms": [
+          {
+            "refId": "100"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T12:20:00",
+            "endTimepoint": "2023-09-07T13:05:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-08T11:00:00",
+            "endTimepoint": "2023-09-08T11:45:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "RE-1",
+        "code": "RE",
+        "course": {
+          "refId": "RE-1"
+        },
+        "rooms": [
+          {
+            "refId": "100"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T11:00:00",
+            "endTimepoint": "2023-09-07T11:45:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "LK-1",
+        "code": "LK",
+        "course": {
+          "refId": "LK-1"
+        },
+        "rooms": [
+          {
+            "refId": "101"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T11:00:00",
+            "endTimepoint": "2023-09-07T11:45:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "SP-1",
+        "code": "SP",
+        "course": {
+          "refId": "SP-1"
+        },
+        "rooms": [
+          {
+            "refId": "Halle"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T08:00:00",
+            "endTimepoint": "2023-09-04T08:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T08:00:00",
+            "endTimepoint": "2023-09-05T08:45:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T12:20:00",
+            "endTimepoint": "2023-09-06T13:05:00"
+          }
+        ]
+      },
+      {
+        "type": "event",
+        "id": "Hort",
+        "code": "Hort",
+        "description": "Hort am Nachmittag",
+        "attendees": [
+          {
+            "refId": "Leo",
+            "role": {
+              "refId": "ERZ"
+            }
+          }
+        ],
+        "rooms": [
+          {
+            "refId": "100"
+          },
+          {
+            "refId": "101"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-04T12:20:00",
+            "endTimepoint": "2023-09-04T16:30:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-05T12:20:00",
+            "endTimepoint": "2023-09-05T16:30:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-06T12:20:00",
+            "endTimepoint": "2023-09-06T16:30:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-07T12:20:00",
+            "endTimepoint": "2023-09-07T16:30:00"
+          },
+          {
+            "type": "weekly",
+            "startTimepoint": "2023-09-08T12:20:00",
+            "endTimepoint": "2023-09-08T16:00:00"
+          }
+        ]
+      },
+      {
+        "type": "holiday",
+        "id": "HerFe",
+        "code": "HerFe",
+        "name": "Herbstferien",
+        "holidayType": "school",
+        "temporalExpressions": [
+          {
+            "type": "onetime",
+            "startTimepoint": "2023-11-23T12:00:00",
+            "endTimepoint": "2023-11-04T12:00:00"
+          }
+        ]
+      },
+      {
+        "type": "holiday",
+        "id": "WeiFe",
+        "code": "WeiFe",
+        "name": "Weihnachtsferien",
+        "holidayType": "school",
+        "temporalExpressions": [
+          {
+            "type": "onetime",
+            "startTimepoint": "2023-12-23T12:00:00",
+            "endTimepoint": "2024-01-05T12:00:00"
+          }
+        ]
+      },
+      {
+        "type": "holiday",
+        "id": "WinFe",
+        "code": "WinFe",
+        "name": "Winterferien",
+        "holidayType": "school",
+        "temporalExpressions": [
+          {
+            "type": "onetime",
+            "startTimepoint": "2024-02-05T12:00:00",
+            "endTimepoint": "2024-02-10T12:00:00"
+          }
+        ]
+      },
+      {
+        "type": "gap",
+        "id": "G-1",
+        "code": "G-1",
+        "description": "Das ist eine Fehlstelle",
+        "reference": {
+          "type": "lesson",
+          "refId": "DE-1A"
+        },
+        "reasons": [
+          {
+            "type": "absence",
+            "id": "A-1",
+            "code": "Krank",
+            "description": "Lehrer ist krank",
+            "reference": {
+              "type": "person",
+              "refId": "Max"
+            }
+          }
+        ],
+        "resolutions": [
+          {
+            "type": "substitution",
+            "id": "V-1",
+            "code": "Ersatz",
+            "description": "Der Erzieher springt ein",
+            "reference": {
+              "type": "lesson",
+              "refId": "Vertretung-1"
+            }
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "onetime",
+            "startTimepoint": "2023-09-04T08:00:00",
+            "endTimepoint": "2023-09-04T08:45:00"
+          }
+        ]
+      },
+      {
+        "type": "lesson",
+        "id": "Vertretung-1",
+        "code": "Vertretung",
+        "description": "Das ist eine Vertretung",
+        "attendees": [
+          {
+            "refId": "Leo",
+            "role": {
+              "refId": "ERZ"
+            }
+          }
+        ],
+        "rooms": [
+          {
+            "refId": "102"
+          }
+        ],
+        "temporalExpressions": [
+          {
+            "type": "onetime",
+            "startTimepoint": "2023-09-04T08:00:00",
+            "endTimepoint": "2023-09-04T08:45:00"
+          }
+        ]
+      }
+    ]
+  }
+}

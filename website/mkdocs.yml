@@ -1,0 +1,85 @@
+# Project information
+site_name: OpenT8
+site_description: 'Documentation for OpenT8'
+site_author: 'STÜBER SYSTEMS GmbH'
+site_url: 'https://openpotato.github.io/opent8/'
+
+# Copyright
+copyright:
+  '&copy; 2023 STÜBER SYSTEMS GmbH'
+
+# Repository
+repo_name: 'Auf GitHub'
+repo_url: 'https://github.com/openpotato/opent8'
+
+# Theming
+theme: 
+  name: material
+  language: de
+  features:
+    - navigation.footer
+    - navigation.instant
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+  palette:
+    - scheme: default
+      primary: 'indigo'
+      accent: 'amber'
+      toggle:
+        icon: material/brightness-7
+        name: In den Dunkelmodus wechseln
+    - scheme: slate
+      primary: 'indigo'
+      accent: 'amber'
+      toggle:
+        icon: material/brightness-4
+        name: In den Hellmodus wechseln
+  font: false
+  include_search_page: false
+  search_index_only: true
+  static_templates:
+    - 404.html
+
+# Customization
+extra_css:
+  - assets/css/custom.css
+    
+# Social media
+extra:
+  social:
+    - icon: fontawesome/brands/mastodon 
+      link: https://fosstodon.org/@openpotato
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/openpotatis
+
+# Plugins
+plugins:
+    - search
+    - minify:
+        minify_html: true
+
+# Extensions    
+markdown_extensions:
+  - def_list
+  - admonition
+  - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+
+# Navigation  
+nav:
+- Einführung: index.md
+- Spezifikation: specification.md
+- Community: community.md
+- Änderungslog: change-log.md
