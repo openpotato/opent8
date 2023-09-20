@@ -568,7 +568,7 @@ Hier ein Beispiel für einen Zeitrahmen in einer Grundschule (Jahrgangsstufe 1):
 
 Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z. B. `0.1`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.1` unterstützen, MÜSSEN mit allen `0.1.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.1.0` und `0.1.1` gemacht wird.
 
-Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version von OpenT8-Spezifikation angibt.
+Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
 ### Format
 
@@ -597,15 +597,16 @@ Beispiele:
 Kalenderwochen werden durch ein JSON-Array mit formatierten Strings repräsentiert. Jeder formatierte String definiert die Menge der gewünschten Kalenderwochen für genau ein benanntes Jahr. Der Syntax lautet:
 
 ```
-Jahr:Wochennummer[,Wochennummer]
+<Jahr>:(<Kalenderwoche>|<Kalenderwoche>-<Kalenderwoche>)[,(<Kalenderwoche>|<Kalenderwoche>-<Kalenderwoche>)]
 ```
 
 Eine Kalenderwoche ist nach ISO 8601 wie folgt definiert:
 
 + Kalenderwochen haben 7 Tage, beginnen an einem Montag und werden über das Jahr fortlaufend nummeriert.
 + Die Kalenderwoche 1 eines Jahres ist diejenige, die den ersten Donnerstag enthält.
++ Je nach Jahr kann es entweder 52 oder 53 Kalenderwochen geben.
 
-Statt einzelner Wochennummern (z.B. `10,11,12`) können optional auch Wochennummernbereiche  (z.B. `10-12`) definiert werden.
+Statt einzelner Kalenderwochen (z.B. `10`) können auch Kalenderwochenbereiche (z.B. `10-12`) definiert werden.
 
 Ein Beispiel, bei dem für das Jahr 2023 die Kalenderwochen 36,38,40,42,44,46,48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:
 
@@ -719,7 +720,7 @@ Das `info`-Objekt enthält Metadaten zum Stundenplan:
 
 **`publishedFrom`**
 
-:   Verantwortlicher für die Veröffentlichung des Stundenplans.
+:   Wem gehört der Stundenplan?
 
 **`language`**
 
@@ -871,8 +872,8 @@ Das `role`-Objekt repräsentiert einen Rolle, mit der Teilnehmer kategorisiert w
 
 :   Name oder Bezeichnung der Teilnehmerrolle. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    + **`plural`** : Der Name oder die Bezeichnung im Simgular. **Dieses Feld ist ERFORDERLICH**.
-    + **`singular`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
+    + **`singular`** : Der Name oder die Bezeichnung im Singular. **Dieses Feld ist ERFORDERLICH**.
+    + **`plural`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
 
 **`description`** 
 
@@ -955,8 +956,8 @@ Das `groupType`-Objekt repräsentiert einen Gruppentyp, mit dem Gruppen kategori
 
 :   Name oder Bezeichnung des Gruppentyps. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    + **`plural`** : Der Name oder die Bezeichnung im Simgular. **Dieses Feld ist ERFORDERLICH**.
-    + **`singular`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
+    + **`singular`** : Der Name oder die Bezeichnung im Singular. **Dieses Feld ist ERFORDERLICH**.
+    + **`plural`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
 
 **`description`** 
 
@@ -1176,7 +1177,7 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
 
 **`scopeOfWeek`** 
 
-:   Die Menge der Wochentage, die bei einer wöchtenlichen Darstellung des Stundenplans berücksichtigt werden sollen (z.B. nur Montag bis Samstag). **Dieses Feld ist ERFORDERLICH**.
+:   Die Menge der Wochentage, die bei einer wöchenlichen Darstellung des Stundenplans berücksichtigt werden sollen (z.B. nur Montag bis Samstag). **Dieses Feld ist ERFORDERLICH**.
 
     Folgende Werte sind definiert:
 
@@ -1192,7 +1193,7 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
 
 **`startOfWeek`** 
 
-:   Der Wochentag, mit dem bei einer wöchtenlichen Darstellung des Stundenplans begonnen werden soll. Der Standardwert ist `mon`.
+:   Der Wochentag, mit dem bei einer wöchenlichen Darstellung des Stundenplans begonnen werden soll. Der Standardwert ist `mon`.
 
     Folgende Werte sind definiert:
 
@@ -1318,7 +1319,7 @@ Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehren Auf
 
 **`attendees`** 
 
-:   Eine Liste von Teilnehmerreferenzen. Dies MUSS ein Array mit `attendeeRef`-Objekten sein. 
+:   Eine Liste von Teilnehmerreferenzen. Dies MUSS ein Array mit `attendee`-Objekten sein. 
 
 **`areas`** 
 
@@ -1332,7 +1333,7 @@ Dieses Objekt KANN erweitert werden.
 
 #### event-Objekt
 
-Das `event`-Objekt repräsentiert ein Termin, dass sich nicht durch eine Veranstaltung ausdrücken lässt (z.B. eine Prüfing oder ein Meeting):
+Das `event`-Objekt repräsentiert ein Termin, dass sich nicht durch eine Veranstaltung ausdrücken lässt (z.B. eine Prüfung oder ein Meeting):
 
 **`type`** 
 
@@ -1364,7 +1365,7 @@ Das `event`-Objekt repräsentiert ein Termin, dass sich nicht durch eine Veranst
 
 **`attendees`** 
 
-:   Eine Liste von Teilnehmerreferenzen. Dies MUSS ein Array mit `attendeeRef`-Objekten sein. 
+:   Eine Liste von Teilnehmerreferenzen. Dies MUSS ein Array mit `attendee`-Objekten sein. 
 
 **`rooms`** 
 
@@ -1392,8 +1393,8 @@ Das `eventType`-Objekt repräsentiert einen Ereignistyp, mit dem Ereignisse kate
 
 :   Name oder Bezeichnung des Ereignistyps. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    + **`plural`** : Der Name oder die Bezeichnung im Simgular. **Dieses Feld ist ERFORDERLICH**.
-    + **`singular`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
+    + **`singular`** : Der Name oder die Bezeichnung im Singular. **Dieses Feld ist ERFORDERLICH**.
+    + **`plural`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
 
 **`description`** 
 
@@ -1795,11 +1796,11 @@ Das `reference`-Objekt definiert einen generischen Verweis auf ein anderes Objek
 
 + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen Objektes sein. **Dieses Feld ist ERFORDERLICH**.
 
-#### attendeeRef-Objekt
+#### attendee-Objekt
 
-Das `attendeeRef`-Objekt definiert einen Verweis auf ein `attendee`-Objekt:
+Das `attendee`-Objekt definiert einen Verweis auf ein `person`-Objekt verbunden mit einer Rolle:
 
-+ **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `attendee`-Objektes sein. **Dieses Feld ist ERFORDERLICH**.
++ **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes sein. **Dieses Feld ist ERFORDERLICH**.
 + **`role`** : Verweis auf eine Teilnehmerrolle. Dies MUSS ein `reference`-Objekt sein. **Dieses Feld ist ERFORDERLICH**.
 
 ### Erweiterung der Spezifikation
