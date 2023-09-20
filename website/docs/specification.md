@@ -190,13 +190,15 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
 "scheduleElements": [
   {
     "type": "supervision",
-    "id": "WeiFe",
-    "code": "WeiFe",
+    "id": "aufsicht-1",
+    "code": "Aufsicht",
     "name": "Pausenaufsicht",
     "attendees": [
       {
         "refId": "Leo",
-        "role": "DE.EZ"
+        "role": {
+          "refId": "ERZ"
+        }
       }
     ],
     "areas": [
@@ -247,11 +249,15 @@ Hier ein Beispiel für ein Meeting:
     "attendees": [
       {
         "refId": "Max",
-        "role": "DE.LE"
+        "role": {
+          "refId": "LEH"
+        }
       },
       {
         "refId": "Eli",
-        "role": "DE.LE"
+        "role": {
+          "refId": "LEH"
+        }
       }
     ],
     "rooms": [
@@ -315,7 +321,7 @@ Hier ein Beispiel für einen Hinweis zum Feueralarm:
 "scheduleElements": [
   {
     "type": "announcement",
-    "id": "alarm",
+    "id": "alarm-1",
     "code": "alarm",
     "name": "Feueralarmübung",
     "description": "Feueralarmübung am Morgen",
@@ -344,16 +350,20 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
     "id": "G-1",
     "code": "G-1",
     "description": "Das ist eine Fehlstelle",
-    "refType": "lesson",
-    "refId": "DE-1A",
+	"reference": {
+	  "type": "lesson",
+	  "refId": "DE-1A"
+	},
     "reasons": [
       {
         "type": "absence",
         "id": "A-1",
         "code": "Krank",
         "description": "Lehrer ist krank",
-        "refType": "attendee",
-        "refId": "Max"
+		"reference": {
+          "type": "attendee",
+          "refId": "Max"
+		}
       }
     ],
     "resolutions": [
@@ -362,8 +372,10 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
         "id": "V-1",
         "code": "Ersatz",
         "description": "Der Erzieher springt ein",
-        "refType": "lesson",
-        "refId": "Vertretung-1"
+		"reference": {
+          "type": "lesson",
+          "refId": "Vertretung-1"
+		}
       }
     ],
     "temporalExpressions": [
@@ -1506,9 +1518,20 @@ Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
 
 :   Eine kurze Beschreibung der Fehlstelle.
 
-**`color`** 
+**`reference`** 
 
-:   Ein Farbwert (Hex-Kodierung) für die Fehlstelle.
+:   Verweis auf eine Veranstaltung oder eine Aufsicht. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
+
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+	
+	    Mögliche Werte sind:
+    
+	    Wert          | Beschreibung
+        ------------- | ------------
+        `lesson`      | Veranstaltung, die nicht wie geplant stattfinden kann.
+        `supervision` | Aufsicht, die nicht wie geplant stattfinden kann.
+		
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`.  **Dieses Feld ist ERFORDERLICH**.
 
 **`reasons`** 
 
@@ -1548,19 +1571,21 @@ Das `absence`-Objekt definiert eine Abwesenheit:
 
 :   Eine kurze Beschreibung der Abwesenheit.
 
-**`refType`** 
+**`reference`** 
 
-:   Die Typisierung des Feldes `refId`. Mögliche Werte sind:
-   
-    Wert     | Beschreibung
-    -------- | ------------
-    `person` | Eine teilnehmende Person (z.B. der Lehrer) ist abwesend.
-    `group`  | Eine Gruppe is abwesend.
-    `room`   | Der Raum steht nicht zur Verfügung.
+:   Referenz zu einer Person, einer Gruppe oder einem Raum. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-**`refId`** 
-
-:   Verweis auf einen Teilnehmer, eine Gruppe oder einen Raum. Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `attendee`-Objektes, eines vorhandenen `group`-Objektes oder eines vorhandenen `room`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `refType`. 
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+	
+	    Mögliche Werte sind:
+    
+	    Wert     | Beschreibung
+        -------- | ------------
+        `person` | Eine teilnehmende Person (z.B. der Lehrer) ist abwesend.
+        `group`  | Eine Gruppe is abwesend.
+        `room`   | Der Raum steht nicht zur Verfügung.
+		
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes, eines vorhandenen `group`-Objektes oder eines vorhandenen `room`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1588,17 +1613,19 @@ Das `stash`-Objekt definiert eine Freistellung:
 
 :   Eine kurze Beschreibung der Freistellung.
 
-**`refType`** 
+**`reference`** 
 
-:   Die Typisierung des Feldes `refId`. Mögliche Werte sind:
+:   Referenz zu einer Person. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    Wert     | Beschreibung
-    ---------| ------------
-    `person` | Eine teilnehmende Person (z.B. der Lehrer) ist freigestellt.
-
-**`refId`** 
-
-:   Verweis auf einen Teilnehmer. Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `attendee`-Objektes sein. 
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+	
+	    Mögliche Werte sind:
+    
+	    Wert     | Beschreibung
+        -------- | ------------
+        `person` | Eine teilnehmende Person (z.B. der Lehrer) ist freigestellt.
+		
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1626,18 +1653,20 @@ Das `substitution`-Objekt definiert eine Vertretung:
 
 :   Eine kurze Beschreibung der Vertretung.
 
-**`refType`** 
+**`reference`** 
 
-:   Die Typisierung des Feldes `refId`. Mögliche Werte sind:
+:   Verweis auf eine Veranstaltung oder eine Aufsicht. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    Wert          | Beschreibung
-    ------------- | ------------
-    `lesson`      | Veranstaltung, die vertreten wird.
-    `supervision` | Aufsicht, die vertreten wird.
-
-**`refId`** 
-
-:   Verweis auf eine Veranstaltung oder eine Aufsicht. Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `refType`. 
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+	
+	    Mögliche Werte sind:
+    
+	    Wert          | Beschreibung
+        ------------- | ------------
+        `lesson`      | Neue Veranstaltung als Vertretung.
+        `supervision` | Neue Aufsicht als Vertretung.
+		
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`.  **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 

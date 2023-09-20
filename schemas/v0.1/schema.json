@@ -1239,7 +1239,7 @@
           "type": "string"
         },
         "reference": {
-          "description": "A reference to a lessonor a supervision",
+          "description": "A reference to a lesson or a supervision",
           "type": "object",
           "properties": {
             "type": {
