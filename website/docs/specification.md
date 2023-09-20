@@ -16,7 +16,7 @@ OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendunge
 
 ### OpenT8-Dokument
 
-Ein OpenT8-Dokument ist eine in sich geschlossene Ressource, die einen Stundenplan oder Dienstplan definiert und beschreibt. Es MÜSSEN mindestens die Felder `opent8`, `source` und `schedule` enthalten sein. Ein OpenT8-Dokument verwendet die OpenT8-Spezifikation und ist mit ihr konform.
+Ein OpenT8-Dokument ist eine in sich geschlossene Ressource, die einen Stundenplan oder Dienstplan definiert und beschreibt. Es MÜSSEN mindestens die Felder `opent8`, `info` und `schedule` enthalten sein. Ein OpenT8-Dokument verwendet die OpenT8-Spezifikation und ist mit ihr konform.
 
 ### Teilnehmer
 
