@@ -8,7 +8,7 @@
     "opent8": {
       "description": "The version of the OpenT8 Document Schema",
       "type": "string",
-      "pattern": "^0\\.0\\.\\d+$"
+      "pattern": "^0\\.1\\.\\d+$"
     },
     "info": {
       "$ref": "#/$defs/info"
@@ -1535,12 +1535,12 @@
           ]
         },
         "operation": {
-          "description": "Should this temporal expression be added or subtracted?",
+          "description": "Should this temporal expression be included or excluded?",
           "enum": [
-            "add",
-            "subtract"
+            "include",
+            "exclude"
           ],
-          "default": "add"
+          "default": "include"
         }
       },
       "required": [
@@ -1574,6 +1574,24 @@
           "examples ": [
             "2023-09-01T10:45:00",
             "2023-09-01T10:45:00+02:00"
+          ]
+        },
+        "days": {
+          "description": "Set of valid date weeks per year",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\d+:(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9]))(,(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9])))*$"
+          },
+          "examples ": [
+            [
+              "2023:36,38,41,44,47,50",
+              "2024:1,2,3,4"
+            ],
+            [
+              "2023:37-40,44-47,51",
+              "2024:1-4"
+            ]
           ]
         },
         "weeks": {
@@ -1611,13 +1629,13 @@
           ]
         },
         "operation": {
-          "description": "Should this temporal expression be added or subtracted?",
+          "description": "Should this temporal expression be included or excluded?",
           "type": "string",
           "enum": [
-            "add",
-            "subtract"
+            "include",
+            "exclude"
           ],
-          "default": "add"
+          "default": "include"
         }
       },
       "required": [

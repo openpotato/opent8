@@ -496,13 +496,13 @@ Hier ein Beispiel für einen zeitlichen Ausdruck, bestehend aus einem wöchentli
     "type": "weekly",
     "startTimepoint": "2023-09-08T11:00:00",
     "endTimepoint": "2023-09-08T11:45:00",
-    "operation": "add"
+    "operation": "include"
   },
   {
     "type": "onetime",
     "startTimepoint": "2023-09-22:00:00",
     "endTimepoint": "2023-09-22T00:00:00",
-    "operation": "subtract"
+    "operation": "exclude"
   }
 ]
 ```
@@ -1724,8 +1724,8 @@ Das `oneTimeExpression`-Objekt definiert einen einmaligen zeitlichen Ausdruck:
 
 :   Soll der zeitliche Ausdruck hinzugefügt oder abgezogen werden? 
 
-    + **`add`** : Findet statt (das ist der Standardwert)
-    + **`subtract`** : Findet nicht statt
+    + **`include`** : Findet statt (das ist der Standardwert)
+    + **`exclude`** : Findet nicht statt
 
 Das folgende Beispiel zeigt ein `oneTimeExpression`-Objekt, das sich über mehrere Tage erstreckt:
 
@@ -1771,8 +1771,8 @@ Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden z
 
 :   Soll der zeitliche Ausdruck hinzugefügt oder abgezogen werden? 
 
-    + **`add`** : Findet statt (das ist der Standardwert)
-    + **`subtract`** : Findet nicht statt
+    + **`inlcude`** : Findet statt (das ist der Standardwert)
+    + **`exclude`** : Findet nicht statt
 
 Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das Jahr 2023 die Kalenderwochen 36,38,40,42,44,46,48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:
 
