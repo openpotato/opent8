@@ -1,8 +1,6 @@
 # Änderungslog
 
-## OpenT8-Spezifikation
-
-### 0.2.0 <small>_ 26. Febnruar 2025</small>
+## 0.2.0 <small>_ 26. Febnruar 2025</small>
 
 **Hinzugefügt**:
 
@@ -10,7 +8,7 @@
 + Die Eigenschaft `code` als Verweis auf Code-Listen im OpenCodeList-Format ist neu für `absenceType`, `activityType`, `courseType`, `eventType`, `exemptionType`, `gender`, `groupType`, `personRole`, `subject`, `supervisionType` und `teachingFormat`.
 + Die Eigenschaft `externalIds` ist neu für `campus`, `building`, `room`, `course`, `person`, `group`, `supervisionArea`.
 
-**Geändert (Breaking changes)**:
+**Geändert (breaking changes)**:
 
 + `stash` wurde in `exemption` umbenannt. 
 + In fast allen Fällen wurden die bisherigen Eignschaften `code` und `name` entweder in `shortName` und `longName` oder in `shortDescription` und `longDescription` umbenannt.
@@ -30,10 +28,12 @@
 
 Diese Version sollte jetzt einigermaßen stabil bleiben.
 
-### 0.1.0 <small>_ 20. November 2023</small>
+## 0.1.0 <small>_ 20. November 2023</small>
+
+**Geändert (breaking changes)**:
 
 + Operationen von zeitlichen Ausdrücken umbenannt zu `include` und `exclude`.
 
-### 0.0.1 <small>_ 18. September 2023</small>
+## 0.0.1 <small>_ 18. September 2023</small>
 
 + Erste Veröffentlichung
