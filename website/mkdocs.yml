@@ -5,8 +5,8 @@ site_author: 'STÜBER SYSTEMS GmbH'
 site_url: 'https://openpotato.github.io/opent8/'
 
 # Copyright
-copyright:
-  '&copy; 2025 STÜBER SYSTEMS GmbH'
+copyright: 
+  '&copy; 2025 STÜBER SYSTEMS GmbH : <a href="https://legal.stueber.de/imprint.php">Impressum</a> : <a href="https://legal.stueber.de/privacy.php">Datenschutz</a>'
 
 # Repository
 repo_name: 'Auf GitHub'
@@ -62,6 +62,8 @@ plugins:
 
 # Extensions    
 markdown_extensions:
+  - toc:
+      permalink: true
   - def_list
   - admonition
   - attr_list
@@ -74,8 +76,8 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.details
   - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg      
 
 # Navigation  
 nav:

@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.1.0
+#### Version 0.0.2
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -8,7 +8,7 @@ Dieses Spezifikation ist lizenziert unter der [Apache License, Version 2.0](http
 
 ## Einführung
 
-OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.1/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
+OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.2/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
 
 OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendungen genutzt werden, als Quelle für die grafische Anzeige von Stundenplänen oder als Antwortformat für API-Anfragen (z.B. für RESTful Web-Services).
 
@@ -18,9 +18,9 @@ OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendunge
 
 Ein OpenT8-Dokument ist eine in sich geschlossene Ressource, die einen Stundenplan oder Dienstplan definiert und beschreibt. Es MÜSSEN mindestens die Felder `opent8`, `info` und `schedule` enthalten sein. Ein OpenT8-Dokument verwendet die OpenT8-Spezifikation und ist mit ihr konform.
 
-### Teilnehmer
+### Personen
 
-Teilnehmer (*Englisch: attendee*) sind Personen (*Englisch: person*), die Gruppen, Kursen, Veranstaltungen, Aufsichten oder Ereignissen zugeordnet werden. Die Art der Teilnahme wird dabei jeweils durch ihre Rolle (*Englisch: role*) unterschieden (z.B. Lehrer:in, Erzieher:in, Schüler:in, etc.).
+Personen (*Englisch: person*) sind Mitglieder (*Englisch: member*) bzw. Teilnehmer (*Englisch: attendee*), die Gruppen, Kursen, Veranstaltungen, Aktivitäten, Aufsichten oder Ereignissen zugeordnet werden. Die Art der Mitgliedschaft bzw. Teilnahme wird dabei jeweils durch ihre Rolle (*Englisch: role*) unterschieden (z.B. Lehrer:in, Erzieher:in, Schüler:in, etc.).
 
 Hier ein Beispiel für die Kursteilnahme eines Lehrers:
 
@@ -28,39 +28,56 @@ Hier ein Beispiel für die Kursteilnahme eines Lehrers:
 "persons": [
   {
     "id": "Leo",
-    "code": "Leo",
-    "lastName": "Schnitzewitz",
-    "middleName": "Alexander",
-    "firstName": "Leopold",
-    "namePrefix": "Dr.",
-    "nameQualifier": "von",
+    "name": {
+      "shortName": "Leo",
+      "familyName": "Schnitzewitz",
+      "familyNamePrefix": "von",
+      "middleName": [
+        "Leopold"
+      ],
+      "givenName": "Alexander",
+      "title": [
+        "Dr."
+      ]
+    },
     "birthdate": "1969-07-20"
   }
 ],
-"roles": [
+"personRoles": [
   {
-    "id": "LK",
-    "code": "LK",
-    "key": "DE.LEHR",
-    "name": {
-      "singular": "Lehrer:in",
-      "plural": "Lehrer:innen"
+    "id": "LER",
+    "shortName": "LER",
+    "longName": "Lehrer:in",
+    "code": {
+      "codeListRef": {
+        "canonicalUri": "urn:opene8:school:codelist:de:personRole",
+        "locationUrls": [
+          "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3ApersonRole"
+        ]
+      },
+      "keyId": "key",
+      "value": "LER"
     }
   }
 ],
 "courses": [
   {
     "id": "DE-1A",
-    "code": "DE",
-    "name": "Deutsch",
+    "shortName": "DE",
+    "longName": "Deutsch",
     "subject": {
       "refId": "DE"
     },
+    "groups": [
+      {
+        "refId": "10a"
+      }
+    ],
     "attendees": [
       {
         "refId": "Leo",
         "role": {
-          "refId": "LK"
+          "refId": "LER"
         }
       }
     ]
@@ -77,17 +94,17 @@ Hier ein Beispiel für zwei Klassen der ersten Jahrgangsstufe:
 ``` json
 "groups": [
   {
-    "id": "1a",
-    "code": "1a",
-    "name": "Klasse 1a",
+    "id": "10a",
+    "shortName": "10a",
+    "longName": "Klasse 10a",
     "groupType": {
       "refId": "KL"
     }
   },
   {
-    "id": "1b",
-    "code": "1b",
-    "name": "Klasse 1b",
+    "id": "10b",
+    "shortName": "10b",
+    "longName": "Klasse 10b",
     "groupType": {
       "refId": "KL"
     }
@@ -96,11 +113,17 @@ Hier ein Beispiel für zwei Klassen der ersten Jahrgangsstufe:
 "groupTypes": [
   {
     "id": "KL",
-    "code": "KL",
-    "key": "DE.KLAS",
-    "name": {
-      "singular": "Klasse",
-      "plural": "Klassen"
+    "shortName": "KL",
+    "longName": "Klasse",
+    "code": {
+      "codeListRef": {
+	    "canonicalUri": "urn:opene8:school:codelist:de:groupType",
+  	    "locationUrls": [
+	      "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupType"
+	    ]
+      },
+      "keyId": "key",
+      "value": "KLA"
     }
   }
 ]
@@ -116,8 +139,8 @@ Hier ein Beispiel für einen Kurs:
 "courses": [
   {
     "id": "DE-1A",
-    "code": "DE",
-    "name": "Deutsch",
+    "shortName": "DE",
+    "longName": "Deutsch",
     "subject": {
       "refId": "DE"
     },
@@ -155,7 +178,6 @@ Hier ein Beispiel für die Veranstaltungen eines Musikkurses. Dieser findet jede
   {
     "type": "lesson",
     "id": "MU-1A",
-    "code": "MU",
     "course": {
       "refId": "MU-1A"
     },
@@ -191,8 +213,7 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
   {
     "type": "supervision",
     "id": "aufsicht-1",
-    "code": "Aufsicht",
-    "name": "Pausenaufsicht",
+    "notes": "Pausenaufsicht",
     "attendees": [
       {
         "refId": "Leo",
@@ -233,9 +254,56 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
 ]
 ```
 
+#### Aktivitäten
+
+Aktivitäten (*Englisch: activity*) repräsentieren Dienstzeiten, die keine Lehrveranstaltungen sind (z.B. Bereitschaftsdienst, Hortaufsicht, etc.).
+
+Hier ein Beispiel für eine Hortaufsicht:
+
+``` json
+"scheduleElements": [
+  {
+    "type": "activity",
+    "id": "ho-1",
+    "shortName": "HoAmAbend",
+    "longName": "Hortaufsicht am Abend",
+	"activityType": {
+      "refId": "HA"
+    },
+    "attendees": [
+      {
+        "refId": "Eli",
+        "role": {
+          "refId": "ERZ"
+        }
+      }
+    ],
+    "rooms": [
+      {
+        "refId": "200"
+      }
+    ],
+    "temporalExpressions": [
+      {
+        "type": "onetime",
+        "startTimepoint": "2023-09-01T16:00:00",
+        "endTimepoint": "2023-09-01T18:00:00"
+      }
+    ]
+  }
+],
+"activityTypes": [
+  {
+    "id": "HA",
+    "shortName": "HA",
+    "longName": "Hortaufsicht"
+  }
+]
+```
+
 #### Ereignisse
 
-Ereignisse (*Englisch: event*) sind Termine, die nicht durch Veranstaltungen oder Aufsichten repräsentiert werden können (z.B. Meetings, Prüfungen, etc.).
+Ereignisse (*Englisch: event*) sind Termine, die nicht durch Veranstaltungen, Aktivitäten oder Aufsichten repräsentiert werden können (z.B. Meetings, Prüfungen, etc.).
 
 Hier ein Beispiel für ein Meeting:
 
@@ -244,8 +312,11 @@ Hier ein Beispiel für ein Meeting:
   {
     "type": "event",
     "id": "meet-1",
-    "code": "Meeting",
-    "name": "Abstimmung zur Einschulung",
+    "shortName": "Meeting",
+    "longName": "Abstimmung zur Einschulung",
+	"eventType": {
+      "refId": "KONFI"
+    },
     "attendees": [
       {
         "refId": "Max",
@@ -276,12 +347,9 @@ Hier ein Beispiel für ein Meeting:
 ],
 "eventTypes": [
   {
-    "id": "KL",
-    "code": "KL",
-    "name": {
-      "singular": "Konferenz",
-      "plural": "Konferenzen"
-    }
+    "id": "KONFI",
+    "shortName": "KONFI",
+    "longName": "Konferenz"
   }
 ]
 ```
@@ -297,8 +365,8 @@ Hier die Weihnachtsferien 2023/2024 als Beispiel:
   {
     "type": "holiday",
     "id": "WeiFe",
-    "code": "WeiFe",
-    "name": "Weihnachtsferien",
+    "shortName": "WeiFe",
+    "longName": "Weihnachtsferien",
     "holidayType": "school",
     "temporalExpressions": [
       {
@@ -322,9 +390,9 @@ Hier ein Beispiel für einen Hinweis zum Feueralarm:
   {
     "type": "announcement",
     "id": "alarm-1",
-    "code": "alarm",
-    "name": "Feueralarmübung",
-    "description": "Feueralarmübung am Morgen",
+    "shortDescription": "alarm",
+    "longDescription": "Feueralarmübung",
+    "notes": "Feueralarmübung am Morgen",
     "color": "#E55604",
     "temporalExpressions": [
       {
@@ -348,34 +416,29 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
   {
     "type": "gap",
     "id": "G-1",
-    "code": "G-1",
-    "description": "Das ist eine Fehlstelle",
-	"reference": {
-	  "type": "lesson",
-	  "refId": "DE-1A"
-	},
+    "notes": "Das ist eine Fehlstelle",
+    "appliesTo": {
+      "type": "lesson",
+      "refId": "DE-1A"
+    },
     "reasons": [
       {
         "type": "absence",
-        "id": "A-1",
-        "code": "Krank",
-        "description": "Lehrer ist krank",
-		"reference": {
-          "type": "attendee",
+        "notes": "Lehrer ist krank",
+        "appliesTo": {
+          "type": "person",
           "refId": "Max"
-		}
+        }
       }
     ],
     "resolutions": [
       {
         "type": "substitution",
-        "id": "V-1",
-        "code": "Ersatz",
-        "description": "Der Erzieher springt ein",
-		"reference": {
+        "notes": "Der Erzieher springt ein",
+        "realisedBy": {
           "type": "lesson",
-          "refId": "Vertretung-1"
-		}
+          "refId": "V-1"
+        }
       }
     ],
     "temporalExpressions": [
@@ -388,9 +451,11 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
   },
   {
     "type": "lesson",
-    "id": "Vertretung-1",
-    "code": "Vertretung",
-    "description": "Das ist eine Vertretung",
+    "id": "V-1",
+    "notes": "Das ist eine Vertretung",
+    "course": {
+      "refId": "DE-1A"
+    },
     "attendees": [
       {
         "refId": "Leo",
@@ -425,16 +490,16 @@ Hier ein Beispiel für zwei Räume mit Verweis auf das gleiche Gebäude:
 "rooms": [
   {
     "id": "100",
-    "code": "100",
-    "name": "Raum 100",
+    "shortName": "100",
+    "longName": "Raum 100",
     "building": {
       "refId": "HG"
     }
   },
   {
     "id": "101",
-    "code": "101",
-    "name": "Raum 101",
+    "shortName": "101",
+    "longName": "Raum 101",
     "building": {
       "refId": "HG"
     }
@@ -446,7 +511,7 @@ Hier ein Beispiel für zwei Räume mit Verweis auf das gleiche Gebäude:
 
 Zeitliche Ausdrücke (*Englisch: temporal expression*) erlauben eine flexible zeitliche Planung von Planelementen. 
 
-Die folgenden zeitlichen Ausdeücke werden unterstützt:
+Die folgenden zeitlichen Ausdrücke werden unterstützt:
 
 #### Einmalig 
 
@@ -517,8 +582,8 @@ Hier ein Beispiel für einen Zeitrahmen in einer Grundschule (Jahrgangsstufe 1):
 "timeFrames": [
   {
     "id": "default",
-    "code": "Unterricht",
-    "name": "Unterrichtsraster",
+    "shortName": "Unterricht",
+    "longName": "Unterrichtsraster",
     "scopeOfWeek": [
       "mon",
       "tue",
@@ -528,35 +593,114 @@ Hier ein Beispiel für einen Zeitrahmen in einer Grundschule (Jahrgangsstufe 1):
     ],
     "timeSlots": [
       {
-        "code": "1",
-        "label": "1. Stunde",
+        "shortLabel": "1",
+        "longLabel": "1. Stunde",
         "startTime": "08:00:00",
         "endTime": "08:45:00"
       },
       {
-        "code": "2",
-        "label": "2. Stunde",
+        "shortLabel": "2",
+        "longLabel": "2. Stunde",
         "startTime": "09:05:00",
         "endTime": "09:50:00"
       },
       {
-        "code": "3",
-        "label": "3. Stunde",
+        "shortLabel": "3",
+        "longLabel": "3. Stunde",
         "startTime": "10:10:00",
         "endTime": "10:55:00"
       },
       {
-        "code": "4",
-        "label": "4. Stunde",
+        "shortLabel": "4",
+        "longLabel": "4. Stunde",
         "startTime": "11:00:00",
         "endTime": "11:45:00"
       },
       {
-        "code": "5",
-        "label": "5. Stunde",
+        "shortLabel": "5",
+        "longLabel": "5. Stunde",
         "startTime": "12:20:00",
         "endTime": "13:05:00"
       }
+    ]
+  }
+]
+```
+
+### Standardisierte Codes
+
+Standardisierte Codes erlauben die eindeutige Identifikation und Klassifikation von Daten. OpenT8 unterstützt [OpenCodeList](https://openpotato.github.io/opencodelist/de/), einem generischen Standard-Datenformat zur Repräsentation von Code-Listen bzw. Schlüsselverzeichnissen. 
+
+Die folgenden Objekte besitzen jeweils ein (zum Teil erforderliches) Code-Attribut, dass einen Verweis auf eine Code-Liste im OpenCodeList-Format darstellt. 
+
++ `absenceType`-Objekt (Abwesenheitstyp)
++ `activityType`-Objekt (Aktivitätstyp)
++ `courseType`-Objekt (Kurstyp)
++ `eventType`-Objekt (Eriegbistyp)
++ `exemptionType`-Objekt (Freistellungsformat)
++ `gender`-Objekt (Geschlecht)
++ `groupType`-Objekt (Gruppentyp)
++ `personRole`-Objekt (Personenrolle)
++ `subject`-Objekt (Fach)
++ `supervisionType`-Objekt (Aufichtstyp)
++ `teachingFormat`-Objekt (Unterrichtsformat)
+
+In einigen Fällen wird eine Standard-Code-Liste spezifiziert. Alle Standard-Code-Listen sind via [CodeListHub](https://www.codelisthub.org/de/) verfügbar und abrufbar.
+
+Hier ein Beispiel für ein Gruppentyp mit einem standardisierten Code:
+
+``` json
+"groupTypes": [
+  {
+    "id": "KL",
+    "shortName": "KL",
+    "longName": "Klasse",
+    "code": {
+      "codeListRef": {
+	    "canonicalUri": "urn:opene8:school:codelist:de:groupType",
+  	    "locationUrls": [
+	      "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupType"
+	    ]
+      },
+      "keyId": "key",
+      "value": "KLA"
+    }
+  }
+]
+```
+
+### Externe Identifikatoren
+
+Externe Identifikatoren erlauben das Verknüpfen von IDs aus Fremdsystemen mit Entitäten im OpenT8-Format. Unterstützt werden folgende Objekte:
+
++ `building`-Objekt (Gebäude)
++ `campus`-Objekt (Campus)
++ `course`-Objekt (Kurs)
++ `group`-Objekt (Gruppe)
++ `person`-Objekt (Person)
++ `room`-Objekt (Raum)
++ `subject`-Objekt (Fach)
++ `supervisionArea`-Objekt (Aufsichtsbereich)
+
+Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
+
+``` json
+"subjects": [
+  {
+    "id": "DE",
+    "shortName": "DE",
+    "longName": "Deutsch",
+    "externalIds": [
+      {
+	    "canonicalUri": "urn:myTimeTableApp1",
+	    "globallyUnique": true,
+  	    "value": "eb002793-570e-45c7-af17-423831240b83"
+	  },
+	  {
+	    "canonicalUri": "urn:myTimeTableApp2",
+	    "globallyUnique": false,
+  	    "value": "42"
+	  }
     ]
   }
 ]
@@ -566,7 +710,7 @@ Hier ein Beispiel für einen Zeitrahmen in einer Grundschule (Jahrgangsstufe 1):
 
 ### Versionierung
 
-Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z. B. `0.1`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.1` unterstützen, MÜSSEN mit allen `0.1.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.1.0` und `0.1.1` gemacht wird.
+Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z. B. `0.1`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.1` unterstützen, MÜSSEN mit allen `0.1.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.0.2` und `0.1.1` gemacht wird.
 
 Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
@@ -580,7 +724,7 @@ Das Schema sieht zwei Arten von Feldern vor: Fest definierte Felder, die einen d
 
 #### JSON Schema
 
-[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.1/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
+[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.2/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
 
 #### Datums- und Zeitangaben
 
@@ -628,7 +772,7 @@ Beispiele:
 + `#ff0000` ist rot
 + `#00ff00` ist grün
 + `#0000ff` ist blau
-+ `#ff8000` ist organge
++ `#ff8000` ist orange
 
 ### Schema
 
@@ -644,25 +788,13 @@ Dies ist das Wurzelobjekt eines OpenT8-Dokuments und enthält folgende Felder:
 
 :   Metadaten zum Stundenplan. **Dieses Objekt ist ERFORDERLICH**.
 
-**`persons`**
+**`absenceTypes`**
 
-:   Eine Liste von Personen. Es MUSS ein JSON-Array mit `person`-Objekten sein. 
+:   Eine Liste von Abwesenheitstypen. Es MUSS ein JSON-Array mit `absenceType`-Objekten sein. 
 
-**`roles`**
+**`activityTypes`**
 
-:   Eine Liste von Teilnehmerrollen. Es MUSS ein JSON-Array mit `role`-Objekten sein. 
-
-**`groups`**
-
-:   Eine Liste von Gruppen. Es MUSS ein JSON-Array mit `group`-Objekten sein. 
-
-**`groupTypes`**
-
-:   Eine Liste von Gruppentypen. Es MUSS ein JSON-Array mit `groupType`-Objekten sein. 
-
-**`rooms`**
-
-:   Eine Liste von Räumen. Es MUSS ein JSON-Array mit `room`-Objekten sein.  
+:   Eine Liste von Aktivitätstypen. Es MUSS ein JSON-Array mit `activityType`-Objekten sein. 
 
 **`buildings`**
 
@@ -672,29 +804,838 @@ Dies ist das Wurzelobjekt eines OpenT8-Dokuments und enthält folgende Felder:
 
 :   Eine Liste von Campus. Es MUSS ein JSON-Array mit `campus`-Objekten sein. 
 
-**`supervisionAreas`** 
+**`courses`** 
 
-:   Eine Liste von Aufsichtsbereichen. Es MUSS ein JSON-Array mit `supervisionArea`-Objekten sein. 
+:   Eine Liste von Kursen. Es MUSS ein JSON-Array mit `course`-Objekten sein. 
+
+**`courseTypes`**
+
+:   Eine Liste von Kurstypen. Es MUSS ein JSON-Array mit `courseType`-Objekten sein. 
 
 **`eventTypes`** 
 
 :   Eine Liste von Ereignistypen. Es MUSS ein JSON-Array mit `eventType`-Objekten sein. 
 
-**`timeFrames`** 
+**`exemptionTypes`**
 
-:   Eine Liste von Zeitrahmen. Es MUSS ein JSON-Array mit `timeFrame`-Objekten sein. 
+:   Eine Liste von Freistellungstypen. Es MUSS ein JSON-Array mit `exemptionType`-Objekten sein. 
+
+**`genders`** 
+
+:   Eine Liste von Angaben zum Personengeschlecht. Es MUSS ein JSON-Array mit `gender`-Objekten sein. 
+
+**`groups`**
+
+:   Eine Liste von Gruppen. Es MUSS ein JSON-Array mit `group`-Objekten sein. 
+
+**`groupTypes`**
+
+:   Eine Liste von Gruppentypen. Es MUSS ein JSON-Array mit `groupType`-Objekten sein. 
+
+**`persons`**
+
+:   Eine Liste von Personen. Es MUSS ein JSON-Array mit `person`-Objekten sein. 
+
+**`personRoles`**
+
+:   Eine Liste von Personenrollen. Es MUSS ein JSON-Array mit `personRole`-Objekten sein. 
+
+**`rooms`**
+
+:   Eine Liste von Räumen. Es MUSS ein JSON-Array mit `room`-Objekten sein.  
 
 **`subjects`** 
 
 :   Eine Liste von Fächern. Es MUSS ein JSON-Array mit `subject`-Objekten sein.  
 
-**`courses`** 
+**`supervisionAreas`** 
 
-:   Eine Liste von Kursen. Es MUSS ein JSON-Array mit `course`-Objekten sein. 
+:   Eine Liste von Aufsichtsbereichen. Es MUSS ein JSON-Array mit `supervisionArea`-Objekten sein. 
+
+**`supervisionTypes`** 
+
+:   Eine Liste von Aufsichtstypen. Es MUSS ein JSON-Array mit `supervisionType`-Objekten sein. 
+
+**`teachingFormats`**
+
+:   Eine Liste von Unterrichtsformaten. Es MUSS ein JSON-Array mit `teachingFormat`-Objekten sein. 
+
+**`timeFrames`** 
+
+:   Eine Liste von Zeitrahmen. Es MUSS ein JSON-Array mit `timeFrame`-Objekten sein. 
 
 **`schedule`** 
 
 :   Die eigentliche zeitliche Verplanung. **Dieses Objekt ist ERFORDERLICH**.
+
+Dieses Objekt KANN erweitert werden.
+
+#### absence-Objekt
+
+Das `absence`-Objekt definiert eine Abwesenheit:
+
+**`type`** 
+
+:   MUSS den Wert `absence` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`id`** 
+
+:   Eindeutige Identifikation der Abwesenheit. **Dieses Feld ist ERFORDERLICH**.
+
+**`notes`** 
+
+:   Bemerkungen zur Abwesenheit.
+
+**`absenceType.refId`** 
+
+:   Typ des Abwesenheit. Dies MUSS ein Verweis auf die `id` eines `absenceType`-Objekts sein. 
+
+**`appliesTo`** 
+
+:   Eine Person, eine Gruppe oder ein Raum, für welche(n) die Abwesenheit gilt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
+
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    
+        Mögliche Werte sind:
+    
+        Wert     | Beschreibung
+        -------- | ------------
+        `person` | Eine Person ist abwesend.
+        `group`  | Eine Gruppe ist abwesend.
+        `room`   | Der Raum steht nicht zur Verfügung.
+        
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes, eines vorhandenen `group`-Objektes oder eines vorhandenen `room`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+
+Dieses Objekt KANN erweitert werden.
+
+#### absenceType-Objekt
+
+Das `absenceType`-Objekt repräsentiert einen Abwesenheitstyp, mit dem Abwesenheiten kategorisiert werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Abwesenheitstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird keine Code-Liste empfohlen.
+
+**`shortName`** 
+
+:   Kürzel des Abwesenheitstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Abwesenheitstyp. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Abwesenheitstyp.
+
+Dieses Objekt KANN erweitert werden.
+
+#### activity-Objekt
+
+Das `activity`-Objekt definiert eine Aktivität:
+
+**`type`** 
+
+:   MUSS den Wert `activity` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`id`** 
+
+:   Eindeutige Identifikation der Aktivität. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel der Aktivität. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name der Aktivität. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung der Aktivität. 
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für die Mitteilung.
+
+**`activityType.refId`** 
+
+:   Typ des Aktivität. Dies MUSS ein Verweis auf die `id` eines `activityType`-Objekts sein. 
+
+**`attendees`** 
+
+:   Eine Liste von Teilnehmern und deren Rollen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+    + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`rooms`** 
+
+:   Eine Liste von genutzten Räumen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `room`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+Dieses Objekt KANN erweitert werden.
+
+#### activityType-Objekt
+
+Das `activityType`-Objekt repräsentiert einen Aktivitätstyp, mit dem Aktivitäten kategorisiert werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Aktivitätstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird keine Code-Liste empfohlen.
+
+**`shortName`** 
+
+:   Kürzel des Aktivitätstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Aktivitätstyp. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Aktivitätstyp.
+
+Dieses Objekt KANN erweitert werden.
+
+#### announcement-Objekt
+
+Das `announcement`-Objekt repräsentiert eine freie Mitteilung im Stundenplan:
+
+**`type`** 
+
+:   MUSS den Wert `announcement` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`id`** 
+
+:   Eindeutige Identifikation der Mitteilung. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortDescription** 
+
+:   Kurzbeschreibung der Mitteilung. **Dieses Feld ist ERFORDERLICH**.
+
+**`longDescription`** 
+
+:   Ausführlicher Inhalt der Mitteilung. 
+
+**`notes`** 
+
+:   Bemerkungen zur Mitteilung.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für die Mitteilung.
+
+**`priority`** 
+
+:   Die Priorität der Mitteilung. 
+
+    Folgende Werte sind definiert:
+
+    Wert        | Beschreibung
+    ----------- | ------------
+    `important` | Wichtig
+    `alarm`     | Alarm
+
+**`appliesTo`** 
+
+:   Eine Liste von Gruppen oder Personen, für welche die Mitteilung gilt. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    
+        Mögliche Werte sind:
+    
+        Wert     | Beschreibung
+        -------- | ------------
+        `person` | Eine Person
+        `group`  | Eine Gruppe
+        
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes, eines vorhandenen `group`-Objektes oder eines vorhandenen `room`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+
+**`temporalExpressions`** 
+
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### building-Objekt
+
+Das `building`-Objekt repräsentiert ein Gebäude, in dem sich Räume befinden:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Gebäudes. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel des Gebäudes. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Gebäudes. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Gebäudes.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für das Gebäude.
+
+**`campus.refId`** 
+
+:   Der Campus, auf dem sich das Gebäude befindet. Dies MUSS ein Verweis auf die `id` eines `campus`-Objekts sein. 
+
+**`externalIds`** 
+
+:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### campus-Objekt
+
+Das `campus`-Objekt repräsentiert einen Campus, auf dem sich Gebäude und/oder Aufsichtsbereiche befinden:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Campus. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel des Campus. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Campus. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Campus.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für den Campus.
+
+**`externalIds`** 
+
+:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### cancellation-Objekt
+
+Das `cancellation`-Objekt definiert einen Unterrichtsausfall:
+
+**`type`** 
+
+:   MUSS den Wert `cancellation` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`id`** 
+
+:   Eindeutige Identifikation des Unterrichtsausfalls. **Dieses Feld ist ERFORDERLICH**.
+
+**`notes`** 
+
+:   Bemerkungen zum Unterrichtsausfall.
+
+**`behaviour`** 
+
+:   Mögliches Verhalten
+
+    + **`leaveRoom`** : Den Unterrichtsraum verlassen
+    + **`stayInRoom`** : Im Unterrichtsraum bleiben
+
+Dieses Objekt KANN erweitert werden.
+
+#### course-Objekt
+
+Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teilnehmer treffen und der Veranstaltungen zugeordnet werden kann:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Kurses. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel des Kurses. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Kurses. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Kurses.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für den Kurs.
+
+**`subject.refId`** 
+
+:   Das zugeordnete Fach. Dies MUSS ein Verweis auf die `id` eines vorhandenen `subject`-Objekts sein. 
+
+**`courseNo`** 
+
+:   Eine Kursnummer.
+
+**`courseType.idRef`** 
+
+:   Typ der Kurses. Dies MUSS ein Verweis auf die `id` eines `courseType`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`courseUrl`** 
+
+:   Eine URL zu einer externen Website mit zusätzlichen Infos zu diesem  Kurs.
+
+**`groups`** 
+
+:   Eine Liste von teilnehmenden Gruppen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `group`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`attendees`** 
+
+:   Eine Liste von Teilnehmern und deren Rollen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+    + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`externalIds`** 
+
+:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### courseType-Objekt
+
+Das `courseType`-Objekt repräsentiert einen Kurstyp, mit dem Gruppen kategorisiert werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Kurstyps. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. **Dieses Feld ist ERFORDERLICH**. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird folgende Code-Liste EMPFOHLEN:
+    
+    CanonicalURI                               | URL
+    ------------------------------------------ | ---
+    `urn:opene8:school:codelist:de:courseType` | [Link](https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AcourseType)
+
+**`shortName`** 
+
+:   Kürzel des Gruppentyps. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Kurstyps. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Kurstyps.
+
+Dieses Objekt KANN erweitert werden.
+
+#### event-Objekt
+
+Das `event`-Objekt repräsentiert ein Termin, dass sich nicht durch eine Veranstaltung ausdrücken lässt (z.B. eine Prüfung oder ein Meeting):
+
+**`type`** 
+
+:   MUSS den Wert `event` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`id`** 
+
+:   Eindeutige Identifikation des Termins. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel des Termins. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Termins. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Termins.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für den Termin.
+
+**`eventType.refId`** 
+
+:   Typ des Ereignisses. Dies MUSS ein Verweis auf die `id` eines `eventType`-Objekts sein. 
+
+**`groups`** 
+
+:   Eine Liste von teilnehmenden Gruppen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `group`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`attendees`** 
+
+:   Eine Liste von Teilnehmern und deren Rollen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+    + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`rooms`** 
+
+:   Eine Liste von genutzten Räumen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `room`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`temporalExpressions`** 
+
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### eventType-Objekt
+
+Das `eventType`-Objekt repräsentiert einen Ereignistyp, mit dem Ereignisse kategorisiert werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Ereignistyps. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird keine Code-Liste empfohlen.
+
+**`shortName`** 
+
+:   Kürzel des Ereignistyps. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Ereignistyps. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Ereignistyps.
+
+Dieses Objekt KANN erweitert werden.
+
+#### exemption-Objekt
+
+Das `exemption`-Objekt definiert eine Freistellung:
+
+**`type`** 
+
+:   MUSS den Wert `exemption` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`id`** 
+
+:   Eindeutige Identifikation der Freistellung. **Dieses Feld ist ERFORDERLICH**.
+
+**`notes`** 
+
+:   Bemerkungen zur Freistellung.
+
+**`exemptionType.refId`** 
+
+:   Typ des Freistellung. Dies MUSS ein Verweis auf die `id` eines `exemptionType`-Objekts sein. 
+
+**`appliesTo`** 
+
+:   Eine Person, für welche(n) die Freistellung gilt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
+
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    
+        Mögliche Werte sind:
+    
+        Wert     | Beschreibung
+        -------- | ------------
+        `person` | Eine Person ist freigestellt.
+        
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+
+Dieses Objekt KANN erweitert werden.
+
+#### exemptionType-Objekt
+
+Das `exemptionType`-Objekt repräsentiert einen Freistellungstyp, mit dem Ereignisse kategorisiert werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Freistellungstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird keine Code-Liste empfohlen.
+
+**`shortName`** 
+
+:   Kürzel des Freistellungstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Freistellungstyp. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Freistellungstyp.
+
+Dieses Objekt KANN erweitert werden.
+
+#### externalCode-Objekt
+
+Das `externalCode`-Objekt definiert einen Code aus einer externen Code-Liste im OpenCodeList-Format:
+
+**`codeListRef`** 
+
+:   Ein Objekt, das auf eine externe Code-Liste verweist. **Dieses Feld ist ERFORDERLICH**.
+
+**`codeListRef.canonicalUri`** 
+
+:   Ein JSON-String im Format `uri`. Diese URI identifiziert alle Versionen (zusammen) der referenzierten Code-Liste eindeutig. **Dieses Feld ist ERFORDERLICH**.
+
+**`codeListRef.canonicalVersionUri`** 
+
+:   Ein JSON-String im Format `uri`. Diese URI identifiziert eine bestimmte Version der referenzierten Code-Liste.
+
+**`codeListRef.locationUrls`** 
+
+:   Ein JSON-Array mit JSON-String-Werten im Format `uri`. Diese URIs sind vorgeschlagene Abruforte für die referenzierte Code-Liste, im OpenCodeList-Format.
+
+**`keyId`** 
+
+:   Ein JSON-String mit einer ID, die auf ein key-Objekt in der unter codeListRef definierten externen Code-Liste verweist. **Dieses Feld ist ERFORDERLICH**.
+
+**`value`** 
+
+:   Ein Code aus der externen Code-Liste. **Dieses Feld ist ERFORDERLICH**.
+
+#### externalId-Objekt
+
+Das `externalId`-Objekt definiert einen externen Identifikator:
+
+**`canonicalUri`** 
+
+:   Ein JSON-String im Format `uri`. Diese URI legt den Namensraum des externen Identifikator fest bzw. gibt Auskunft darüberm, zu wem der Identifikator gehört. **Dieses Feld ist ERFORDERLICH**.
+
+**`globallyUnique`** 
+
+:   Ein JSON-Boolean, der angibt, ob der Identifikator eine globale Eindeutigkeit. **Dieses Feld ist ERFORDERLICH**.
+
+**`value`** 
+
+:   Der eigentliche Identifikator-Wert. **Dieses Feld ist ERFORDERLICH**.
+
+#### gap-Objekt
+
+Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
+
+**`type`** 
+
+:   MUSS den Wert `gap` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`id`** 
+
+:   Eindeutige Identifikation der Fehlstelle. **Dieses Feld ist ERFORDERLICH**.
+
+**`notes`** 
+
+:   Bemerkungen zur Fehlstelle.
+
+**`appliesTo`** 
+
+:   Eine Aktivität, eine Unterrichtseinheit oder eine Aufsicht, für welche(n) die Fehlstelle gilt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
+
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    
+        Mögliche Werte sind:
+    
+        Wert          | Beschreibung
+        ------------- | ------------
+        `activity`    | Fehlstelle für eine Aktivität
+        `lesson`      | Fehlstelle für eine Unterrichtseinheit
+        `supervision` | Fehlstelle für eine Aufsicht
+        
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objektes, eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+
+**`reasons`** 
+
+:   Eine Liste von Gründen. Es MUSS ein JSON-Array mit `absence`-Objekten und/oder `exemption`-Objekten sein. 
+
+**`resolutions`** 
+
+:   Eine Liste von Auflösungen. Es MUSS ein JSON-Array mit `substitution`-Objekten und/oder `cancellation`-Objekten sein. 
+
+**`temporalExpressions`** 
+
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### gender-Objekt
+
+Das `gender`-Objekt definiert das Geschlecht einer Person:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Geschlechts. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. **Dieses Feld ist ERFORDERLICH**. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird folgende Code-Liste EMPFOHLEN:
+    
+    CanonicalURI                         | URL
+    ------------------------------------ | ---
+    `urn:opene8:core:codelist:de:gender` | [Link](https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Acore%3Acodelist%3Ade%3Agender)
+
+**`shortName`** 
+
+:   Kürzel des Geschlechts. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Geschlechts. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Geschlechts.
+
+Dieses Objekt KANN erweitert werden.
+
+#### group-Objekt
+
+Das `group`-Objekt repräsentiert eine Gruppe, der man Teilnehmer zuordnen kann:
+
+**`id`** 
+
+:   Eindeutige Identifikation der Gruppe. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel der Gruppe. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name der Gruppe. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung der Gruppe.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für die Gruppe.
+    
+**`groupType.idRef`** 
+
+:   Typ der Gruppe. Dies MUSS ein Verweis auf die `id` eines `groupType`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`members`** 
+
+:   Eine Liste von Mitgliedern und deren Rollen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+    + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`timeFrame`** 
+
+:   Der Zeitrahmen des Teilnehmers. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
+
+**`externalIds`** 
+
+:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### groupType-Objekt
+
+Das `groupType`-Objekt repräsentiert einen Gruppentyp, mit dem Gruppen kategorisiert werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Gruppentyps. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. **Dieses Feld ist ERFORDERLICH**. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird folgende Code-Liste EMPFOHLEN:
+    
+    CanonicalURI                              | URL
+    ----------------------------------------- | ---
+    `urn:opene8:school:codelist:de:groupType` | [Link](https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupTyp)
+
+**`shortName`** 
+
+:   Kürzel des Gruppentyps. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Gruppentyps. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Gruppentyps.
+
+Dieses Objekt KANN erweitert werden.
+
+#### holiday-Objekt
+
+Das `holiday`-Objekt repräsentiert schulfreie Zeit (Feiertage oder Schulferien):
+
+**`type`** 
+
+:   MUSS den Wert `holiday` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel der schulfreie Zeit. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name der schulfreie Zeit 
+
+**`description`** 
+
+:   Eine kurze Beschreibung der schulfreie Zeit.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für die schulfreie Zeit.
+
+**`holidayType`** 
+
+:   Die Typisierung des Termins. Mögliche Werte sind:
+
+    Wert     | Beschreibung
+    -------- | ------------
+    `public` | Feiertag
+    `school` | Schulferien
+    `custom` | Benutzerdefinierte Freizeit
+
+**`temporalExpressions`**
+
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -730,6 +1671,18 @@ Das `info`-Objekt enthält Metadaten zum Stundenplan:
 
 :   Quelle der Stundenplandaten.
 
+**`source.name`**
+
+:   Name des Dienstes, der Anwendung oder des Werkzeugs, mit dessen Hilfe die Stundenplandaten erzeugt wurden. **Dieses Feld ist ERFORDERLICH**.
+
+**`source.version`**
+
+:   Versionsnummer des Dienstes, der Anwendung oder des Werkzeugs, mit dessen Hilfe die Stundenplandaten erzeugt wurden.
+
+**`source.url`**
+
+:   Eine URL, unter der sich weitere Informationen finden lassen.
+
 Dieses Objekt KANN erweitert werden.
 
 Beispiel:
@@ -745,26 +1698,243 @@ Beispiel:
   "language": "de",
   "source": {
     "name": "MyTimeTableApp",
-    "version": "1.0"
+    "version": "0.2"
   }
 }
 ```
 
-#### source-Objekt
+#### lesson-Objekt
 
-Das `source`-Objekt enthält Informationen zum Dienst, zur Anwendung oder zum Werkzeug, mit dessen Hilfe die Stundenplandaten erzeugt wurden:
+Das `lesson`-Objekt repräsentiert eine Veranstaltung bzw. Unterrichtseinheit, die einem Kurs zugeordnet ist und zeitlich verplant wird:
 
-**`name`**
+**`type`** 
 
-:   Name des Dienstes, der Anwendung oder des Werkzeugs, mit dessen Hilfe die Stundenplandaten erzeugt wurden. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `lesson` haben. **Dieses Feld ist ERFORDERLICH**.
 
-**`version`**
+**`id`** 
 
-:   Versionsnummer des Dienstes, der Anwendung oder des Werkzeugs, mit dessen Hilfe die Stundenplandaten erzeugt wurden.
+:   Eindeutige Identifikation der Veranstaltung. **Dieses Feld ist ERFORDERLICH**.
 
-**`url`**
+**`course.refId`** 
 
-:   Eine URL, unter der sich weitere Informationen finden lassen.
+:   Der zugeordnete Kurs. Dies MUSS ein Verweis auf die `id` eines `course`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`relevance`** 
+
+:   Relevanz des Kurses. **Dieses Feld ist ERFORDERLICH**.
+
+    Folgende Werte sind definiert:
+
+    Wert         | Beschreibung
+    ------------ | ------------
+    `scheduled`  | Wie geplant
+    `additional` | Zusatzunterricht
+
+**`notes`** 
+
+:   Bemerkungen zur Veranstaltung.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für die Veranstaltung.
+
+**`teachingFormat.idRef`** 
+
+:   Unterrichtsformat. Dies MUSS ein Verweis auf die `id` eines `teachingFormat`-Objekts sein. 
+
+**`groups`** 
+
+:   Eine Liste von teilnehmenden Gruppen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `group`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`attendees`** 
+
+:   Eine Liste von Teilnehmern und deren Rollen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+    + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`rooms`** 
+
+:   Eine Liste von genutzten Räumen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
+    
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `room`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`temporalExpressions`** 
+
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### oneTimeExpression-Objekt
+
+Das `oneTimeExpression`-Objekt definiert einen einmaligen zeitlichen Ausdruck:
+
+**`type`** 
+
+:   MUSS den Wert `oneTime` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`startTimepoint`** 
+
+:   Startzeitpunkt (RFC 3339) des zeitlichen Ausdrucks. **Dieses Feld ist ERFORDERLICH**.
+
+**`endTimepoint`** 
+
+:   Endzeitpunkt (RFC 3339) des zeitlichen Ausdrucks. **Dieses Feld ist ERFORDERLICH**.
+
+**`operation`** 
+
+:   Soll der zeitliche Ausdruck hinzugefügt oder abgezogen werden? 
+
+    + **`include`** : Findet statt (das ist der Standardwert)
+    + **`exclude`** : Findet nicht statt
+
+Das folgende Beispiel zeigt ein `oneTimeExpression`-Objekt, das sich über mehrere Tage erstreckt:
+
+``` json
+"temporalExpressions": [
+  {
+    "type": "onetime",
+    "startTimepoint": "2023-12-23T12:00:00",
+    "endTimepoint": "2024-01-05T12:00:00"
+  }
+]
+```
+
+#### person-Objekt
+
+Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines Kurses, einer Veranstaltung, einer Aufsicht eines Ereignisses oder einer Aktivität:
+
+**`id`** 
+
+:   Eindeutige Identifikation der Person. **Dieses Feld ist ERFORDERLICH**.
+
+**`name.shortName`** 
+
+:   Kürzel der Person. **Dieses Feld ist ERFORDERLICH**.
+
+**`name.fullName`** 
+
+:   Der komplett ausgeschriebene Name der Person.
+
+**`name.sortingName`** 
+
+:   Der Name der Person, optimiert für eine gewünschte alphanumerische Sortierung in einer Liste.
+
+**`name.familyName`** 
+
+:   Nachname der Person.
+
+**`name.familyNamePrefix`** 
+
+:   Namensvorsatz (z.B. "von") der Person.
+
+**`name.middleName`** 
+
+:   Mittelnamen der Person. Dies MUSS ein JSON-String-Array sein. 
+
+**`name.givenName`** 
+
+:   Vorname der Person.
+
+**`name.nameSuffix`** 
+
+:   Namenszusätze (z.B. "Jr.") der Person. Dies MUSS ein JSON-String-Array sein. 
+
+**`name.title`** 
+
+:   Titel (z.B. "Dr.") der Person. Dies MUSS ein JSON-String-Array sein. 
+
+**`name.nickName`** 
+
+:   Rufname der Person. 
+
+**`gender.refId`** 
+
+:   Geschlecht der Person. Dies MUSS ein Verweis auf die `id` eines `gender`-Objekts sein. 
+
+**`birthdate`** 
+
+:   Geburtsdatum der Person.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für die Person.
+
+**`timeFrame`** 
+
+:   Der zugeordnete Zeitrahmen der Person. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
+
+**`externalIds`** 
+
+:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+
+Dieses Objekt KANN erweitert werden.
+
+#### personRole-Objekt
+
+Das `personRole`-Objekt repräsentiert einen Rolle, mit der Mitglieder oder Teilnehmer kategorisiert werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation der Rolle. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. **Dieses Feld ist ERFORDERLICH**. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird folgende Code-Liste EMPFOHLEN:
+    
+    CanonicalURI                               | URL
+    ------------------------------------------ | ---
+    `urn:opene8:school:codelist:de:personRole` | [Link](https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3ApersonRole)
+
+**`shortName`** 
+
+:   Kürzel der Rolle. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name der Rolle. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung der Rolle.
+
+Dieses Objekt KANN erweitert werden.
+
+#### room-Objekt
+
+Das `room`-Objekt repräsentiert einen Raum, in dem Unterricht oder ein anderweitiges Ereignis stattfindet:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Raums. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel des Raums. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Raums. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Raums.
+
+**`color`** 
+
+:   Ein Farbwert (Hex-Kodierung) für den Raum.
+
+**`building.refId`** 
+
+:   Das Gebäude, in dem sich der Raum befindet. Dies MUSS ein Verweis auf die `id` eines `building`-Objekts sein. 
+
+**`externalIds`** 
+
+:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -786,275 +1956,124 @@ Das `schedule`-Objekt enthält die eigentliche zeitliche Verplanung:
 
 **`scheduleElements`** 
 
-:   Eine Liste von Planelementen. Es MUSS ein JSON-Array mit `lesson`-Objekten, `supervision`-Objekten, `event`-Objekten, `holdiay`-Objekten, `announcement`-Objekten und/oder `gap`-Objekten sein. 
+:   Eine Liste von Planelementen. Es MUSS ein JSON-Array mit `activity`-Objekten, `announcement`-Objekten, `event`-Objekten, `gap`-Objekten, `holdiay`-Objekten, `lesson`-Objekten und/oder `supervision`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
-#### person-Objekt
+#### subject-Objekt
 
-Das `person`-Objekt repräsentiert einen Teilnehmer einer Gruppe, eines Kurses, einer Veranstaltungen, einer Aufsichten oder eines Ereignisses:
-
-**`id`** 
-
-:   Eindeutige Identifikation des Teilnehmers. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel des Teilnehmers. **Dieses Feld ist ERFORDERLICH**.
-
-**`lastName`** 
-
-:   Nachname des Teilnehmers.
-
-**`middleName`** 
-
-:   Mittelname des Teilnehmers.
-
-**`firstName`** 
-
-:   Vorname des Teilnehmers.
-
-**`namePrefix`** 
-
-:  Namenspräfix (z.B. "von") des Teilnehmers.
-
-**`nameQualifier`** 
-
-:   Titel (z.B. "Dr.") des Teilnehmers.
-
-**`nameSuffix`** 
-
-:   Namenszusatz (z.B. "Jr.") des Teilnehmers.
-
-**`birthdate`** 
-
-:   Geburtsdatum des Teilnehmers.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für den Teilnehmer.
-
-**`timeFrame`** 
-
-:   Der Zeitrahmen des Teilnehmers. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
-
-Dieses Objekt KANN erweitert werden.
-
-#### role-Objekt
-
-Das `role`-Objekt repräsentiert einen Rolle, mit der Teilnehmer kategorisiert werden können:
+Das `subject`-Objekt repräsentiert ein Fach, das mit Kursen verknüpft werden kann:
 
 **`id`** 
 
-:   Eindeutige Identifikation der Teilnehmerrolle. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation des Fachs. **Dieses Feld ist ERFORDERLICH**.
 
 **`code`** 
 
-:   Kürzel der Teilnehmerrolle. **Dieses Feld ist ERFORDERLICH**.
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
-**`key`** 
+    Standardmäßig wird folgende Code-Liste EMPFOHLEN:
+    
+    CanonicalURI                            | URL
+    --------------------------------------- | ---
+    `urn:opene8:school:codelist:de:subject` | [Link](https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3Asubject)
 
-:   Ein standardisierter, optionaler Schlüssel. Es wird **EMPFOHLEN**, diese Werte, wann immer möglich zu verwenden, um eine Kategorisierung der Rolle unabhängig von der Datenquelle zu gewährleisten.
+**`shortName`** 
 
-    Folgende Werte sind definiert:
+:   Kürzel des Fachs. **Dieses Feld ist ERFORDERLICH**.
 
-    Wert      | Beschreibung
-    --------- | ------------
-    `DE.KIND` | Kind 
-    `DE.SCHÜ` | Schüler:in
-    `DE.STUD` | Student:in
-    `DE.LEHR` | Lehrkraft
-    `DE.DOZN` | Dozent:in
-    `DE.ERZI` | Erzieher:in
-    `DE.EZBE` | Erziehungsberechtigte:r
+**`longName`** 
 
-**`name`** 
-
-:   Name oder Bezeichnung der Teilnehmerrolle. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
-
-    + **`singular`** : Der Name oder die Bezeichnung im Singular. **Dieses Feld ist ERFORDERLICH**.
-    + **`plural`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
+:   Ausführlicher Name des Fachs. 
 
 **`description`** 
 
-:   Eine kurze Beschreibung der Teilnehmerrolle.
+:   Eine kurze Beschreibung des Fachs.
 
 **`color`** 
 
-:   Ein Farbwert (Hex-Kodierung) für die Teilnehmerrolle.
+:   Ein Farbwert (Hex-Kodierung) für das Fach.
+
+**`externalIds`** 
+
+:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
-#### group-Objekt
+#### substitution-Objekt
 
-Das `group`-Objekt repräsentiert eine Gruppe, der man Teilnehmer zuordnen kann:
+Das `substitution`-Objekt definiert eine Vertretung:
+
+**`type`** 
+
+:   MUSS den Wert `substitution` haben. **Dieses Feld ist ERFORDERLICH**.
 
 **`id`** 
 
-:   Eindeutige Identifikation der Gruppe. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation der Vertretung. **Dieses Feld ist ERFORDERLICH**.
 
-**`code`** 
+**`notes`** 
 
-:   Kürzel der Gruppe. **Dieses Feld ist ERFORDERLICH**.
+:   Bemerkungen zur Vertretung.
 
-**`name`** 
+**`appliesTo`** 
 
-:   Name oder Bezeichnung der Gruppe.
+:   Eine Aktivität, eine Unterrichtseinheit oder eine Aufsicht, welche(n) die Vertretung darstellt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-**`description`** 
+    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    
+        Mögliche Werte sind:
+    
+        Wert          | Beschreibung
+        ------------- | ------------
+        `activity`    | Vertretung durch eine Aktivität
+        `lesson`      | Fehlstelle durch eine Unterrichtseinheit
+        `supervision` | Fehlstelle durch eine Aufsicht
+        
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objektes, eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
 
-:   Eine kurze Beschreibung der Gruppe.
+Dieses Objekt KANN erweitert werden.
+
+#### supervision-Objekt
+
+Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehren Aufsichtsbereichen zugeordnet ist und zeitlich verplant wird:
+
+**`type`** 
+
+:   MUSS den Wert `supervision` haben. **Dieses Feld ist ERFORDERLICH**.
+
+**`id`** 
+
+:   Eindeutige Identifikation der Aufsicht. **Dieses Feld ist ERFORDERLICH**.
+
+**`notes`** 
+
+:   Bemerkungen zur Aufsicht.
 
 **`color`** 
 
-:   Ein Farbwert (Hex-Kodierung) für die Gruppe.
+:   Ein Farbwert (Hex-Kodierung) für die Aufsicht.
+
+**`supervisionType.idRef`** 
+
+:   Typ der Aufsicht. Dies MUSS ein Verweis auf die `id` eines `supervisionType`-Objekts sein. 
 
 **`attendees`** 
 
-:   Eine Liste von Teilnehmern und ihren Rollen. Dies MUSS ein Array mit Objekten sein, welche folgende Felder besitzen: 
+:   Eine Liste von Teilnehmern und deren Rollen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
     
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `attendee`-Objektes sein. **Dieses Feld ist ERFORDERLICH**.
-    + **`role`** : Verweis auf eine Teilnehmerrolle. Dies MUSS ein `reference`-Objekt sein. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+    + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`areas`** 
+
+:   Eine Liste von betroffenen Aufsichtsbereichen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
     
-**`groupType`** 
+    + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `supervisionArea`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
 
-:   Typ der Gruppe. Dies MUSS ein `reference`-Objekt, das auf ein `groupType`-Objekt verweist, sein.
+**`temporalExpressions`** 
 
-**`timeFrame`** 
-
-:   Der Zeitrahmen des Teilnehmers. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
-
-Dieses Objekt KANN erweitert werden.
-
-#### groupType-Objekt
-
-Das `groupType`-Objekt repräsentiert einen Gruppentyp, mit dem Gruppen kategorisiert werden können:
-
-**`id`** 
-
-:   Eindeutige Identifikation des Gruppentyps. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel des Gruppentyps. **Dieses Feld ist ERFORDERLICH**.
-
-**`key`** 
-
-:   Ein standardisierter, optionaler Schlüssel. Es wird **EMPFOHLEN**, diese Werte, wann immer möglich zu verwenden, um eine Kategorisierung der Gruppe unabhängig von der Datenquelle zu gewährleisten.
-
-    Folgende Werte sind definiert:
-
-    Wert      | Beschreibung
-    --------- | ------------
-    `DE.KITA` | KiTa-Gruppe
-    `DE.KIGA` | KiGa-Gruppe
-    `DE.HORT` | Hortgruppe
-    `DE.KLAS` | Klasse
-    `DE.JAHR` | Jahrgang
-
-**`name`** 
-
-:   Name oder Bezeichnung des Gruppentyps. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
-
-    + **`singular`** : Der Name oder die Bezeichnung im Singular. **Dieses Feld ist ERFORDERLICH**.
-    + **`plural`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
-
-**`description`** 
-
-:   Eine kurze Beschreibung des Gruppentyps.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für den Gruppentyps.
-
-Dieses Objekt KANN erweitert werden.
-
-#### room-Objekt
-
-Das `room`-Objekt repräsentiert einen Raum, in dem Unterricht oder ein anderweitiges Ereignis stattfindet:
-
-**`id`** 
-
-:   Eindeutige Identifikation des Raums. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel des Raums. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung des Raums.
-
-**`description`** 
-
-:   Eine kurze Beschreibung des Raums.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für den Raum.
-
-**`building`** 
-
-:   Das Gebäude, in dem sich der Raum befindet. Dies MUSS ein `reference`-Objekt, das auf ein `building`-Objekt verweist, sein. 
-
-Dieses Objekt KANN erweitert werden.
-
-#### building-Objekt
-
-Das `building`-Objekt repräsentiert ein Gebäude, in dem sich Räume befinden:
-
-**`id`** 
-
-:   Eindeutige Identifikation des Gebäudes. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel des Gebäudes. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung des Gebäudes.
-
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `attendee`-Objektes sein. **Dieses Feld ist ERFORDERLICH**.
-    + **`role`** : Die Teilnehmerrolle. Dies MUSS ein `reference`-Objekt sein, das auf ein vorhandenes `attendeeRole`-Objekt verweist. **Dieses Feld ist ERFORDERLICH**.
-
-**`description`** 
-
-:   Eine kurze Beschreibung des Gebäudes.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für das Gebäude.
-
-**`campus`** 
-
-:   Der Campus, auf dem sich das Gebäude befindet. Dies MUSS ein `reference`-Objekt, das auf ein `campus`-Objekt verweist, sein. 
-
-Dieses Objekt KANN erweitert werden.
-
-#### campus-Objekt
-
-Das `campus`-Objekt repräsentiert einen Campus, auf dem sich Gebäude und/oder Aufsichtsbereiche befinden:
-
-**`id`** 
-
-:   Eindeutige Identifikation des Campus. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel des Campus. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung des Campus.
-
-**`description`** 
-
-:   Eine kurze Beschreibung des Campus.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für den Campus.
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1066,13 +2085,13 @@ Das `supervisionArea`-Objekt repräsentiert ein Aufsichtsbereich, für den Aufsi
 
 :   Eindeutige Identifikation des Aufsichtsbereichs. **Dieses Feld ist ERFORDERLICH**.
 
-**`code`** 
+**`shortName`** 
 
 :   Kürzel des Aufsichtsbereichs. **Dieses Feld ist ERFORDERLICH**.
 
-**`name`** 
+**`longName`** 
 
-:   Name oder Bezeichnung des Aufsichtsbereichs.
+:   Ausführlicher Name des Aufsichtsbereichs. 
 
 **`description`** 
 
@@ -1082,72 +2101,73 @@ Das `supervisionArea`-Objekt repräsentiert ein Aufsichtsbereich, für den Aufsi
 
 :   Ein Farbwert (Hex-Kodierung) für den Aufsichtsbereich.
 
-**`campus`** 
+**`campus.refId`** 
 
-:   Der Campus, auf dem sich der Aufsichtsbereich befindet. Dies MUSS ein `reference`-Objekt, das auf ein `campus`-Objekt verweist, sein. 
+:   Der Campus, auf dem sich der Aufsichtsbereich befindet. Dies MUSS ein Verweis auf die `id` eines `campus`-Objekts sein. 
 
-Dieses Objekt KANN erweitert werden.
+**`externalIds`** 
 
-#### subject-Objekt
-
-Das `subject`-Objekt repräsentiert ein Fach, das mit Kursen verknüpft werden kann:
-
-**`id`** 
-
-:   Eindeutige Identifikation der Fachs. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der Fachs. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung des Fach.
-
-**`description`** 
-
-:   Eine kurze Beschreibung des Fachs.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für das Fach.
+:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
-#### course-Objekt
+#### supervisionType-Objekt
 
-Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teilnehmer treffen und der Veranstaltungen zugeordnet werden kann:
+Das `supervisionType`-Objekt repräsentiert einen Aufsichtstyp, mit dem Aufsichten kategorisiert werden können:
 
 **`id`** 
 
-:   Eindeutige Identifikation des Kurses. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation des Aufsichtstyp. **Dieses Feld ist ERFORDERLICH**.
 
 **`code`** 
 
-:   Kürzel des Kurses. **Dieses Feld ist ERFORDERLICH**.
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
-**`name`** 
+    Standardmäßig wird keine folgende Code-Liste empfohlen.
 
-:   Name oder Bezeichnung des Kurses.
+**`shortName`** 
+
+:   Kürzel des Aufsichtstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Aufsichtstyp. 
 
 **`description`** 
 
-:   Eine kurze Beschreibung des Kurses.
+:   Eine kurze Beschreibung des Aufsichtstyp.
 
-**`color`** 
+Dieses Objekt KANN erweitert werden.
 
-:   Ein Farbwert (Hex-Kodierung) für den Kurs.
+#### teachingFormat-Objekt
 
-**`groups`** 
+Das `teachingFormat`-Objekt repräsentiert ein Unterrichtsformat, mit dem Unterrichtseinheiten kategorisiert werden können:
 
-:   Eine Liste von Gruppen. Dies MUSS ein Array mit `reference`-Objekten sein, die wiederum auf ein vorhandenes `group`-Objekt verweisen.
+**`id`** 
 
-**`attendees`** 
+:   Eindeutige Identifikation des Unterrichtsformat. **Dieses Feld ist ERFORDERLICH**.
 
-:   Eine Liste von Teilnehmern und ihren Rollen. Dies MUSS ein Array mit Objekten sein, welche folgende Felder besitzen: 
+**`code`** 
+
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Standardmäßig wird folgende Code-Liste EMPFOHLEN:
     
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `attendee`-Objektes sein. **Dieses Feld ist ERFORDERLICH**.
-    + **`role`** : Die Teilnehmerrolle. Dies MUSS ein `reference`-Objekt sein, das auf ein vorhandenes `attendeeRole`-Objekt verweist. **Dieses Feld ist ERFORDERLICH**.
+    CanonicalURI                                   | URL
+    ---------------------------------------------- | ---
+    `urn:opene8:school:codelist:de:teachingFormat` | [Link](https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AteachingFormat)
+
+**`shortName`** 
+
+:   Kürzel des Unterrichtsformat. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Unterrichtsformat. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Unterrichtsformat.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1159,13 +2179,13 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
 
 :   Eindeutige Identifikation des Zeitrahmens. **Dieses Feld ist ERFORDERLICH**.
 
-**`code`** 
+**`shortName`** 
 
 :   Kürzel des Zeitrahmens. **Dieses Feld ist ERFORDERLICH**.
 
-**`name`** 
+**`longName`** 
 
-:   Name oder Bezeichnung des Zeitrahmens.
+:   Ausführlicher Name des Zeitrahmens. 
 
 **`description`** 
 
@@ -1209,7 +2229,7 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
 
 **`timeSlots`** 
 
-:   Eine Liste von benannten Zeitfenstern, welche die Abstraktion des Zeitrahmens definieren. Dies MUSS ein Array mit `timeSlot`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
+:   Eine Liste von benannten Zeitfenstern, welche die Abstraktion des Zeitrahmens definieren. Dies MUSS ein JSON-Array mit `timeSlot`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1217,13 +2237,13 @@ Dieses Objekt KANN erweitert werden.
 
 Das `timeSlot`-Objekt definiert ein benanntes Zeitfenster für einen Zeitrahmen (z.B. 1. Stunde von 8:00 bis 8:45):
 
-**`code`** 
+**`shortlabel`** 
 
-:   Kürzel des Zeitfensters. **Dieses Feld ist ERFORDERLICH**.
+:   Kürzel des Zeitfenster. **Dieses Feld ist ERFORDERLICH**.
 
-**`label`** 
+**`longlabel`** 
 
-:   Kennzeichnung des Zeitfenster.
+:   Ausführlicher Name des Zeitfenster. 
 
 **`color`** 
 
@@ -1239,505 +2259,6 @@ Das `timeSlot`-Objekt definiert ein benanntes Zeitfenster für einen Zeitrahmen 
 
 Dieses Objekt KANN erweitert werden.
 
-#### lesson-Objekt
-
-Das `lesson`-Objekt repräsentiert eine Veranstaltung, die einem Kurs zugeordnet ist und zeitlich verplant wird:
-
-**`type`** 
-
-:  MUSS den Wert `lesson` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Veranstaltung. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der Veranstaltung. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung der Veranstaltung.
-
-**`description`** 
-
-:   Eine kurze Beschreibung der Veranstaltung.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für die Veranstaltung.
-
-**`course`** 
-
-:   Der zugeordnete Kurs. Dies MUSS ein `reference`-Objekt, das auf ein `course`-Objekt verweist, sein. **Dieses Feld ist ERFORDERLICH**.
-
-**`groups`** 
-
-:   Eine Liste von Gruppenreferenzen. Dies MUSS ein Array mit `reference`-Objekten sein. 
-
-**`attendees`** 
-
-:   Eine Liste von Teilnehmerreferenzen. Dies MUSS ein Array mit `attendeeRef`-Objekten sein. 
-
-**`rooms`** 
-
-:   Eine Liste von Raumreferenzen. Dies MUSS ein Array mit `reference`-Objekten sein. 
-
-**`temporalExpressions`** 
-
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
-
-Dieses Objekt KANN erweitert werden.
-
-#### supervision-Objekt
-
-Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehren Aufsichtsbereichen zugeordnet ist und zeitlich verplant wird:
-
-**`type`** 
-
-:   MUSS den Wert `supervision` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Veranstaltung. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der Veranstaltung. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung der Veranstaltung.
-
-**`description`** 
-
-:   Eine kurze Beschreibung der Veranstaltung.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für die Veranstaltung.
-
-**`attendees`** 
-
-:   Eine Liste von Teilnehmerreferenzen. Dies MUSS ein Array mit `attendee`-Objekten sein. 
-
-**`areas`** 
-
-:   Eine Liste von Aufsichtsbereichsreferenzen. Dies MUSS ein Array mit `reference`-Objekten sein. 
-
-**`temporalExpressions`** 
-
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
-
-Dieses Objekt KANN erweitert werden.
-
-#### event-Objekt
-
-Das `event`-Objekt repräsentiert ein Termin, dass sich nicht durch eine Veranstaltung ausdrücken lässt (z.B. eine Prüfung oder ein Meeting):
-
-**`type`** 
-
-:   MUSS den Wert `event` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation des Termins. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel des Termins. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung des Termins.
-
-**`description`** 
-
-:   Eine kurze Beschreibung des Termins.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für den Termin.
-
-**`eventType`** 
-
-:   Die Typisierung des Termins. Dies MUSS ein `reference`-Objekt, das auf ein `eventType`-Objekt verweist, sein.
-
-**`attendees`** 
-
-:   Eine Liste von Teilnehmerreferenzen. Dies MUSS ein Array mit `attendee`-Objekten sein. 
-
-**`rooms`** 
-
-:   Eine Liste von Raumreferenzen. Dies MUSS ein Array mit `reference`-Objekten sein. 
-
-**`temporalExpressions`** 
-
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
-
-Dieses Objekt KANN erweitert werden.
-
-#### eventType-Objekt
-
-Das `eventType`-Objekt repräsentiert einen Ereignistyp, mit dem Ereignisse kategorisiert werden können:
-
-**`id`** 
-
-:   Eindeutige Identifikation des Ereignistyps. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel des Ereignistyps. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung des Ereignistyps. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
-
-    + **`singular`** : Der Name oder die Bezeichnung im Singular. **Dieses Feld ist ERFORDERLICH**.
-    + **`plural`** : Der Name oder die Bezeichnung im Plural. **Dieses Feld ist ERFORDERLICH**.
-
-**`description`** 
-
-:   Eine kurze Beschreibung des Ereignistyps.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für den Ereignistyps.
-
-Dieses Objekt KANN erweitert werden.
-
-#### holiday-Objekt
-
-Das `holiday`-Objekt repräsentiert schulfreie Zeit (Feiertage oder Schulferien):
-
-**`type`** 
-
-:   MUSS den Wert `holiday` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der schulfreie Zeit. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der schulfreie Zeit. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung der schulfreie Zeit.
-
-**`description`** 
-
-:   Eine kurze Beschreibung der schulfreie Zeit.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für die schulfreie Zeit.
-
-**`holidayType`** 
-
-:   Die Typisierung des Termins. Mögliche Werte sind:
-
-    Wert     | Beschreibung
-    -------- | ------------
-    `public` | Feiertag
-    `school` | Schulferien
-    `custom` | Benutzerdefinierte Freizeit
-
-**`temporalExpressions`**
-
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
-
-Dieses Objekt KANN erweitert werden.
-
-#### announcement-Objekt
-
-Das `announcement`-Objekt repräsentiert eine freie Mitteilung im Stundenplan:
-
-**`type`** 
-
-:   MUSS den Wert `announcement` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Mitteilung. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der Mitteilung. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung der Mitteilung.
-
-**`description`** 
-
-:   Eine kurze Beschreibung der Mitteilung.
-
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für die Mitteilung.
-
-**`priority`** 
-
-:   Die Priorität der Mitteilung. 
-
-    Folgende Werte sind definiert:
-
-    Wert        | Beschreibung
-    ----------- | ------------
-    `important` | Wichtig
-    `alarm`     | Alarm
-
-**`temporalExpressions`** 
-
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
-
-Dieses Objekt KANN erweitert werden.
-
-#### gap-Objekt
-
-Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
-
-**`type`** 
-
-:   MUSS den Wert `gap` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Fehlstelle. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der Fehlstelle. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung der Fehlstelle.
-
-**`description`** 
-
-:   Eine kurze Beschreibung der Fehlstelle.
-
-**`reference`** 
-
-:   Verweis auf eine Veranstaltung oder eine Aufsicht. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
-
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
-	
-	    Mögliche Werte sind:
-    
-	    Wert          | Beschreibung
-        ------------- | ------------
-        `lesson`      | Veranstaltung, die nicht wie geplant stattfinden kann.
-        `supervision` | Aufsicht, die nicht wie geplant stattfinden kann.
-		
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`.  **Dieses Feld ist ERFORDERLICH**.
-
-**`reasons`** 
-
-:   Eine Liste von Gründen. Es MUSS ein JSON-Array mit `absence`-Objekten und/oder `stash`-Objekten sein. 
-
-**`resolutions`** 
-
-:   Eine Liste von Auflösungen. Es MUSS ein JSON-Array mit `substitution`-Objekten und/oder `cancellation`-Objekten sein. 
-
-**`temporalExpressions`** 
-
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
-
-Dieses Objekt KANN erweitert werden.
-
-#### absence-Objekt
-
-Das `absence`-Objekt definiert eine Abwesenheit:
-
-**`type`** 
-
-:   MUSS den Wert `absence` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Abwesenheit. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der Abwesenheit. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung der Abwesenheit.
-
-**`description`** 
-
-:   Eine kurze Beschreibung der Abwesenheit.
-
-**`reference`** 
-
-:   Referenz zu einer Person, einer Gruppe oder einem Raum. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
-
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
-	
-	    Mögliche Werte sind:
-    
-	    Wert     | Beschreibung
-        -------- | ------------
-        `person` | Eine teilnehmende Person (z.B. der Lehrer) ist abwesend.
-        `group`  | Eine Gruppe is abwesend.
-        `room`   | Der Raum steht nicht zur Verfügung.
-		
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes, eines vorhandenen `group`-Objektes oder eines vorhandenen `room`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
-
-Dieses Objekt KANN erweitert werden.
-
-#### stash-Objekt
-
-Das `stash`-Objekt definiert eine Freistellung:
-
-**`type`** 
-
-:   MUSS den Wert `stash` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Freistellung. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der Freistellung. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung der Freistellung.
-
-**`description`** 
-
-:   Eine kurze Beschreibung der Freistellung.
-
-**`reference`** 
-
-:   Referenz zu einer Person. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
-
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
-	
-	    Mögliche Werte sind:
-    
-	    Wert     | Beschreibung
-        -------- | ------------
-        `person` | Eine teilnehmende Person (z.B. der Lehrer) ist freigestellt.
-		
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes sein. **Dieses Feld ist ERFORDERLICH**.
-
-Dieses Objekt KANN erweitert werden.
-
-#### substitution-Objekt
-
-Das `substitution`-Objekt definiert eine Vertretung:
-
-**`type`** 
-
-:   MUSS den Wert `substitution` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Vertretung. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel der Vertretung. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung der Vertretung.
-
-**`description`** 
-
-:   Eine kurze Beschreibung der Vertretung.
-
-**`reference`** 
-
-:   Verweis auf eine Veranstaltung oder eine Aufsicht. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
-
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
-	
-	    Mögliche Werte sind:
-    
-	    Wert          | Beschreibung
-        ------------- | ------------
-        `lesson`      | Neue Veranstaltung als Vertretung.
-        `supervision` | Neue Aufsicht als Vertretung.
-		
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`.  **Dieses Feld ist ERFORDERLICH**.
-
-Dieses Objekt KANN erweitert werden.
-
-#### cancellation-Objekt
-
-Das `cancellation`-Objekt definiert einen Unterrichtsausfall:
-
-**`type`** 
-
-:   MUSS den Wert `cancellation` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`id`** 
-
-:   Eindeutige Identifikation des Unterrichtsausfalls. **Dieses Feld ist ERFORDERLICH**.
-
-**`code`** 
-
-:   Kürzel des Unterrichtsausfalls. **Dieses Feld ist ERFORDERLICH**.
-
-**`name`** 
-
-:   Name oder Bezeichnung des Unterrichtsausfalls.
-
-**`description`** 
-
-:   Eine kurze Beschreibung des Unterrichtsausfalls.
-
-**`behaviour`** 
-
-:   Mögliches Verhalten
-
-    + **`leaveRoom`** : Den Unterrichtsraum verlassen
-    + **`stayInRoom`** : Im Unterrichtsraum bleiben
-
-Dieses Objekt KANN erweitert werden.
-
-#### oneTimeExpression-Objekt
-
-Das `oneTimeExpression`-Objekt definiert einen einmaligen zeitlichen Ausdruck:
-
-**`type`** 
-
-:   MUSS den Wert `oneTime` haben. **Dieses Feld ist ERFORDERLICH**.
-
-**`startTimepoint`** 
-
-:   Startzeitpunkt (RFC 3339) des zeitlichen Ausdrucks. **Dieses Feld ist ERFORDERLICH**.
-
-**`endTimepoint`** 
-
-:   Endzeitpunkt (RFC 3339) des zeitlichen Ausdrucks. **Dieses Feld ist ERFORDERLICH**.
-
-**`operation`** 
-
-:   Soll der zeitliche Ausdruck hinzugefügt oder abgezogen werden? 
-
-    + **`include`** : Findet statt (das ist der Standardwert)
-    + **`exclude`** : Findet nicht statt
-
-Das folgende Beispiel zeigt ein `oneTimeExpression`-Objekt, das sich über mehrere Tage erstreckt:
-
-``` json
-"temporalExpressions": [
-  {
-    "type": "onetime",
-    "startTimepoint": "2023-12-23T12:00:00",
-    "endTimepoint": "2024-01-05T12:00:00"
-  }
-]
-```
 
 #### weeklyExpression-Objekt
 
@@ -1789,19 +2310,6 @@ Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das Jahr
   }
 ]  
 ```
-
-#### reference-Objekt
-
-Das `reference`-Objekt definiert einen generischen Verweis auf ein anderes Objekt. Der Typ des Objekt hängt vom Kontext ab:
-
-+ **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen Objektes sein. **Dieses Feld ist ERFORDERLICH**.
-
-#### attendee-Objekt
-
-Das `attendee`-Objekt definiert einen Verweis auf ein `person`-Objekt verbunden mit einer Rolle:
-
-+ **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes sein. **Dieses Feld ist ERFORDERLICH**.
-+ **`role`** : Verweis auf eine Teilnehmerrolle. Dies MUSS ein `reference`-Objekt sein. **Dieses Feld ist ERFORDERLICH**.
 
 ### Erweiterung der Spezifikation
 

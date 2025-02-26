@@ -1,5 +1,5 @@
 {
-  "opent8": "0.1.0",
+  "opent8": "0.2.0",
   "info": {
     "title": "Stundenplan 2023/2024",
     "description": "Stundenplan für das Schuljahr 2023/2024",
@@ -11,184 +11,23 @@
       "version": "1.0"
     }
   },
-  "rooms": [
-    {
-      "id": "100",
-      "code": "100",
-      "name": "Raum 100",
-      "building": {
-        "refId": "HG"
-      }
-    },
-    {
-      "id": "101",
-      "code": "101",
-      "name": "Raum 101",
-      "building": {
-        "refId": "HG"
-      }
-    },
-    {
-      "id": "200",
-      "code": "200",
-      "name": "Musikraum 200",
-      "building": {
-        "refId": "NG"
-      }
-    },
-    {
-      "id": "Halle",
-      "code": "Halle",
-      "name": "Sporthalle"
-    }
-  ],
   "buildings": [
     {
       "id": "HG",
-      "code": "HG",
-      "name": "Hauptgebäude"
+      "shortName": "HG",
+      "longName": "Hauptgebäude"
     },
     {
       "id": "NG",
-      "code": "NG",
-      "name": "Nebengebäude"
-    }
-  ],
-  "supervisionAreas": [
-    {
-      "id": "Hof",
-      "code": "Hof",
-      "name": "Pausenhof"
-    }
-  ],
-  "subjects": [
-    {
-      "id": "DE",
-      "code": "DE",
-      "name": "Deutsch"
-    },
-    {
-      "id": "MA",
-      "code": "DE",
-      "name": "Mathematik"
-    },
-    {
-      "id": "MU",
-      "code": "DE",
-      "name": "Musik"
-    },
-    {
-      "id": "BK",
-      "code": "BK",
-      "name": "Bildende Kunst"
-    },
-    {
-      "id": "SK",
-      "code": "SK",
-      "name": "Sachkunde"
-    },
-    {
-      "id": "RE",
-      "code": "RE",
-      "name": "Religion"
-    },
-    {
-      "id": "LK",
-      "code": "LK",
-      "name": "Lebenskunde"
-    },
-    {
-      "id": "SP",
-      "code": "SP",
-      "name": "Sport"
-    }
-  ],
-  "persons": [
-    {
-      "id": "Max",
-      "code": "Max",
-      "lastName": "Mustermann",
-      "firstName": "Max"
-    },
-    {
-      "id": "Eli",
-      "code": "Eli",
-      "lastName": "Musterfrau",
-      "firstName": "Elisabeth"
-    },
-    {
-      "id": "Jon",
-      "code": "Jon",
-      "lastName": "Schmidt",
-      "firstName": "Jonas"
-    },
-    {
-      "id": "Mia",
-      "code": "Mia",
-      "lastName": "Berger",
-      "firstName": "Mia"
-    },
-    {
-      "id": "Leo",
-      "code": "Leo",
-      "lastName": "Meister",
-      "firstName": "Leopold"
-    }
-  ],
-  "roles": [
-    {
-      "id": "LER",
-      "code": "LER",
-      "key": "DE.LEHR",
-      "name": {
-        "singular": "Lehrer*in",
-        "plural": "Lehrer*innen"
-      }
-    },
-    {
-      "id": "ERZ",
-      "code": "ERZ",
-      "key": "DE.ERZI",
-      "name": {
-        "singular": "Erzieher*in",
-        "plural": "Erzieher*innen"
-      }
-    }
-  ],
-  "groups": [
-    {
-      "id": "1a",
-      "code": "1a",
-      "name": "Klasse 1a",
-      "groupType": {
-        "refId": "KLA"
-      }
-    },
-    {
-      "id": "1b",
-      "code": "1b",
-      "name": "Klasse 1b",
-      "groupType": {
-        "refId": "KLA"
-      }
-    }
-  ],
-  "groupTypes": [
-    {
-      "id": "KLA",
-      "code": "KLA",
-      "key": "DE.KLAS",
-      "name": {
-        "singular": "Klasse",
-        "plural": "Klassen"
-      }
+      "shortName": "NG",
+      "longName": "Nebengebäude"
     }
   ],
   "courses": [
     {
       "id": "DE-1A",
-      "code": "DE",
-      "name": "Deutsch",
+      "shortName": "DE",
+      "longName": "Deutsch",
       "subject": {
         "refId": "DE"
       },
@@ -208,8 +47,8 @@
     },
     {
       "id": "DE-1B",
-      "code": "DE",
-      "name": "Deutsch",
+      "shortName": "DE",
+      "longName": "Deutsch",
       "subject": {
         "refId": "DE"
       },
@@ -229,8 +68,8 @@
     },
     {
       "id": "MA-1A",
-      "code": "MA",
-      "name": "Mathematik",
+      "shortName": "MA",
+      "longName": "Mathematik",
       "subject": {
         "refId": "MA"
       },
@@ -250,8 +89,8 @@
     },
     {
       "id": "MA-1B",
-      "code": "MA",
-      "name": "Mathematik",
+      "shortName": "MA",
+      "longName": "Mathematik",
       "subject": {
         "refId": "MA"
       },
@@ -271,8 +110,8 @@
     },
     {
       "id": "BK-1A",
-      "code": "BK",
-      "name": "Kunst",
+      "shortName": "BK",
+      "longName": "Kunst",
       "subject": {
         "refId": "BK"
       },
@@ -292,8 +131,8 @@
     },
     {
       "id": "BK-1B",
-      "code": "BK",
-      "name": "Kunst",
+      "shortName": "BK",
+      "longName": "Kunst",
       "subject": {
         "refId": "BK"
       },
@@ -313,8 +152,8 @@
     },
     {
       "id": "MU-1A",
-      "code": "MU",
-      "name": "Musik",
+      "shortName": "MU",
+      "longName": "Musik",
       "subject": {
         "refId": "MU"
       },
@@ -334,8 +173,8 @@
     },
     {
       "id": "MU-1B",
-      "code": "MU",
-      "name": "Musik",
+      "shortName": "MU",
+      "longName": "Musik",
       "subject": {
         "refId": "MU"
       },
@@ -355,8 +194,8 @@
     },
     {
       "id": "SK-1A",
-      "code": "SK",
-      "name": "Sachkunde",
+      "shortName": "SK",
+      "longName": "Sachkunde",
       "subject": {
         "refId": "SK"
       },
@@ -376,8 +215,8 @@
     },
     {
       "id": "SK-1B",
-      "code": "SK",
-      "name": "Sachkunde",
+      "shortName": "SK",
+      "longName": "Sachkunde",
       "subject": {
         "refId": "SK"
       },
@@ -397,8 +236,8 @@
     },
     {
       "id": "SP-1",
-      "code": "SP-1",
-      "name": "Sport",
+      "shortName": "SP-1",
+      "longName": "Sport",
       "subject": {
         "refId": "SP"
       },
@@ -427,8 +266,8 @@
     },
     {
       "id": "RE-1",
-      "code": "RE-1",
-      "name": "Religion",
+      "shortName": "RE-1",
+      "longName": "Religion",
       "subject": {
         "refId": "RE"
       },
@@ -451,8 +290,8 @@
     },
     {
       "id": "LK-1",
-      "code": "LK-1",
-      "name": "Lebenskunde",
+      "shortName": "LK-1",
+      "longName": "Lebenskunde",
       "subject": {
         "refId": "LK"
       },
@@ -475,8 +314,8 @@
     },
     {
       "id": "KR-1A",
-      "code": "KR",
-      "name": "Klassenrat",
+      "shortName": "KR",
+      "longName": "Klassenrat",
       "groups": [
         {
           "refId": "1a"
@@ -493,8 +332,8 @@
     },
     {
       "id": "KR/1B",
-      "code": "KR",
-      "name": "Klassenrat",
+      "shortName": "KR",
+      "longName": "Klassenrat",
       "groups": [
         {
           "refId": "1b"
@@ -510,94 +349,149 @@
       ]
     }
   ],
-  "timeFrames": [
+  "groups": [
     {
-      "id": "default",
-      "code": "Unterricht",
-      "name": "Unterrichtsraster",
-      "scopeOfWeek": [
-        "mon",
-        "tue",
-        "wed",
-        "thu",
-        "fri"
-      ],
-      "timeSlots": [
-        {
-          "code": "1",
-          "label": "1. Stunde",
-          "startTime": "08:00:00",
-          "endTime": "08:45:00"
-        },
-        {
-          "code": "2",
-          "label": "2. Stunde",
-          "startTime": "09:05:00",
-          "endTime": "09:50:00"
-        },
-        {
-          "code": "3",
-          "label": "3. Stunde",
-          "startTime": "10:10:00",
-          "endTime": "10:55:00"
-        },
-        {
-          "code": "4",
-          "label": "4. Stunde",
-          "startTime": "11:00:00",
-          "endTime": "11:45:00"
-        },
-        {
-          "code": "5",
-          "label": "5. Stunde",
-          "startTime": "12:20:00",
-          "endTime": "13:05:00"
-        }
-      ]
+      "id": "1a",
+      "shortName": "1a",
+      "longName": "Klasse 1a",
+      "groupType": {
+        "refId": "KLA"
+      }
     },
     {
-      "id": "break",
-      "code": "Pausen",
-      "name": "Pausenraster",
-      "scopeOfWeek": [
-        "mon",
-        "tue",
-        "wed",
-        "thu",
-        "fri"
-      ],
-      "timeSlots": [
-        {
-          "code": "Frühstück",
-          "label": "Frühstück",
-          "startTime": "08:45:00",
-          "endTime": "09:05:00"
+      "id": "1b",
+      "shortName": "1b",
+      "longName": "Klasse 1b",
+      "groupType": {
+        "refId": "KLA"
+      }
+    }
+  ],
+  "groupTypes": [
+    {
+      "id": "KLA",
+      "shortName": "KLA",
+      "longName": "Klasse",
+      "code": {
+        "codeListRef": {
+          "canonicalUri": "urn:opene8:codelist:de:groupType",
+          "locationUrls": [
+            "https://localhost:44365/v1/documents/urn%3Aopent8%3Acodelist%3AgroupType%3Av1?metaOnly=false&language=de"
+          ]
         },
-        {
-          "code": "Hofpause-1",
-          "label": "Hofpause",
-          "startTime": "09:50:00",
-          "endTime": "10:10:00"
+        "keyId": "key",
+        "value": "KLA"
+      }
+    }
+  ],
+  "persons": [
+    {
+      "id": "Max",
+      "name": {
+        "shortName": "Max",
+        "fullName": "Max Mustermann",
+        "familyName": "Mustermann",
+        "givenName": "Max"
+      }
+    },
+    {
+      "id": "Eli",
+      "name": {
+        "shortName": "Eli",
+        "fullName": "Elisabeth Musterfrau",
+        "familyName": "Musterfrau",
+        "givenName": "Elisabeth"
+      }
+    },
+    {
+      "id": "Jon",
+      "name": {
+        "shortName": "Jon",
+        "fullName": "Jonas Schmidt",
+        "familyName": "Schmidt",
+        "givenName": "Jonas"
+      }
+    },
+    {
+      "id": "Mia",
+      "name": {
+        "shortName": "Mia",
+        "fullName": "Mia Berger",
+        "familyName": "Berger",
+        "givenName": "Mia"
+      }
+    },
+    {
+      "id": "Leo",
+      "name": {
+        "shortName": "Leo",
+        "fullName": "Leopold Meister",
+        "familyName": "Meister",
+        "givenName": "Leopold"
+      }
+    }
+  ],
+  "personRoles": [
+    {
+      "id": "LER",
+      "shortName": "LER",
+      "longName": "Lehrer:in",
+      "code": {
+        "codeListRef": {
+          "canonicalUri": "urn:opent8:codelist:de:personRole",
+          "locationUrls": [
+            "https://localhost:44365/v1/documents/urn%3Aopent8%3Acodelist%3ApersonRole%3Av1?metaOnly=false&language=de"
+          ]
         },
-        {
-          "code": "Pause",
-          "label": "Kleine Pause",
-          "startTime": "10:55:00",
-          "endTime": "11:00:00"
+        "keyId": "key",
+        "value": "LER"
+      }
+    },
+    {
+      "id": "ERZ",
+      "shortName": "ERZ",
+      "longName": "Erzieher:in",
+      "code": {
+        "codeListRef": {
+          "canonicalUri": "urn:opent8:codelist:de:personRole",
+          "locationUrls": [
+            "https://localhost:44365/v1/documents/urn%3Aopent8%3Acodelist%3ApersonRole%3Av1?metaOnly=false&language=de"
+          ]
         },
-        {
-          "code": "Hofpause-2",
-          "label": "Hofpause",
-          "startTime": "11:45:00",
-          "endTime": "12:20:00"
-        },
-        {
-          "code": "Mittag",
-          "label": "Mittagessen",
-          "startTime": "13:05:00",
-          "endTime": "14:00:00"
-        }
-      ]
+        "keyId": "key",
+        "value": "ERZ"
+      }
+    }
+  ],
+  "rooms": [
+    {
+      "id": "100",
+      "shortName": "100",
+      "longName": "Raum 100",
+      "building": {
+        "refId": "HG"
+      }
+    },
+    {
+      "id": "101",
+      "shortName": "101",
+      "longName": "Raum 101",
+      "building": {
+        "refId": "HG"
+      }
+    },
+    {
+      "id": "200",
+      "shortName": "200",
+      "longName": "Musikraum 200",
+      "building": {
+        "refId": "NG"
+      }
+    },
+    {
+      "id": "Halle",
+      "shortName": "Halle",
+      "longName": "Sporthalle"
     }
   ],
   "schedule": {
@@ -610,7 +504,7 @@
       {
         "type": "lesson",
         "id": "DE-1A",
-        "code": "DE",
+        "relevance": "scheduled",
         "course": {
           "refId": "DE-1A"
         },
@@ -660,7 +554,7 @@
       {
         "type": "lesson",
         "id": "MA-1A",
-        "code": "MA",
+        "relevance": "scheduled",
         "course": {
           "refId": "MA-1A"
         },
@@ -700,7 +594,7 @@
       {
         "type": "lesson",
         "id": "BK-1A",
-        "code": "BK",
+        "relevance": "scheduled",
         "course": {
           "refId": "BK-1A"
         },
@@ -725,7 +619,7 @@
       {
         "type": "lesson",
         "id": "MU-1A",
-        "code": "MU",
+        "relevance": "scheduled",
         "course": {
           "refId": "MU-1A"
         },
@@ -750,7 +644,7 @@
       {
         "type": "lesson",
         "id": "SK-1A",
-        "code": "SK",
+        "relevance": "scheduled",
         "course": {
           "refId": "SK-1A"
         },
@@ -775,8 +669,7 @@
       {
         "type": "lesson",
         "id": "KR-1A",
-        "code": "KR",
-        "description": "Dieser Unterricht findet nicht immer statt",
+        "relevance": "scheduled",
         "course": {
           "refId": "KR-1A"
         },
@@ -800,7 +693,7 @@
       {
         "type": "lesson",
         "id": "DE-1B",
-        "code": "DE",
+        "relevance": "scheduled",
         "course": {
           "refId": "DE-1B"
         },
@@ -850,7 +743,7 @@
       {
         "type": "lesson",
         "id": "MA-1B",
-        "code": "MA",
+        "relevance": "scheduled",
         "course": {
           "refId": "MA-1B"
         },
@@ -890,7 +783,7 @@
       {
         "type": "lesson",
         "id": "BK-1B",
-        "code": "BK",
+        "relevance": "scheduled",
         "course": {
           "refId": "BK-1B"
         },
@@ -915,7 +808,7 @@
       {
         "type": "lesson",
         "id": "MU-1B",
-        "code": "MU",
+        "relevance": "scheduled",
         "course": {
           "refId": "MU-1B"
         },
@@ -940,7 +833,7 @@
       {
         "type": "lesson",
         "id": "SK-1B",
-        "code": "SK",
+        "relevance": "scheduled",
         "course": {
           "refId": "SK-1B"
         },
@@ -965,7 +858,7 @@
       {
         "type": "lesson",
         "id": "RE-1",
-        "code": "RE",
+        "relevance": "scheduled",
         "course": {
           "refId": "RE-1"
         },
@@ -985,7 +878,7 @@
       {
         "type": "lesson",
         "id": "LK-1",
-        "code": "LK",
+        "relevance": "scheduled",
         "course": {
           "refId": "LK-1"
         },
@@ -1005,7 +898,7 @@
       {
         "type": "lesson",
         "id": "SP-1",
-        "code": "SP",
+        "relevance": "scheduled",
         "course": {
           "refId": "SP-1"
         },
@@ -1033,9 +926,9 @@
         ]
       },
       {
-        "type": "event",
+        "type": "activity",
         "id": "Hort",
-        "code": "Hort",
+        "shortName": "Hort",
         "description": "Hort am Nachmittag",
         "attendees": [
           {
@@ -1084,8 +977,8 @@
       {
         "type": "holiday",
         "id": "HerFe",
-        "code": "HerFe",
-        "name": "Herbstferien",
+        "shortName": "HerFe",
+        "longName": "Herbstferien",
         "holidayType": "school",
         "temporalExpressions": [
           {
@@ -1098,8 +991,8 @@
       {
         "type": "holiday",
         "id": "WeiFe",
-        "code": "WeiFe",
-        "name": "Weihnachtsferien",
+        "shortName": "WeiFe",
+        "longName": "Weihnachtsferien",
         "holidayType": "school",
         "temporalExpressions": [
           {
@@ -1112,8 +1005,8 @@
       {
         "type": "holiday",
         "id": "WinFe",
-        "code": "WinFe",
-        "name": "Winterferien",
+        "shortName": "WinFe",
+        "longName": "Winterferien",
         "holidayType": "school",
         "temporalExpressions": [
           {
@@ -1126,19 +1019,19 @@
       {
         "type": "gap",
         "id": "G-1",
-        "code": "G-1",
-        "description": "Das ist eine Fehlstelle",
-        "reference": {
+        "notes": "Das ist eine Fehlstelle",
+        "appliesTo": {
           "type": "lesson",
           "refId": "DE-1A"
         },
         "reasons": [
           {
             "type": "absence",
-            "id": "A-1",
-            "code": "Krank",
-            "description": "Lehrer ist krank",
-            "reference": {
+            "notes": "Lehrer ist krank",
+            "absenceType": {
+              "refId": "krank"
+            },
+            "appliesTo": {
               "type": "person",
               "refId": "Max"
             }
@@ -1147,10 +1040,8 @@
         "resolutions": [
           {
             "type": "substitution",
-            "id": "V-1",
-            "code": "Ersatz",
-            "description": "Der Erzieher springt ein",
-            "reference": {
+            "notes": "Der Erzieher springt ein",
+            "realisedBy": {
               "type": "lesson",
               "refId": "Vertretung-1"
             }
@@ -1167,8 +1058,11 @@
       {
         "type": "lesson",
         "id": "Vertretung-1",
-        "code": "Vertretung",
-        "description": "Das ist eine Vertretung",
+        "relevance": "scheduled",
+        "notes": "Das ist eine Vertretung",
+        "course": {
+          "refId": "DE-1A"
+        },
         "attendees": [
           {
             "refId": "Leo",
@@ -1191,5 +1085,144 @@
         ]
       }
     ]
-  }
+  },
+  "subjects": [
+    {
+      "id": "DE",
+      "shortName": "DE",
+      "longName": "Deutsch"
+    },
+    {
+      "id": "MA",
+      "shortName": "DE",
+      "longName": "Mathematik"
+    },
+    {
+      "id": "MU",
+      "shortName": "DE",
+      "longName": "Musik"
+    },
+    {
+      "id": "BK",
+      "shortName": "BK",
+      "longName": "Bildende Kunst"
+    },
+    {
+      "id": "SK",
+      "shortName": "SK",
+      "longName": "Sachkunde"
+    },
+    {
+      "id": "RE",
+      "shortName": "RE",
+      "longName": "Religion"
+    },
+    {
+      "id": "LK",
+      "shortName": "LK",
+      "longName": "Lebenskunde"
+    },
+    {
+      "id": "SP",
+      "shortName": "SP",
+      "longName": "Sport"
+    }
+  ],
+  "supervisionAreas": [
+    {
+      "id": "Hof",
+      "shortName": "Hof",
+      "longName": "Pausenhof"
+    }
+  ],
+  "timeFrames": [
+    {
+      "id": "default",
+      "shortName": "Unterricht",
+      "longName": "Unterrichtsraster",
+      "scopeOfWeek": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "timeSlots": [
+        {
+          "shortLabel": "1",
+          "longLabel": "1. Stunde",
+          "startTime": "08:00:00",
+          "endTime": "08:45:00"
+        },
+        {
+          "shortLabel": "2",
+          "longLabel": "2. Stunde",
+          "startTime": "09:05:00",
+          "endTime": "09:50:00"
+        },
+        {
+          "shortLabel": "3",
+          "longLabel": "3. Stunde",
+          "startTime": "10:10:00",
+          "endTime": "10:55:00"
+        },
+        {
+          "shortLabel": "4",
+          "longLabel": "4. Stunde",
+          "startTime": "11:00:00",
+          "endTime": "11:45:00"
+        },
+        {
+          "shortLabel": "5",
+          "longLabel": "5. Stunde",
+          "startTime": "12:20:00",
+          "endTime": "13:05:00"
+        }
+      ]
+    },
+    {
+      "id": "break",
+      "shortName": "Pausen",
+      "longName": "Pausenraster",
+      "scopeOfWeek": [
+        "mon",
+        "tue",
+        "wed",
+        "thu",
+        "fri"
+      ],
+      "timeSlots": [
+        {
+          "shortLabel": "Frühstück",
+          "longLabel": "Frühstück",
+          "startTime": "08:45:00",
+          "endTime": "09:05:00"
+        },
+        {
+          "shortLabel": "Hofpause-1",
+          "longLabel": "Hofpause",
+          "startTime": "09:50:00",
+          "endTime": "10:10:00"
+        },
+        {
+          "shortLabel": "Pause",
+          "longLabel": "Kleine Pause",
+          "startTime": "10:55:00",
+          "endTime": "11:00:00"
+        },
+        {
+          "shortLabel": "Hofpause-2",
+          "longLabel": "Hofpause",
+          "startTime": "11:45:00",
+          "endTime": "12:20:00"
+        },
+        {
+          "shortLabel": "Mittag",
+          "longLabel": "Mittagessen",
+          "startTime": "13:05:00",
+          "endTime": "14:00:00"
+        }
+      ]
+    }
+  ]
 }

@@ -6,13 +6,14 @@ The main features are:
 
 + Open Source
 + JSON documents can be validated against the [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.1/schema.json).
-+ Support of events of any kind (e.g. lessons, exams, meetings etc.).
++ Support of events of any kind (e.g. lessons, activities, exams, meetings etc.).
 + Support of attendees of any kind (e.g. teachers, students, examiners, etc.).
 + Support of timetable changes (substitutions, time shifts, cancellations, etc.)
 + Support of supervisions
 + Support of school and public holidays
 + Support of time frames (When does the first lesson start? When is lunch break? etc.)
 + Support of color definitions
++ Support of code lists based on [OpenCodeList](https://openpotato.github.io/opencodelist/en/)
 + Flexible definition of time scheduling through temporal expressions
 + Extensions possible through user-defined properties
 
