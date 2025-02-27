@@ -26,4 +26,4 @@ Die folgenden OpenT8-Beispiel-Dokumente stehen zur Verfügung:
 
 ## Aktueller Status
 
-OpenT8 ist noch ganz frisch und hier in einer aller ersten Version veröffentlicht. Über [Feedback](community.md) jeglicher Art würden wir uns sehr freuen.
+OpenT8 ist noch relativ frisch und hier bereits in einer zweiten Version veröffentlicht. Über [Feedback](community.md) jeglicher Art würden wir uns sehr freuen.
