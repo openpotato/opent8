@@ -25,18 +25,20 @@ theme:
     - toc.follow
   palette:
     - scheme: default
-      primary: 'indigo'
-      accent: 'amber'
+      primary: 'blue'
+      accent: 'blue'
       toggle:
         icon: material/brightness-7
         name: In den Dunkelmodus wechseln
     - scheme: slate
-      primary: 'indigo'
-      accent: 'amber'
+      primary: 'blue'
+      accent: 'blue'
       toggle:
         icon: material/brightness-4
         name: In den Hellmodus wechseln
   font: false
+  favicon: 'assets/logos/favicon.ico'
+  logo: 'assets/logos/logo.svg'
   include_search_page: false
   search_index_only: true
   static_templates:
