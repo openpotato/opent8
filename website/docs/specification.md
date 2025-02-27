@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.0.2
+#### Version 0.2.0
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -407,7 +407,7 @@ Hier ein Beispiel für einen Hinweis zum Feueralarm:
 
 #### Fehlstellen
 
-Fehlstellen (*Englisch: gap*) repräsentieren Veranstaltungen oder Aufsichten, die nicht wie geplant stattfinden können. Eine Fehlstelle definiert neben der Zeit die Gründe (*Englisch: reason*) für die Planänderung (z.B. Lehrer fehlt/ist freigestellt oder Raum ist nicht verfügbar) und die Auflösung (*Englisch: resolution*). Die Auflösung kann entweder eine Vertretung (*Englisch: substitution*) oder der Ausfall (*Englisch: cancellation*) sein.
+Fehlstellen (*Englisch: gap*) repräsentieren Veranstaltungen, Aufsichten oder Aktivitäten, die nicht wie geplant stattfinden können. Eine Fehlstelle definiert neben der Zeit die Gründe (*Englisch: reason*) für die Planänderung (z.B. Lehrer fehlt/ist freigestellt oder Raum ist nicht verfügbar) und die Auflösung (*Englisch: resolution*). Die Auflösung kann entweder eine Vertretung bzw. ein Ersatz (*Englisch: substitution*) oder der Ausfall (*Englisch: cancellation*) sein.
 
 Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzieher vertreten:
 
@@ -482,7 +482,7 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
 
 ### Räume, Gebäude, Campus und Aufsichtsbereiche
 
-Planelemente können mit Standorten verknüpft werden. Für Veranstaltungen und Ereignisse sind dies Räume (*Englisch: room*), für Aufsichten sind dies Aufsichtsbereiche (*Englisch: supervision area*). Räume können für ein Gebäude (*Englisch: building*) zusammengefasst, Gebäude wiederum für einen Campus (*Englisch: campus*) zusammengefasst werden. Auch Aufsichtsbereiche können für einen Campus zusammengefasst werden.
+Planelemente können mit Standorten verknüpft werden. Für Veranstaltungen, Aktivitäten und Ereignisse sind dies Räume (*Englisch: room*), für Aufsichten sind dies Aufsichtsbereiche (*Englisch: supervision area*). Räume können für ein Gebäude (*Englisch: building*) zusammengefasst, Gebäude wiederum für einen Campus (*Englisch: campus*) zusammengefasst werden. Auch Aufsichtsbereiche können für einen Campus zusammengefasst werden.
 
 Hier ein Beispiel für zwei Räume mit Verweis auf das gleiche Gebäude:
 
@@ -710,7 +710,7 @@ Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
 
 ### Versionierung
 
-Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z. B. `0.1`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.1` unterstützen, MÜSSEN mit allen `0.1.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.0.2` und `0.1.1` gemacht wird.
+Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z. B. `0.2`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.2` unterstützen, MÜSSEN mit allen `0.2.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.2.1` und `0.2.2` gemacht wird.
 
 Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
@@ -752,7 +752,7 @@ Eine Kalenderwoche ist nach ISO 8601 wie folgt definiert:
 
 Statt einzelner Kalenderwochen (z.B. `10`) können auch Kalenderwochenbereiche (z.B. `10-12`) definiert werden.
 
-Ein Beispiel, bei dem für das Jahr 2023 die Kalenderwochen 36,38,40,42,44,46,48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:
+Ein Beispiel, bei dem für das Jahr 2023 die Kalenderwochen 36, 38, 40, 42, 44, 46, 48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:
 
 ``` json
 "weeks": [
@@ -904,7 +904,7 @@ Das `absence`-Objekt definiert eine Abwesenheit:
         `group`  | Eine Gruppe ist abwesend.
         `room`   | Der Raum steht nicht zur Verfügung.
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes, eines vorhandenen `group`-Objektes oder eines vorhandenen `room`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts, eines vorhandenen `group`-Objekts oder eines vorhandenen `room`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -920,7 +920,7 @@ Das `absenceType`-Objekt repräsentiert einen Abwesenheitstyp, mit dem Abwesenhe
 
 :   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
-    Standardmäßig wird keine Code-Liste empfohlen.
+    Es wird keine Code-Liste empfohlen.
 
 **`shortName`** 
 
@@ -966,7 +966,7 @@ Das `activity`-Objekt definiert eine Aktivität:
 
 **`activityType.refId`** 
 
-:   Typ des Aktivität. Dies MUSS ein Verweis auf die `id` eines `activityType`-Objekts sein. 
+:   Typ der Aktivität. Dies MUSS ein Verweis auf die `id` eines `activityType`-Objekts sein. 
 
 **`attendees`** 
 
@@ -995,7 +995,7 @@ Das `activityType`-Objekt repräsentiert einen Aktivitätstyp, mit dem Aktivitä
 
 :   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
-    Standardmäßig wird keine Code-Liste empfohlen.
+    Es wird keine Code-Liste empfohlen.
 
 **`shortName`** 
 
@@ -1023,7 +1023,7 @@ Das `announcement`-Objekt repräsentiert eine freie Mitteilung im Stundenplan:
 
 :   Eindeutige Identifikation der Mitteilung. **Dieses Feld ist ERFORDERLICH**.
 
-**`shortDescription** 
+**`shortDescription`** 
 
 :   Kurzbeschreibung der Mitteilung. **Dieses Feld ist ERFORDERLICH**.
 
@@ -1063,7 +1063,7 @@ Das `announcement`-Objekt repräsentiert eine freie Mitteilung im Stundenplan:
         `person` | Eine Person
         `group`  | Eine Gruppe
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes, eines vorhandenen `group`-Objektes oder eines vorhandenen `room`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts, eines vorhandenen `group`-Objekts oder eines vorhandenen `room`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
 
 **`temporalExpressions`** 
 
@@ -1320,7 +1320,7 @@ Das `eventType`-Objekt repräsentiert einen Ereignistyp, mit dem Ereignisse kate
 
 :   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
-    Standardmäßig wird keine Code-Liste empfohlen.
+    Es wird keine Code-Liste empfohlen.
 
 **`shortName`** 
 
@@ -1368,7 +1368,7 @@ Das `exemption`-Objekt definiert eine Freistellung:
         -------- | ------------
         `person` | Eine Person ist freigestellt.
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1384,7 +1384,7 @@ Das `exemptionType`-Objekt repräsentiert einen Freistellungstyp, mit dem Ereign
 
 :   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
-    Standardmäßig wird keine Code-Liste empfohlen.
+    Es wird keine Code-Liste empfohlen.
 
 **`shortName`** 
 
@@ -1474,7 +1474,7 @@ Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
         `lesson`      | Fehlstelle für eine Unterrichtseinheit
         `supervision` | Fehlstelle für eine Aufsicht
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objektes, eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objekts, eines vorhandenen `lesson`-Objekts oder eines vorhandenen `supervision`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
 
 **`reasons`** 
 
@@ -2030,7 +2030,7 @@ Das `substitution`-Objekt definiert eine Vertretung:
         `lesson`      | Fehlstelle durch eine Unterrichtseinheit
         `supervision` | Fehlstelle durch eine Aufsicht
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objektes, eines vorhandenen `lesson`-Objektes oder eines vorhandenen `supervision`-Objektes sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objekts, eines vorhandenen `lesson`-Objekts oder eines vorhandenen `supervision`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2282,11 +2282,11 @@ Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden z
 
 **`validFrom`** 
 
-:   Definiert den Startzeitpunkt (RFC 3339) des Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Startzeitpunkt der Gültigkeit des `schedule`-Objektes.
+:   Definiert den Startzeitpunkt (RFC 3339) des Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Startzeitpunkt der Gültigkeit des `schedule`-Objekts.
 
 **`validTo`** 
 
-:   Definiert den Endzeitpunkt (RFC 3339) des Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Endzeitpunkt der Gültigkeit des `schedule`-Objektes.
+:   Definiert den Endzeitpunkt (RFC 3339) des Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Endzeitpunkt der Gültigkeit des `schedule`-Objekts.
 
 **`operation`** 
 
