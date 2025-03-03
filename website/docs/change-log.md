@@ -1,6 +1,6 @@
 # Änderungslog
 
-## 0.2.0 <small>_ 26. Febnruar 2025</small>
+## 0.2.0 <small>_ 26. Februar 2025</small>
 
 **Hinzugefügt**:
 
