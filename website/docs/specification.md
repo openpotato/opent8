@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.2.0
+#### Version 0.2.1
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -710,7 +710,7 @@ Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
 
 ### Versionierung
 
-Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z. B. `0.2`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.2` unterstützen, MÜSSEN mit allen `0.2.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.2.1` und `0.2.2` gemacht wird.
+Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.2`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.2` unterstützen, MÜSSEN mit allen `0.2.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.2.1` und `0.2.2` gemacht wird.
 
 Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
