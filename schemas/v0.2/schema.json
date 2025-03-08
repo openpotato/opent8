@@ -196,7 +196,7 @@
         },
         "defaultTimeFrame": {
           "description": "Reference by id to a default time frame",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "scheduleElements": {
           "description": "A list of schedule elements",
@@ -255,7 +255,7 @@
         },
         "absenceType": {
           "description": "Reference by id to an absence type",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "appliesTo": {
           "description": "A person, a group or a room for which the absence applies",
@@ -364,7 +364,7 @@
         },
         "activityType": {
           "description": "Reference by id to an activity type",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "attendees": {
           "description": "A list of attendees",
@@ -405,7 +405,7 @@
           "uniqueItems": true,
           "items": {
             "description": "Reference by if to a room",
-            "$ref": "#/$defs/idRef"
+            "$ref": "#/$defs/referenceById"
           }
         },
         "temporalExpressions": {
@@ -573,7 +573,7 @@
         },
         "campus": {
           "description": "Reference by id to a campus",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "externalIds": {
           "description": "A list of external identifiers",
@@ -698,7 +698,7 @@
         },
         "subject": {
           "description": "Reference by id to a subject",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "courseNo": {
           "description": "An additional course number",
@@ -706,7 +706,7 @@
         },
         "courseType": {
           "description": "Reference by id to a course type",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "courseUrl": {
           "description": "External url of website with additional information",
@@ -719,7 +719,7 @@
           "uniqueItems": true,
           "items": {
             "description": "Reference by id to a group",
-            "$ref": "#/$defs/idRef"
+            "$ref": "#/$defs/referenceById"
           }
         },
         "attendees": {
@@ -847,7 +847,7 @@
         },
         "eventType": {
           "description": "Reference by id to an event type",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "attendees": {
           "description": "A list of attendees",
@@ -885,7 +885,7 @@
           "uniqueItems": true,
           "items": {
             "description": "Reference by if to a room",
-            "$ref": "#/$defs/idRef"
+            "$ref": "#/$defs/referenceById"
           }
         },
         "temporalExpressions": {
@@ -953,7 +953,7 @@
         },
         "exemptionType": {
           "description": "Reference by id to an exemption type",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "appliesTo": {
           "description": "A reference to a person",
@@ -1253,7 +1253,7 @@
         },
         "groupType": {
           "description": "Reference by id to a group type",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "members": {
           "description": "A list of members",
@@ -1290,7 +1290,7 @@
         },
         "timeFrame": {
           "description": "Reference by id to a time frame",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "externalIds": {
           "description": "A list of external identifiers",
@@ -1401,21 +1401,8 @@
       },
       "additionalProperties": false
     },
-    "idRef": {
-      "description": "A reference by id",
-      "type": "object",
-      "required": [
-        "refId"
-      ],
-      "properties": {
-        "refId": {
-          "description": "The id",
-          "type": "string"
-        }
-      },
-      "additionalProperties": false
-    },
     "info": {
+      "description": "Meta information about the timetable data",
       "type": "object",
       "required": [
         "title"
@@ -1488,7 +1475,7 @@
         },
         "course": {
           "description": "Reference by id to a course",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "notes": {
           "description": "Additional notes on the lesson",
@@ -1520,7 +1507,7 @@
           "uniqueItems": true,
           "items": {
             "description": "Reference by id to a group",
-            "$ref": "#/$defs/idRef"
+            "$ref": "#/$defs/referenceById"
           }
         },
         "attendees": {
@@ -1562,7 +1549,7 @@
           "uniqueItems": true,
           "items": {
             "description": "Reference by id to a room",
-            "$ref": "#/$defs/idRef"
+            "$ref": "#/$defs/referenceById"
           }
         },
         "temporalExpressions": {
@@ -1719,7 +1706,7 @@
         },
         "timeFrame": {
           "description": "Reference by id to a time frame",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "externalIds": {
           "description": "A list of external identifiers",
@@ -1773,6 +1760,20 @@
       },
       "additionalProperties": false
     },
+    "referenceById": {
+      "description": "A reference by id",
+      "type": "object",
+      "required": [
+        "refId"
+      ],
+      "properties": {
+        "refId": {
+          "description": "The id",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "room": {
       "description": "A room",
       "type": "object",
@@ -1808,7 +1809,7 @@
         },
         "building": {
           "description": "Reference by id to a building",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "externalIds": {
           "description": "A list of external identifiers",
@@ -1986,7 +1987,7 @@
         },
         "supervisionType": {
           "description": "Reference by id to a supervision type",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "attendees": {
           "description": "A list of attendees",
@@ -2027,7 +2028,7 @@
           "uniqueItems": true,
           "items": {
             "description": "Reference by if to a supervision area",
-            "$ref": "#/$defs/idRef"
+            "$ref": "#/$defs/referenceById"
           }
         },
         "temporalExpressions": {
@@ -2076,7 +2077,7 @@
         },
         "campus": {
           "description": "Reference by id to a campus",
-          "$ref": "#/$defs/idRef"
+          "$ref": "#/$defs/referenceById"
         },
         "externalIds": {
           "description": "A list of external identifiers",
@@ -2327,24 +2328,6 @@
           "examples ": [
             "2023-09-01T10:45:00",
             "2023-09-01T10:45:00+02:00"
-          ]
-        },
-        "days": {
-          "description": "Set of valid date weeks per year",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^\\d+:(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9]))(,(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9])))*$"
-          },
-          "examples ": [
-            [
-              "2023:36,38,41,44,47,50",
-              "2024:1,2,3,4"
-            ],
-            [
-              "2023:37-40,44-47,51",
-              "2024:1-4"
-            ]
           ]
         },
         "weeks": {

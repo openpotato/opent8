@@ -1956,7 +1956,7 @@ Das `schedule`-Objekt enthält die eigentliche zeitliche Verplanung:
 
 **`scheduleElements`** 
 
-:   Eine Liste von Planelementen. Es MUSS ein JSON-Array mit `activity`-Objekten, `announcement`-Objekten, `event`-Objekten, `gap`-Objekten, `holdiay`-Objekten, `lesson`-Objekten und/oder `supervision`-Objekten sein. 
+:   Eine Liste von Planelementen. Es MUSS ein JSON-Array mit `activity`-Objekten, `announcement`-Objekten, `event`-Objekten, `gap`-Objekten, `holiday`-Objekten, `lesson`-Objekten und/oder `supervision`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
