@@ -16,10 +16,6 @@
 + Breaking change: Die Eigenschaft `person.title` wurde umbenannt in `person.titles`.
 + Die Eigenschaft `code` als Verweis auf Code-Listen im OpenCodeList-Format ist jetzt für *alle* Entitäten optional. 
 
-**Korrigiert**:
-
-+ Nicht benötigte Eigenschaft in Entität `timeFrame` entfernt.
-
 ## 0.2.1 <small>_ 08. März 2025</small>
 
 **Geändert**:
