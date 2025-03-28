@@ -5,7 +5,7 @@ OpenT8 ist ein standardisiertes [JSON](https://www.json.org/)-Format zum Abbilde
 Die wesentlichen Eigenschaften sind:
 
 + Open Source
-+ OpenT8-Dokumente können gegen das [OpenT8 Document Schema](https://github.com/openpotato/opent8/blob/main/schemas/v0.2/schema.json) validiert werden.
++ OpenT8-Dokumente können gegen das [OpenT8 Document Schema](https://github.com/openpotato/opent8/blob/main/schemas/v0.3/schema.json) validiert werden.
 + Unterstützung von Veranstaltungen jeglicher Art (z.B. Unterricht, Prüfungen, Treffen etc.)
 + Unterstützung von Teilnehmern jeglicher Art (z.B. Lehrer:in, Schüler:in, Erzieher:in etc.)
 + Unterstützung von Planänderungen (Vertretungen, Verschiebungen, Ausfall etc.)

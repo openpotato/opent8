@@ -1,8 +1,8 @@
 ﻿{
-  "$id": "https://schemahub.openpotato.org/opent8/v0.2/schema.json",
+  "$id": "https://schemahub.openpotato.org/opent8/v0.3/schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OpenT8 Document Schema Specification",
-  "description": "The specification of OpenT8 v0.2.x documents",
+  "description": "The specification of OpenT8 v0.3.0 documents",
   "type": "object",
   "required": [
     "opent8",
@@ -13,7 +13,7 @@
     "opent8": {
       "description": "The version of the OpenT8 Document Schema",
       "type": "string",
-      "pattern": "^0\\.2\\.\\d+$"
+      "pattern": "^0\\.3\\.\\d+$"
     },
     "info": {
       "$ref": "#/$defs/info"
@@ -181,7 +181,7 @@
         "validFrom": {
           "description": "Valid from",
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "examples": [
             "2023-09-01"
           ]
@@ -189,7 +189,7 @@
         "validTo": {
           "description": "Valid to",
           "type": "string",
-          "format": "date",
+          "format": "date-time",
           "examples": [
             "2024-01-31"
           ]
@@ -775,7 +775,6 @@
       "type": "object",
       "required": [
         "id",
-        "code",
         "shortName"
       ],
       "properties": {
@@ -1186,7 +1185,6 @@
       "type": "object",
       "required": [
         "id",
-        "code",
         "shortName"
       ],
       "properties": {
@@ -1312,7 +1310,6 @@
       "type": "object",
       "required": [
         "id",
-        "code",
         "shortName"
       ],
       "properties": {
@@ -1350,7 +1347,8 @@
       "required": [
         "type",
         "id",
-        "shortName"
+        "shortName",
+        "holidayType"
       ],
       "properties": {
         "type": {
@@ -1425,8 +1423,8 @@
           "type": "string",
           "format": "date-time",
           "examples": [
-            "2023-09-01T10:00:00",
-            "2023-09-01T10:00:00+02:00"
+            "2023-09-01T10:00:00Z",
+            "2023-09-01T10:00:00+02:00Z"
           ]
         },
         "publishedFrom": {
@@ -1461,8 +1459,7 @@
       "required": [
         "type",
         "id",
-        "course",
-        "relevance"
+        "course"
       ],
       "properties": {
         "type": {
@@ -1494,11 +1491,13 @@
           "description": "Relevance of the lesson",
           "enum": [
             "scheduled",
-            "additional"
-          ]
+            "additional",
+            "substitution"
+          ],
+          "default": "scheduled"
         },
         "teachingFormat": {
-          "description": "Teaching format  (e.g. in-person, remote, hybrid)",
+          "description": "Teaching format (e.g. in-person, remote, hybrid)",
           "$ref": "#/$defs/teachingFormat"
         },
         "groups": {
@@ -1582,7 +1581,7 @@
           "description": "Name respresenation for sorting",
           "type": "string"
         },
-        "title": {
+        "titles": {
           "description": "Title(s) (e.g. academic degree)",
           "type": "array",
           "uniqueItems": true,
@@ -1594,8 +1593,8 @@
           "description": "Given name or first name",
           "type": "string"
         },
-        "middleName": {
-          "description": "MMiddle name(s)",
+        "middleNames": {
+          "description": "Middle name(s)",
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -1610,7 +1609,7 @@
           "description": "Family name or last name",
           "type": "string"
         },
-        "nameSuffix": {
+        "nameSuffixes": {
           "description": "Name suffix(es)",
           "type": "array",
           "uniqueItems": true,
@@ -1643,8 +1642,8 @@
           "type": "string",
           "format": "date-time",
           "examples ": [
-            "2023-09-01T10:00:00",
-            "2023-09-01T10:00:00+02:00"
+            "2023-09-01T10:00:00Z",
+            "2023-09-01T10:00:00+02:00Z"
           ]
         },
         "endTimepoint": {
@@ -1652,8 +1651,8 @@
           "type": "string",
           "format": "date-time",
           "examples ": [
-            "2023-09-01T10:45:00",
-            "2023-09-01T10:45:00+02:00"
+            "2023-09-01T10:45:00Z",
+            "2023-09-01T10:45:00+02:00Z"
           ]
         },
         "operation": {
@@ -1728,7 +1727,6 @@
       "type": "object",
       "required": [
         "id",
-        "code",
         "shortName"
       ],
       "properties": {
@@ -2272,7 +2270,7 @@
                 "type": "string",
                 "format": "time",
                 "examples ": [
-                  "10:00:00"
+                  "10:00:00Z"
                 ]
               },
               "endTime": {
@@ -2280,7 +2278,7 @@
                 "type": "string",
                 "format": "time",
                 "examples ": [
-                  "10:45:00"
+                  "10:45:00Z"
                 ]
               }
             },
@@ -2317,8 +2315,8 @@
           "type": "string",
           "format": "date-time",
           "examples ": [
-            "2023-09-01T10:00:00",
-            "2023-09-01T10:00:00+02:00"
+            "2023-09-01T10:00:00Z",
+            "2023-09-01T10:00:00+02:00Z"
           ]
         },
         "endTimepoint": {
@@ -2326,8 +2324,8 @@
           "type": "string",
           "format": "date-time",
           "examples ": [
-            "2023-09-01T10:45:00",
-            "2023-09-01T10:45:00+02:00"
+            "2023-09-01T10:45:00Z",
+            "2023-09-01T10:45:00+02:00Z"
           ]
         },
         "weeks": {
