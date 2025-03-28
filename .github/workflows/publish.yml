@@ -3,16 +3,23 @@ on:
   push:
     branches: 
       - main
+  workflow_dispatch:      
+permissions:
+  contents: write
 jobs:
   deploy:
     name: Build and publish MkDocs website
     if: github.event.repository.fork == false    
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout repo content
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material mkdocs-minify-plugin
+      - name: Install dependencies
+        run: pip install mkdocs-material mkdocs-minify-plugin
+      - name: Build and Deploy to GitHub Pages
       - run: mkdocs gh-deploy --force
         working-directory: website
