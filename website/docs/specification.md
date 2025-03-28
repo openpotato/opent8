@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.2.1
+#### Version 0.3.0
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -8,7 +8,7 @@ Dieses Spezifikation ist lizenziert unter der [Apache License, Version 2.0](http
 
 ## Einführung
 
-OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.2/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
+OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.3/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
 
 OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendungen genutzt werden, als Quelle für die grafische Anzeige von Stundenplänen oder als Antwortformat für API-Anfragen (z.B. für RESTful Web-Services).
 
@@ -36,7 +36,7 @@ Hier ein Beispiel für die Kursteilnahme eines Lehrers:
         "Leopold"
       ],
       "givenName": "Alexander",
-      "title": [
+      "titles": [
         "Dr."
       ]
     },
@@ -169,7 +169,7 @@ Planelemente sind unterschiedlich ausgeprägt.
 
 #### Veranstaltungen
 
-Veranstaltungen (*Englisch: lesson*) repräsentieren den eigentlichen Unterricht. Eine Veranstaltung MUSS immer mit einem Kurs verknüpft sein. Veranstaltungen umfassen nicht nur ursprünglich geplante Veranstaltungen sondern auch aktuelle Vertretungen (in diesem Fall gibt es eine korrespondierende Fehlstelle mit Verweis auf diese Veranstaltung).
+Veranstaltungen bzw. Unterrichtseinheiten (*Englisch: lesson*) repräsentieren den eigentlichen Unterricht. Eine Veranstaltung MUSS immer mit einem Kurs verknüpft sein. Veranstaltungen umfassen nicht nur ursprünglich geplante Veranstaltungen sondern auch aktuelle Vertretungen (in diesem Fall gibt es eine korrespondierende Fehlstelle mit Verweis auf diese Veranstaltung).
 
 Hier ein Beispiel für die Veranstaltungen eines Musikkurses. Dieser findet jede Woche am Mittwoch und am Donnerstag zu jeweils unterschiedlichen Unterrichtszeiten statt:
 
@@ -189,18 +189,24 @@ Hier ein Beispiel für die Veranstaltungen eines Musikkurses. Dieser findet jede
     "temporalExpressions": [
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-06T11:00:00",
-        "endTimepoint": "2023-09-06T11:45:00"
+        "startTimepoint": "2023-09-06T11:00:00Z",
+        "endTimepoint": "2023-09-06T11:45:00Z"
       },
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-07T12:20:00",
-        "endTimepoint": "2023-09-07T13:05:00"
+        "startTimepoint": "2023-09-07T12:20:00Z",
+        "endTimepoint": "2023-09-07T13:05:00Z"
       }
     ]
   }
 ]
 ```
+
+Veranstaltungen haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
+
++ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassich verplante Veranstaltung.
++ `additional`: Dieser Wert soll Veranstaltungen kennzeichnen, die kurzfristig (z.B. im Rahmen der Vertetungsplanung) hinzugefügt wurden. Es handelt sich dabei um keinen Vertretungsunterricht sondern vielmahr um einen Zusatzunterricht.
++ `substitution`: Dieser Wert soll Veranstaltungen kennzeichnen, die durch die Vertetungsplanung entstanden sind. Sie ersetzen eine andere Veranstaltung, sei es geplant (also `scheduled`), zusätzlich (also `additional`) oder ebenfalls vertreten (also `substitution`).
 
 #### Aufsichten
 
@@ -230,29 +236,34 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
     "temporalExpressions": [
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-04T08:45:00",
-        "endTimepoint": "2023-09-04T09:05:00",
-        "validFrom": "2023-09-04T00:00:00",
-        "validTo": "2023-09-15T00:00:00"
+        "startTimepoint": "2023-09-04T08:45:00Z",
+        "endTimepoint": "2023-09-04T09:05:00Z",
+        "validFrom": "2023-09-04T00:00:00Z",
+        "validTo": "2023-09-15T00:00:00Z"
       },
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-06T08:45:00",
-        "endTimepoint": "2023-09-06T09:05:00",
-        "validFrom": "2023-09-04T00:00:00",
-        "validTo": "2023-09-15T00:00:00"
+        "startTimepoint": "2023-09-06T08:45:00Z",
+        "endTimepoint": "2023-09-06T09:05:00Z",
+        "validFrom": "2023-09-04T00:00:00Z",
+        "validTo": "2023-09-15T00:00:00Z"
       },
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-08T08:45:00",
-        "endTimepoint": "2023-09-08T09:05:00",
-        "validFrom": "2023-09-04T00:00:00",
-        "validTo": "2023-09-15T00:00:00"
+        "startTimepoint": "2023-09-08T08:45:00Z",
+        "endTimepoint": "2023-09-08T09:05:00Z",
+        "validFrom": "2023-09-04T00:00:00Z",
+        "validTo": "2023-09-15T00:00:00Z"
       }
     ]
   }
 ]
 ```
+
+Aufsichten haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
+
++ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassich verplante Aufsicht.
++ `substitution`: Dieser Wert soll Aufsichten kennzeichnen, die durch die Vertetungsplanung entstanden sind. Sie ersetzen eine andere Aufsicht, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
 
 #### Aktivitäten
 
@@ -286,8 +297,8 @@ Hier ein Beispiel für eine Hortaufsicht:
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-09-01T16:00:00",
-        "endTimepoint": "2023-09-01T18:00:00"
+        "startTimepoint": "2023-09-01T16:00:00Z",
+        "endTimepoint": "2023-09-01T18:00:00Z"
       }
     ]
   }
@@ -301,9 +312,14 @@ Hier ein Beispiel für eine Hortaufsicht:
 ]
 ```
 
+Aktivitäten haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
+
++ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassich verplante Aktivität.
++ `substitution`: Dieser Wert soll Aktivitäten kennzeichnen, die durch die Vertetungsplanung entstanden sind. Sie ersetzen eine andere Aktivität, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
+
 #### Ereignisse
 
-Ereignisse (*Englisch: event*) sind Termine, die nicht durch Veranstaltungen, Aktivitäten oder Aufsichten repräsentiert werden können (z.B. Meetings, Prüfungen, etc.).
+Ereignisse (*Englisch: event*) sind Termine, die nicht durch Veranstaltungen, Aktivitäten oder Aufsichten repräsentiert werden können (z.B. Meetings, Prüfungen, etc.). Ereignisse können nicht vertreten werden.
 
 Hier ein Beispiel für ein Meeting:
 
@@ -339,8 +355,8 @@ Hier ein Beispiel für ein Meeting:
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-09-01T08:00:00",
-        "endTimepoint": "2023-09-01T10:00:00"
+        "startTimepoint": "2023-09-01T08:00:00Z",
+        "endTimepoint": "2023-09-01T10:00:00Z"
       }
     ]
   }
@@ -371,8 +387,8 @@ Hier die Weihnachtsferien 2023/2024 als Beispiel:
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-12-23T00:00:00",
-        "endTimepoint": "2024-01-05T00:00:00"
+        "startTimepoint": "2023-12-23T00:00:00Z",
+        "endTimepoint": "2024-01-05T00:00:00Z"
       }
     ]
   }
@@ -397,8 +413,8 @@ Hier ein Beispiel für einen Hinweis zum Feueralarm:
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-12-23T08:00:00",
-        "endTimepoint": "2024-01-05T08:25:00"
+        "startTimepoint": "2023-12-23T08:00:00Z",
+        "endTimepoint": "2024-01-05T08:25:00Z"
       }
     ]
   }
@@ -444,18 +460,19 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-09-04T08:00:00",
-        "endTimepoint": "2023-09-04T08:45:00"
+        "startTimepoint": "2023-09-04T08:00:00Z",
+        "endTimepoint": "2023-09-04T08:45:00Z"
       }
     ]
   },
   {
     "type": "lesson",
     "id": "V-1",
-    "notes": "Das ist eine Vertretung",
     "course": {
       "refId": "DE-1A"
     },
+    "notes": "Das ist eine Vertretung",
+	"relevance": "substitution",
     "attendees": [
       {
         "refId": "Leo",
@@ -472,8 +489,8 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-09-04T08:00:00",
-        "endTimepoint": "2023-09-04T08:45:00"
+        "startTimepoint": "2023-09-04T08:00:00Z",
+        "endTimepoint": "2023-09-04T08:45:00Z"
       }
     ]
   }
@@ -523,8 +540,8 @@ Hier ein Beispiel für einen einmaligen Termin.
 "temporalExpressions": [
   {
     "type": "onetime",
-    "startTimepoint": "2023-09-04T08:00:00",
-    "endTimepoint": "2023-09-04T08:45:00"
+    "startTimepoint": "2023-09-04T08:00:00Z",
+    "endTimepoint": "2023-09-04T08:45:00Z"
   }
 ]
 ```
@@ -539,8 +556,8 @@ Hier ein Beispiel für einen wöchentlichen Termin, der jedoch nur in bestimmten
 "temporalExpressions": [
   {
     "type": "weekly",
-    "startTimepoint": "2023-09-08T11:00:00",
-    "endTimepoint": "2023-09-08T11:45:00",
+    "startTimepoint": "2023-09-08T11:00:00Z",
+    "endTimepoint": "2023-09-08T11:45:00Z",
     "weeks": [
       "2023:36,38,40,42,44,46,48,50",
       "2024:1-4"
@@ -559,14 +576,14 @@ Hier ein Beispiel für einen zeitlichen Ausdruck, bestehend aus einem wöchentli
 "temporalExpressions": [
   {
     "type": "weekly",
-    "startTimepoint": "2023-09-08T11:00:00",
-    "endTimepoint": "2023-09-08T11:45:00",
+    "startTimepoint": "2023-09-08T11:00:00Z",
+    "endTimepoint": "2023-09-08T11:45:00Z",
     "operation": "include"
   },
   {
     "type": "onetime",
-    "startTimepoint": "2023-09-22:00:00",
-    "endTimepoint": "2023-09-22T00:00:00",
+    "startTimepoint": "2023-09-22:00:00Z",
+    "endTimepoint": "2023-09-22T00:00:00Z",
     "operation": "exclude"
   }
 ]
@@ -595,32 +612,32 @@ Hier ein Beispiel für einen Zeitrahmen in einer Grundschule (Jahrgangsstufe 1):
       {
         "shortLabel": "1",
         "longLabel": "1. Stunde",
-        "startTime": "08:00:00",
-        "endTime": "08:45:00"
+        "startTime": "08:00:00Z",
+        "endTime": "08:45:00Z"
       },
       {
         "shortLabel": "2",
         "longLabel": "2. Stunde",
-        "startTime": "09:05:00",
-        "endTime": "09:50:00"
+        "startTime": "09:05:00Z",
+        "endTime": "09:50:00Z"
       },
       {
         "shortLabel": "3",
         "longLabel": "3. Stunde",
-        "startTime": "10:10:00",
-        "endTime": "10:55:00"
+        "startTime": "10:10:00Z",
+        "endTime": "10:55:00Z"
       },
       {
         "shortLabel": "4",
         "longLabel": "4. Stunde",
-        "startTime": "11:00:00",
-        "endTime": "11:45:00"
+        "startTime": "11:00:00Z",
+        "endTime": "11:45:00Z"
       },
       {
         "shortLabel": "5",
         "longLabel": "5. Stunde",
-        "startTime": "12:20:00",
-        "endTime": "13:05:00"
+        "startTime": "12:20:00Z",
+        "endTime": "13:05:00Z"
       }
     ]
   }
@@ -631,7 +648,7 @@ Hier ein Beispiel für einen Zeitrahmen in einer Grundschule (Jahrgangsstufe 1):
 
 Standardisierte Codes erlauben die eindeutige Identifikation und Klassifikation von Daten. OpenT8 unterstützt [OpenCodeList](https://openpotato.github.io/opencodelist/de/), einem generischen Standard-Datenformat zur Repräsentation von Code-Listen bzw. Schlüsselverzeichnissen. 
 
-Die folgenden Objekte besitzen jeweils ein (zum Teil erforderliches) Code-Attribut, dass einen Verweis auf eine Code-Liste im OpenCodeList-Format darstellt. 
+Die folgenden Objekte besitzen jeweils ein Code-Attribut, dass einen Verweis auf eine Code-Liste im OpenCodeList-Format darstellt. 
 
 + `absenceType`-Objekt (Abwesenheitstyp)
 + `activityType`-Objekt (Aktivitätstyp)
@@ -710,7 +727,7 @@ Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
 
 ### Versionierung
 
-Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.2`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.2` unterstützen, MÜSSEN mit allen `0.2.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.2.1` und `0.2.2` gemacht wird.
+Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.3`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.3` unterstützen, MÜSSEN mit allen `0.3.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.3.1` und `0.3.2` gemacht wird.
 
 Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
@@ -724,7 +741,7 @@ Das Schema sieht zwei Arten von Feldern vor: Fest definierte Felder, die einen d
 
 #### JSON Schema
 
-[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.2/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
+[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.3/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
 
 #### Datums- und Zeitangaben
 
@@ -773,6 +790,41 @@ Beispiele:
 + `#00ff00` ist grün
 + `#0000ff` ist blau
 + `#ff8000` ist orange
+
+#### URIs
+
+Eine [URI (Uniform Resource Identifier)](https://datatracker.ietf.org/doc/html/rfc3986) ist eine Zeichenkette, die verwendet wird, um eine Ressource im Internet zu identifizieren. Es handelt sich hierbei um einen umfassenden Begriff, der sowohl URLs als auch URNs einschließt. Es gibt zwei Haupttypen von URIs:
+
++ *URL (Uniform Resource Locator)*: Gibt den Standort einer Ressource an.
++ *URN (Uniform Resource Name)*: Gibt den Namen einer Ressource an, ohne ihren Standort zu implizieren.
+
+Eine **URL (Uniform Resource Locator)** ist ein URI-Typ, der beschreibt, wie eine Ressource im Netzwerk gefunden werden kann. Sie enthält Informationen wie das zu verwendende Protokoll (z.B. HTTPS), den Hostnamen (z.B. www.beispiel.de) und manchmal einen Pfad oder eine Abfragezeichenfolge, um die spezifische Ressource zu identifizieren.
+
+Beispiel für eine URL:
+
+```
+https://www.beispiel.de/buecher/die-abenteuer-des-tom-sawyer.pdf
+```
+
+Hier:
+
++ `https` ist das Protokoll.
++ `www.beispiel.de` ist der Hostname.
++ `/buecher/die-abenteuer-des-tom-sawyer.pdf` ist der Pfad zur spezifischen Ressource.
+
+Eine **URN (Uniform Resource Name)** ist ein URI-Typ, der eine eindeutige und dauerhafte Kennung für eine Ressource bereitstellt, ohne ihren Standort oder den Zugriffsweg zu beschreiben. URNs sollen als dauerhafte, standortunabhängige Ressourcenkennung dienen.
+
+Beispiel für eine URN:
+
+```
+urn:isbn:978-3-96111-268-5
+```
+
+Hier:
+
++ `urn` zeigt an, dass es sich um eine URN handelt.
++ `isbn` ist der Namespace-Identifier.
++ `978-3-96111-268-5` ist der spezifische Ressourcename innerhalb des `isbn` Namespace.
 
 ### Schema
 
@@ -876,7 +928,7 @@ Das `absence`-Objekt definiert eine Abwesenheit:
 
 **`type`** 
 
-:   MUSS den Wert `absence` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `absence` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -942,7 +994,7 @@ Das `activity`-Objekt definiert eine Aktivität:
 
 **`type`** 
 
-:   MUSS den Wert `activity` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `activity` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -963,6 +1015,17 @@ Das `activity`-Objekt definiert eine Aktivität:
 **`color`** 
 
 :   Ein Farbwert (Hex-Kodierung) für die Mitteilung.
+
+**`relevance`** 
+
+:   Relevanz der Aktivität. 
+
+    Folgende Werte sind definiert:
+
+    Wert           | Beschreibung
+    -------------- | ------------
+    `scheduled`    | Wie geplant (das ist der Standardwert)
+    `substitution` | Vertretungsaktivität
 
 **`activityType.refId`** 
 
@@ -1017,7 +1080,7 @@ Das `announcement`-Objekt repräsentiert eine freie Mitteilung im Stundenplan:
 
 **`type`** 
 
-:   MUSS den Wert `announcement` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `announcement` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1141,7 +1204,7 @@ Das `cancellation`-Objekt definiert einen Unterrichtsausfall:
 
 **`type`** 
 
-:   MUSS den Wert `cancellation` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `cancellation` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1229,7 +1292,7 @@ Das `courseType`-Objekt repräsentiert einen Kurstyp, mit dem Gruppen kategorisi
 
 **`code`** 
 
-:   Ein standardisierter Schlüssel. **Dieses Feld ist ERFORDERLICH**. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
     Standardmäßig wird folgende Code-Liste EMPFOHLEN:
     
@@ -1257,7 +1320,7 @@ Das `event`-Objekt repräsentiert ein Termin, dass sich nicht durch eine Veranst
 
 **`type`** 
 
-:   MUSS den Wert `event` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `event` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1342,7 +1405,7 @@ Das `exemption`-Objekt definiert eine Freistellung:
 
 **`type`** 
 
-:   MUSS den Wert `exemption` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `exemption` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1450,7 +1513,7 @@ Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
 
 **`type`** 
 
-:   MUSS den Wert `gap` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `gap` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1500,7 +1563,7 @@ Das `gender`-Objekt definiert das Geschlecht einer Person:
 
 **`code`** 
 
-:   Ein standardisierter Schlüssel. **Dieses Feld ist ERFORDERLICH**. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
     Standardmäßig wird folgende Code-Liste EMPFOHLEN:
     
@@ -1577,7 +1640,7 @@ Das `groupType`-Objekt repräsentiert einen Gruppentyp, mit dem Gruppen kategori
 
 **`code`** 
 
-:   Ein standardisierter Schlüssel. **Dieses Feld ist ERFORDERLICH**. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
     Standardmäßig wird folgende Code-Liste EMPFOHLEN:
     
@@ -1605,7 +1668,7 @@ Das `holiday`-Objekt repräsentiert schulfreie Zeit (Feiertage oder Schulferien)
 
 **`type`** 
 
-:   MUSS den Wert `holiday` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `holiday` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`shortName`** 
 
@@ -1625,7 +1688,9 @@ Das `holiday`-Objekt repräsentiert schulfreie Zeit (Feiertage oder Schulferien)
 
 **`holidayType`** 
 
-:   Die Typisierung des Termins. Mögliche Werte sind:
+:   Die Typisierung des Termins. **Dieses Feld ist ERFORDERLICH**. 
+
+    Mögliche Werte sind:
 
     Wert     | Beschreibung
     -------- | ------------
@@ -1693,12 +1758,12 @@ Beispiel:
   "description": "Stundenplan für das Schuljahr 2023/2024",
   "summary": "Der aktuelle Stundenplan inklusive Aufsichten und Vertretungen.",
   "version": "201",
-  "publishedAt": "2023-09-01T12:00:00",
+  "publishedAt": "2023-09-01T12:00:00Z",
   "publishedFrom": "Meine-Schule, Berlin",
   "language": "de",
   "source": {
     "name": "MyTimeTableApp",
-    "version": "0.2"
+    "version": "1.0"
   }
 }
 ```
@@ -1709,7 +1774,7 @@ Das `lesson`-Objekt repräsentiert eine Veranstaltung bzw. Unterrichtseinheit, d
 
 **`type`** 
 
-:   MUSS den Wert `lesson` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `lesson` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1721,14 +1786,15 @@ Das `lesson`-Objekt repräsentiert eine Veranstaltung bzw. Unterrichtseinheit, d
 
 **`relevance`** 
 
-:   Relevanz des Kurses. **Dieses Feld ist ERFORDERLICH**.
+:   Relevanz der Veranstaltung. 
 
     Folgende Werte sind definiert:
 
-    Wert         | Beschreibung
-    ------------ | ------------
-    `scheduled`  | Wie geplant
-    `additional` | Zusatzunterricht
+    Wert           | Beschreibung
+    -------------- | ------------
+    `scheduled`    | Wie geplant (das ist der Standardwert)
+    `additional`   | Zusatzunterricht
+    `substitution` | Vertretungsunterricht
 
 **`notes`** 
 
@@ -1773,7 +1839,7 @@ Das `oneTimeExpression`-Objekt definiert einen einmaligen zeitlichen Ausdruck:
 
 **`type`** 
 
-:   MUSS den Wert `oneTime` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `oneTime` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`startTimepoint`** 
 
@@ -1796,8 +1862,8 @@ Das folgende Beispiel zeigt ein `oneTimeExpression`-Objekt, das sich über mehre
 "temporalExpressions": [
   {
     "type": "onetime",
-    "startTimepoint": "2023-12-23T12:00:00",
-    "endTimepoint": "2024-01-05T12:00:00"
+    "startTimepoint": "2023-12-23T12:00:00Z",
+    "endTimepoint": "2024-01-05T12:00:00Z"
   }
 ]
 ```
@@ -1830,7 +1896,7 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 :   Namensvorsatz (z.B. "von") der Person.
 
-**`name.middleName`** 
+**`name.middleNames`** 
 
 :   Mittelnamen der Person. Dies MUSS ein JSON-String-Array sein. 
 
@@ -1838,13 +1904,13 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 :   Vorname der Person.
 
-**`name.nameSuffix`** 
+**`name.nameSuffixes`** 
 
 :   Namenszusätze (z.B. "Jr.") der Person. Dies MUSS ein JSON-String-Array sein. 
 
-**`name.title`** 
+**`name.titles`** 
 
-:   Titel (z.B. "Dr.") der Person. Dies MUSS ein JSON-String-Array sein. 
+:   Die Liste der Titel (z.B. "Dr.") der Person. Dies MUSS ein JSON-String-Array sein. 
 
 **`name.nickName`** 
 
@@ -1856,7 +1922,7 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 **`birthdate`** 
 
-:   Geburtsdatum der Person.
+:   Geburtsdatum (RFC 3339) der Person. 
 
 **`color`** 
 
@@ -1882,7 +1948,7 @@ Das `personRole`-Objekt repräsentiert einen Rolle, mit der Mitglieder oder Teil
 
 **`code`** 
 
-:   Ein standardisierter Schlüssel. **Dieses Feld ist ERFORDERLICH**. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
     Standardmäßig wird folgende Code-Liste EMPFOHLEN:
     
@@ -2006,7 +2072,7 @@ Das `substitution`-Objekt definiert eine Vertretung:
 
 **`type`** 
 
-:   MUSS den Wert `substitution` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `substitution` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -2018,7 +2084,7 @@ Das `substitution`-Objekt definiert eine Vertretung:
 
 **`appliesTo`** 
 
-:   Eine Aktivität, eine Unterrichtseinheit oder eine Aufsicht, welche(n) die Vertretung darstellt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
+:   Eine Aktivität, eine Unterrichtseinheit oder eine Aufsicht, welche die Vertretung darstellt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
     + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
     
@@ -2027,8 +2093,8 @@ Das `substitution`-Objekt definiert eine Vertretung:
         Wert          | Beschreibung
         ------------- | ------------
         `activity`    | Vertretung durch eine Aktivität
-        `lesson`      | Fehlstelle durch eine Unterrichtseinheit
-        `supervision` | Fehlstelle durch eine Aufsicht
+        `lesson`      | Vertretung durch eine Unterrichtseinheit
+        `supervision` | Vertretung durch eine Aufsicht
         
     + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objekts, eines vorhandenen `lesson`-Objekts oder eines vorhandenen `supervision`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
 
@@ -2053,6 +2119,17 @@ Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehren Auf
 **`color`** 
 
 :   Ein Farbwert (Hex-Kodierung) für die Aufsicht.
+
+**`relevance`** 
+
+:   Relevanz der Aufsicht. 
+
+    Folgende Werte sind definiert:
+
+    Wert           | Beschreibung
+    -------------- | ------------
+    `scheduled`    | Wie geplant (das ist der Standardwert)
+    `substitution` | Vertretungsaufsicht
 
 **`supervisionType.idRef`** 
 
@@ -2266,7 +2343,7 @@ Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden z
 
 **`type`** 
 
-:   MUSS den Wert `weekly` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `weekly` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`startTimepoint`** 
 
@@ -2301,8 +2378,8 @@ Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das Jahr
 "temporalExpressions": [
   {
     "type": "weekly",
-    "startTimepoint": "2023-09-08T10:30:00",
-    "endTimepoint": "2023-09-08T11:15:00",
+    "startTimepoint": "2023-09-08T10:30:00Z",
+    "endTimepoint": "2023-09-08T11:15:00Z",
     "weeks": [
       "2023:36,38,40,42,44,46,48,50",
       "2024:1-4"

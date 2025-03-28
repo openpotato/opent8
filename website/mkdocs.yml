@@ -83,7 +83,8 @@ markdown_extensions:
 
 # Navigation  
 nav:
-- Einführung: index.md
-- Spezifikation: specification.md
-- Community: community.md
-- Änderungslog: change-log.md
+  - Einführung: index.md
+  - Spezifikation: specification.md
+  - Bibliotheken: libraries.md
+  - Community: community.md
+  - Änderungslog: change-log.md

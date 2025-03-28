@@ -1,5 +1,25 @@
 # Änderungslog
 
+## 0.3.0 <small>_ 28. März 2025</small>
+
+**Hinzugefügt**:
+
++ Die Eigenschaft `lesson.relevance` hat einen zusätzlichen Wert `substitution` bekommen.
++ Neue Eigenschaft `activity.relevance` hinzugefügt.
++ Neue Eigenschaft `supervision.relevance` hinzugefügt.
+
+**Geändert**:
+
++ Breaking change: Die Eigenschaft `holiday.holidayType` ist jetzt erforderlich.
++ Breaking change: Die Eigenschaft `person.middleName` wurde umbenannt in `person.middleNames`.
++ Breaking change: Die Eigenschaft `person.nameSuffix` wurde umbenannt in `person.nameSuffixes`.
++ Breaking change: Die Eigenschaft `person.title` wurde umbenannt in `person.titles`.
++ Die Eigenschaft `code` als Verweis auf Code-Listen im OpenCodeList-Format ist jetzt für *alle* Entitäten optional. 
+
+**Korrigiert**:
+
++ Nicht benötigte Eigenschaft in Entität `timeFrame` entfernt.
+
 ## 0.2.1 <small>_ 08. März 2025</small>
 
 **Geändert**:
