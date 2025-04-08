@@ -2,7 +2,7 @@
   "$id": "https://schemahub.openpotato.org/opent8/v0.3/schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OpenT8 Document Schema Specification",
-  "description": "The specification of OpenT8 v0.3.0 documents",
+  "description": "The specification of OpenT8 v0.3.1 documents",
   "type": "object",
   "required": [
     "opent8",
@@ -365,6 +365,15 @@
         "activityType": {
           "description": "Reference by id to an activity type",
           "$ref": "#/$defs/referenceById"
+        },
+        "groups": {
+          "description": "A list of group references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by id to a group",
+            "$ref": "#/$defs/referenceById"
+          }
         },
         "attendees": {
           "description": "A list of attendees",
@@ -847,6 +856,15 @@
         "eventType": {
           "description": "Reference by id to an event type",
           "$ref": "#/$defs/referenceById"
+        },
+        "groups": {
+          "description": "A list of group references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by id to a group",
+            "$ref": "#/$defs/referenceById"
+          }
         },
         "attendees": {
           "description": "A list of attendees",
