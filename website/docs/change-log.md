@@ -1,5 +1,12 @@
 # Änderungslog
 
+## 0.3.1 <small>_ 08. April 2025</small>
+
+**Hinzugefügt**:
+
++ Neue Eigenschaft `activity.groups` hinzugefügt.
++ Neue Eigenschaft `event.groups` hinzugefügt.
+
 ## 0.3.0 <small>_ 28. März 2025</small>
 
 **Hinzugefügt**:
