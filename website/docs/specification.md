@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.3.1
+#### Version 0.4.0
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -30,15 +30,12 @@ Hier ein Beispiel für die Kursteilnahme eines Lehrers:
     "id": "Leo",
     "name": {
       "shortName": "Leo",
-      "familyName": "Schnitzewitz",
-      "familyNamePrefix": "von",
-      "middleName": [
+      "familyName": "von Schnitzewitz",
+      "middleNames": [
         "Leopold"
       ],
       "givenName": "Alexander",
-      "titles": [
-        "Dr."
-      ]
+      "title": "Dr."
     },
     "birthdate": "1969-07-20"
   }
@@ -1894,13 +1891,34 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 :   Der Name der Person, optimiert für eine gewünschte alphanumerische Sortierung in einer Liste.
 
+**`name.salutations`** 
+
+:   Die Liste der Anreden (z.B. "Herr", "Frau", etc.) der Person. Dies MUSS ein JSON-String-Array sein. 
+
+**`name.title`** 
+
+:   Der Titel (z.B. "Dr.", "Prof. Dr.", etc.) der Person. 
+
 **`name.familyName`** 
 
-:   Nachname der Person.
+:   Familienname oder Nachname der Person.
 
-**`name.familyNamePrefix`** 
+**`name.declaredName`** 
 
-:   Namensvorsatz (z.B. "von") der Person.
+:   Deklarierte Name der Person (z.B. Ehename oder Lebenspartnerschaftsname).
+
+**`name.declaredNameType`** 
+
+:  Die Typisierung des Feldes `name.declaredName`. 
+    
+        Mögliche Werte sind:
+    
+        Wert                   | Beschreibung
+        ---------------------- | ------------
+        `marriedName`          | Ehename
+        `civilPartnershipName` | Lebenspartnerschaftsname
+		
+		Der Standardwert ist `marriedName`.
 
 **`name.middleNames`** 
 
@@ -1912,11 +1930,7 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 **`name.nameSuffixes`** 
 
-:   Namenszusätze (z.B. "Jr.") der Person. Dies MUSS ein JSON-String-Array sein. 
-
-**`name.titles`** 
-
-:   Die Liste der Titel (z.B. "Dr.") der Person. Dies MUSS ein JSON-String-Array sein. 
+:   Namenszusätze (z.B. "Jr.", "MdB") der Person. Dies MUSS ein JSON-String-Array sein. 
 
 **`name.nickName`** 
 
@@ -1944,6 +1958,10 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 Dieses Objekt KANN erweitert werden.
 
+!!! Hinweis
+
+    Die Untereigenschaften von `name` sind so spezifiziert, dass sie kompatibel (also 1:1 abgebildet werden können) mit der XÖV-Kernkomponente [NameNatuerlichePerson](https://www.xrepository.de/details/urn:xoev-de:kosit:xoev:kernkomponente:namenatuerlicheperson) sind.
+    
 #### personRole-Objekt
 
 Das `personRole`-Objekt repräsentiert einen Rolle, mit der Mitglieder oder Teilnehmer kategorisiert werden können:

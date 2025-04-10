@@ -1,5 +1,11 @@
 # Änderungslog
 
+### 0.4.0 <small>_ 10. April 2025</small>
+
+**Geändert:**
+
++ Breaking change: Die Eigenschaft `person.name` wurde refactored, um sie kompatibel zu machen mit der XÖV-Kernkomponente [NameNatuerlichePerson](https://www.xrepository.de/details/urn:xoev-de:kosit:xoev:kernkomponente:namenatuerlicheperson).
+
 ## 0.3.1 <small>_ 08. April 2025</small>
 
 **Hinzugefügt**:
@@ -18,9 +24,9 @@
 **Geändert**:
 
 + Breaking change: Die Eigenschaft `holiday.holidayType` ist jetzt erforderlich.
-+ Breaking change: Die Eigenschaft `person.middleName` wurde umbenannt in `person.middleNames`.
-+ Breaking change: Die Eigenschaft `person.nameSuffix` wurde umbenannt in `person.nameSuffixes`.
-+ Breaking change: Die Eigenschaft `person.title` wurde umbenannt in `person.titles`.
++ Breaking change: Die Eigenschaft `person.name.middleName` wurde umbenannt in `person.name.middleNames`.
++ Breaking change: Die Eigenschaft `person.name.nameSuffix` wurde umbenannt in `person.name.nameSuffixes`.
++ Breaking change: Die Eigenschaft `person.name.title` wurde umbenannt in `person.name.titles`.
 + Die Eigenschaft `code` als Verweis auf Code-Listen im OpenCodeList-Format ist jetzt für *alle* Entitäten optional. 
 
 ## 0.2.1 <small>_ 08. März 2025</small>

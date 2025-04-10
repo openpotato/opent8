@@ -2,7 +2,7 @@
   "$id": "https://schemahub.openpotato.org/opent8/v0.3/schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OpenT8 Document Schema Specification",
-  "description": "The specification of OpenT8 v0.3.1 documents",
+  "description": "The specification of OpenT8 v0.4.0 documents",
   "type": "object",
   "required": [
     "opent8",
@@ -13,7 +13,7 @@
     "opent8": {
       "description": "The version of the OpenT8 Document Schema",
       "type": "string",
-      "pattern": "^0\\.3\\.\\d+$"
+      "pattern": "^0\\.4\\.\\d+$"
     },
     "info": {
       "$ref": "#/$defs/info"
@@ -1599,13 +1599,17 @@
           "description": "Name respresenation for sorting",
           "type": "string"
         },
-        "titles": {
-          "description": "Title(s) (e.g. academic degree)",
+        "salutations": {
+          "description": "Salutaion(s)",
           "type": "array",
           "uniqueItems": true,
           "items": {
             "type": "string"
           }
+        },
+        "title": {
+          "description": "Title (e.g. academic degree)",
+          "type": "string"
         },
         "givenName": {
           "description": "Given name or first name",
@@ -1619,13 +1623,21 @@
             "type": "string"
           }
         },
-        "familyNamePrefix": {
-          "description": "Family name prefix",
-          "type": "string"
-        },
         "familyName": {
           "description": "Family name or last name",
           "type": "string"
+        },
+        "declaredName": {
+          "description": "Declared name (e.g. married name or name for civil partners)",
+          "type": "string"
+        },
+        "declaredNameType": {
+          "description": "Type of the name declaration",
+          "enum": [
+            "marriedName",
+            "civilPartnershipName"
+          ],
+          "default": "MarriedName"
         },
         "nameSuffixes": {
           "description": "Name suffix(es)",
