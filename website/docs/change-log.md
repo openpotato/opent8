@@ -1,6 +1,6 @@
 # Änderungslog
 
-### 0.4.0 <small>_ 10. April 2025</small>
+## 0.4.0 <small>_ 10. April 2025</small>
 
 **Geändert:**
 
