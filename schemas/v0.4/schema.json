@@ -1,5 +1,5 @@
 ﻿{
-  "$id": "https://schemahub.openpotato.org/opent8/v0.3/schema.json",
+  "$id": "https://schemahub.openpotato.org/opent8/v0.4/schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OpenT8 Document Schema Specification",
   "description": "The specification of OpenT8 v0.4.0 documents",
