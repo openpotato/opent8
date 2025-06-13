@@ -1,8 +1,8 @@
 ﻿{
-  "$id": "https://schemahub.openpotato.org/opent8/v0.4/schema.json",
+  "$id": "https://schemahub.openpotato.org/opent8/v0.5/schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OpenT8 Document Schema Specification",
-  "description": "The specification of OpenT8 v0.4.0 documents",
+  "description": "The specification of OpenT8 v0.5.0 documents",
   "type": "object",
   "required": [
     "opent8",
@@ -13,7 +13,7 @@
     "opent8": {
       "description": "The version of the OpenT8 Document Schema",
       "type": "string",
-      "pattern": "^0\\.4\\.\\d+$"
+      "pattern": "^0\\.5\\.\\d+$"
     },
     "info": {
       "$ref": "#/$defs/info"
@@ -168,6 +168,14 @@
       "uniqueItems": true,
       "items": {
         "$ref": "#/$defs/timeFrame"
+      }
+    },
+    "weeksPatterns": {
+      "description": "A list of weeks patterns",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/weeksPattern"
       }
     },
     "schedule": {
@@ -780,7 +788,7 @@
       "additionalProperties": false
     },
     "courseType": {
-      "description": "A course type (e.g. Advanced course)",
+      "description": "A course type (e.g. intensive course, basic course etc.)",
       "type": "object",
       "required": [
         "id",
@@ -2358,24 +2366,6 @@
             "2023-09-01T10:45:00+02:00Z"
           ]
         },
-        "weeks": {
-          "description": "Set of valid date weeks per year",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "pattern": "^\\d+:(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9]))(,(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9])))*$"
-          },
-          "examples ": [
-            [
-              "2023:36,38,41,44,47,50",
-              "2024:1,2,3,4"
-            ],
-            [
-              "2023:37-40,44-47,51",
-              "2024:1-4"
-            ]
-          ]
-        },
         "validFrom": {
           "description": "Valid from",
           "type": "string",
@@ -2392,6 +2382,19 @@
             "2024-01-31"
           ]
         },
+        "validWeeks": {
+          "description": "Set of valid date weeks per year (embedded or by reference)",
+          "oneOf": [
+            {
+              "description": "Set of valid date weeks per year",
+              "$ref": "#/$defs/weeks"
+            },
+            {
+              "description": "Reference to a set of valid date weeks per year",
+              "$ref": "#/$defs/referenceById"
+            }
+          ]
+        },
         "operation": {
           "description": "Should this temporal expression be included or excluded?",
           "type": "string",
@@ -2400,6 +2403,56 @@
             "exclude"
           ],
           "default": "include"
+        }
+      },
+      "additionalProperties": false
+    },
+    "weeks": {
+      "description": "Set of valid date weeks per year",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d+:(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9]))(,(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9])))*$"
+      },
+      "examples ": [
+        [
+          "2023:36,38,41,44,47,50",
+          "2024:1,2,3,4"
+        ],
+        [
+          "2023:37-40,44-47,51",
+          "2024:1-4"
+        ]
+      ]
+    },
+    "weeksPattern": {
+      "description": "A week pattern",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName",
+        "weeks"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the week pattern",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The short name of the week pattern",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the week pattern",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the week pattern",
+          "type": "string"
+        },
+        "weeks": {
+          "description": "Set of valid date weeks per year",
+          "$ref": "#/$defs/weeks"
         }
       },
       "additionalProperties": false

@@ -1,6 +1,17 @@
 # Änderungslog
 
-### 0.4.0 <small>_ 10. April 2025</small>
+## 0.5.0 <small>_ 12. Juni 2025</small>
+
+**Hinzugefügt**:
+
++ Neue Entität `weeksPattern` hinzugefügt.
+
+**Geändert:**
+
++ Breaking change: Die Eigenschaft `weeklyExpression.weeks` wurde umbenannt in `weeklyExpression.validWeeks`.
++ Die Eigenschaft `weeklyExpression.validWeeks` ist jetzt polymorph. Sie ist entweder (wie bisher) ein JSON-String-Array oder (jetzt neu) ein JSON-Objekt mit einem Verweis auf eine `weeksPattern`-Entität.
+
+## 0.4.0 <small>_ 10. April 2025</small>
 
 **Geändert:**
 

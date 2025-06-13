@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.4.0
+#### Version 0.5.0
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -8,7 +8,7 @@ Dieses Spezifikation ist lizenziert unter der [Apache License, Version 2.0](http
 
 ## Einführung
 
-OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.3/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
+OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.5/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
 
 OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendungen genutzt werden, als Quelle für die grafische Anzeige von Stundenplänen oder als Antwortformat für API-Anfragen (z.B. für RESTful Web-Services).
 
@@ -202,7 +202,7 @@ Hier ein Beispiel für die Veranstaltungen eines Musikkurses. Dieser findet jede
 Veranstaltungen haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
 + `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassich verplante Veranstaltung.
-+ `additional`: Dieser Wert soll Veranstaltungen kennzeichnen, die kurzfristig (z.B. im Rahmen der Vertetungsplanung) hinzugefügt wurden. Es handelt sich dabei um keinen Vertretungsunterricht sondern vielmahr um einen Zusatzunterricht.
++ `additional`: Dieser Wert soll Veranstaltungen kennzeichnen, die kurzfristig (z.B. im Rahmen der Änderungsplanung) hinzugefügt wurden. Es handelt sich dabei um keinen Vertretungsunterricht sondern vielmahr um einen Zusatzunterricht.
 + `substitution`: Dieser Wert soll Veranstaltungen kennzeichnen, die durch die Vertetungsplanung entstanden sind. Sie ersetzen eine andere Veranstaltung, sei es geplant (also `scheduled`), zusätzlich (also `additional`) oder ebenfalls vertreten (also `substitution`).
 
 #### Aufsichten
@@ -264,7 +264,7 @@ Aufsichten haben ein optionales Feld `relevance`, mit dem deren Bedeutung festge
 
 #### Aktivitäten
 
-Aktivitäten (*Englisch: activity*) repräsentieren Dienstzeiten, die keine Lehrveranstaltungen sind (z.B. Bereitschaftsdienst, Hortaufsicht, etc.).
+Aktivitäten (*Englisch: activity*) repräsentieren Dienstzeiten, die keine klassischen Lehrveranstaltungen sind (z.B. Bereitschaftsdienst, Hortaufsicht, etc.).
 
 Hier ein Beispiel für eine Hortaufsicht:
 
@@ -545,7 +545,7 @@ Hier ein Beispiel für einen einmaligen Termin.
 
 #### Wöchentlich
 
-Wöchentlich (*Englisch: weekly*) Ausdrücke repräsentieren sich wöchentlich wiederholendende Termine, beginnend mit einem konkretem Termin, definiert durch ein Startzeitpunkt und einem Endzeitpunkt. Standardmäßig findet dieser Termin in jeder Woche innerhalb des Gültigkeitszeitraum des Stundenplans statt. Es können jedoch optional einzelne Wochen deaktiviert werden, so dass ein Wochenmuster entsteht (z.B. 14-tägig, jede dritte Woche, etc.).
+Wöchentlich (*Englisch: weekly*) Ausdrücke repräsentieren sich wöchentlich wiederholendende Termine, beginnend mit einem konkretem Termin, definiert durch ein Startzeitpunkt und einem Endzeitpunkt. Standardmäßig findet dieser Termin in jeder Woche innerhalb des Gültigkeitszeitraum des Stundenplans statt. Es können jedoch optional einzelne Wochen deaktiviert werden, so dass ein Wochenmuster (*Englisch: weeks pattern*) entsteht (z.B. 14-tägig, jede dritte Woche, etc.).
 
 Hier ein Beispiel für einen wöchentlichen Termin, der jedoch nur in bestimmten Kalenderwochen stattfindet:
 
@@ -555,10 +555,25 @@ Hier ein Beispiel für einen wöchentlichen Termin, der jedoch nur in bestimmten
     "type": "weekly",
     "startTimepoint": "2023-09-08T11:00:00Z",
     "endTimepoint": "2023-09-08T11:45:00Z",
-    "weeks": [
+    "validWeeks": [
       "2023:36,38,40,42,44,46,48,50",
       "2024:1-4"
     ]
+  }
+]
+```
+
+Wochenmuster können auch separat als `weeksPattern`-Entitäten gespeichert werden, auf die dann referiert werden kann. Auch hierfür ein Beispiel:
+
+``` json
+"temporalExpressions": [
+  {
+    "type": "weekly",
+    "startTimepoint": "2023-09-08T11:00:00Z",
+    "endTimepoint": "2023-09-08T11:45:00Z",
+    "validWeeks": {
+      "refId": "A-Woche"
+    }
   }
 ]
 ```
@@ -643,9 +658,9 @@ Hier ein Beispiel für einen Zeitrahmen in einer Grundschule (Jahrgangsstufe 1):
 
 ### Standardisierte Codes
 
-Standardisierte Codes erlauben die eindeutige Identifikation und Klassifikation von Daten. OpenT8 unterstützt [OpenCodeList](https://openpotato.github.io/opencodelist/de/), einem generischen Standard-Datenformat zur Repräsentation von Code-Listen bzw. Schlüsselverzeichnissen. 
+Standardisierte Codes erlauben die eindeutige Identifikation und Klassifikation von Daten. OpenT8 unterstützt [OpenCodeList](https://openpotato.github.io/opencodelist/de/), ein generisches Standard-Datenformat zur Repräsentation von Code-Listen bzw. Schlüsselverzeichnissen. 
 
-Die folgenden Objekte besitzen jeweils ein Code-Attribut, dass einen Verweis auf eine Code-Liste im OpenCodeList-Format darstellt. 
+Die folgenden Objekte besitzen jeweils ein Code-Attribut, das einen Verweis auf eine Code-Liste im OpenCodeList-Format darstellt. 
 
 + `absenceType`-Objekt (Abwesenheitstyp)
 + `activityType`-Objekt (Aktivitätstyp)
@@ -724,7 +739,7 @@ Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
 
 ### Versionierung
 
-Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.3`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.3` unterstützen, MÜSSEN mit allen `0.3.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.3.1` und `0.3.2` gemacht wird.
+Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.5`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.5` unterstützen, MÜSSEN mit allen `0.5.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.5.1` und `0.5.2` gemacht wird.
 
 Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
@@ -738,7 +753,7 @@ Das Schema sieht zwei Arten von Feldern vor: Fest definierte Felder, die einen d
 
 #### JSON Schema
 
-[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.3/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
+[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.5/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
 
 #### Datums- und Zeitangaben
 
@@ -912,6 +927,10 @@ Dies ist das Wurzelobjekt eines OpenT8-Dokuments und enthält folgende Felder:
 **`timeFrames`** 
 
 :   Eine Liste von Zeitrahmen. Es MUSS ein JSON-Array mit `timeFrame`-Objekten sein. 
+
+**`weeksPatterns`**
+
+:   Eine Liste von Kalenderwochenmuster. Es MUSS ein JSON-Array mit `weeksPattern`-Objekten sein. 
 
 **`schedule`** 
 
@@ -1260,7 +1279,7 @@ Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teil
 
 **`courseType.idRef`** 
 
-:   Typ der Kurses. Dies MUSS ein Verweis auf die `id` eines `courseType`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+:   Ein Kurstyp zur Differenzierung des Kurses. Dies MUSS ein Verweis auf die `id` eines `courseType`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
 
 **`courseUrl`** 
 
@@ -1287,7 +1306,7 @@ Dieses Objekt KANN erweitert werden.
 
 #### courseType-Objekt
 
-Das `courseType`-Objekt repräsentiert einen Kurstyp, mit dem Gruppen kategorisiert werden können:
+Das `courseType`-Objekt repräsentiert die Art bzw. Differenzierung eines Kurses (z.B. Leistungskurs, Grundkurs etc.):
 
 **`id`** 
 
@@ -1319,7 +1338,7 @@ Dieses Objekt KANN erweitert werden.
 
 #### event-Objekt
 
-Das `event`-Objekt repräsentiert ein Termin, dass sich nicht durch eine Veranstaltung ausdrücken lässt (z.B. eine Prüfung oder ein Meeting):
+Das `event`-Objekt repräsentiert einen Termin, der sich nicht durch eine Veranstaltung ausdrücken lässt (z.B. eine Prüfung oder ein Meeting):
 
 **`type`** 
 
@@ -1504,7 +1523,7 @@ Das `externalId`-Objekt definiert einen externen Identifikator:
 
 **`globallyUnique`** 
 
-:   Ein JSON-Boolean, der angibt, ob der Identifikator eine globale Eindeutigkeit. **Dieses Feld ist ERFORDERLICH**.
+:   Ein JSON-Boolean, der angibt, ob der Identifikator eine globale Eindeutigkeit besitzt. **Dieses Feld ist ERFORDERLICH**.
 
 **`value`** 
 
@@ -1590,7 +1609,7 @@ Dieses Objekt KANN erweitert werden.
 
 #### group-Objekt
 
-Das `group`-Objekt repräsentiert eine Gruppe, der man Teilnehmer zuordnen kann:
+Das `group`-Objekt repräsentiert eine Gruppe (z.B. Klasse, Jahrgang, etc.), der man Teilnehmer zuordnen kann:
 
 **`id`** 
 
@@ -2274,7 +2293,7 @@ Dieses Objekt KANN erweitert werden.
 
 #### timeFrame-Objekt
 
-Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhrzeiten der Planelemente auf ein abstrahiertes Raster (z.B. !. Stunde, 2. Stunde, Pause, etc.) abbilden:
+Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhrzeiten der Planelemente auf ein abstrahiertes Raster (z.B. 1. Stunde, 2. Stunde, Pause, etc.) abbilden:
 
 **`id`** 
 
@@ -2360,7 +2379,6 @@ Das `timeSlot`-Objekt definiert ein benanntes Zeitfenster für einen Zeitrahmen 
 
 Dieses Objekt KANN erweitert werden.
 
-
 #### weeklyExpression-Objekt
 
 Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden zeitlichen Ausdruck:
@@ -2377,10 +2395,6 @@ Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden z
 
 :   Endzeitpunkt (RFC 3339) des zeitlichen Ausdrucks. **Dieses Feld ist ERFORDERLICH**.
 
-**`weeks`** 
-
-:   Eine Liste von Kalenderwochen, an denen dieser zeitliche Ausdruck sich wiederholt. Ist dieses Feld nicht definiert, dann wiederholt sich dieser zeitliche Ausdruck in jeder Woche innerhalb der Gültigkeit.
-
 **`validFrom`** 
 
 :   Definiert den Startzeitpunkt (RFC 3339) des Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Startzeitpunkt der Gültigkeit des `schedule`-Objekts.
@@ -2388,6 +2402,12 @@ Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden z
 **`validTo`** 
 
 :   Definiert den Endzeitpunkt (RFC 3339) des Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Endzeitpunkt der Gültigkeit des `schedule`-Objekts.
+
+**`validWeeks`** 
+
+:   Eine Liste von Kalenderwochen, an denen dieser zeitliche Ausdruck sich wiederholt. Ist dieses Feld nicht definiert, dann wiederholt sich dieser zeitliche Ausdruck in jeder Woche innerhalb der Gültigkeit. 
+
+    Dieses Feld MUSS entweder ein JSON-String-Array mit eingebettetn Kalenderwochen oder ein JSON-Objekt mit einem Verweis (`validWeeks.idRef`) auf die `id` eines `weeksPattern`-Objekts sein. Zum besseren Verständnis siehe auch die beiden Beispiele im weiteren Verlauf. 
 
 **`operation`** 
 
@@ -2404,12 +2424,72 @@ Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das Jahr
     "type": "weekly",
     "startTimepoint": "2023-09-08T10:30:00Z",
     "endTimepoint": "2023-09-08T11:15:00Z",
-    "weeks": [
+    "validWeeks": [
       "2023:36,38,40,42,44,46,48,50",
       "2024:1-4"
     ]
   }
 ]  
+```
+
+Und hier das gleiche Beispiel mit einem Verweis auf ein `weeksPattern`-Objekt:
+
+``` json
+"temporalExpressions": [
+  {
+    "type": "weekly",
+    "startTimepoint": "2023-09-08T10:30:00Z",
+    "endTimepoint": "2023-09-08T11:15:00Z",
+    "validWeeks": {
+      "refId": "weeksPattern-1"
+    }
+  }
+]  
+```
+
+#### weeksPattern-Objekt
+
+Das `weeksPattern`-Objekt repräsentiert ein Kalendaerwochenmuster, mit dem `weeklyExpression`-Objekt ausgezeichnet werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Aufsichtstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`shortName`** 
+
+:   Kürzel des Aufsichtstyp. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Aufsichtstyp. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Aufsichtstyp.
+
+**`weeks`** 
+
+:   Eine Liste von Kalenderwochen, an denen dieser zeitliche Ausdruck sich wiederholt. Ist dieses Feld nicht definiert, dann wiederholt sich dieser zeitliche Ausdruck in jeder Woche innerhalb der Gültigkeit. Es MUSS ein JSON-String-Array sein. 
+
+Das folgende Beispiel zeigt zwei `weeksPattern`-Objekte. Das eine definiert ungerade Wochen, das andere gerade Wochen:
+
+``` json
+"weeksPatterns": [
+  {
+    "id": "pattern-A",
+    "shortName": "Pattern A",
+    "weeks": [
+      "2024:35,37,39,41,43,45,47,49"
+    ]
+  },
+  {
+    "id": "pattern-B",
+    "shortName": "Pattern B",
+    "weeks": [
+      "2024:36,38,40,42,44,46,48,50"
+    ]
+  }
+]
 ```
 
 ### Erweiterung der Spezifikation

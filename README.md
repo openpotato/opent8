@@ -5,7 +5,7 @@ OpenT8 is a standardized [JSON](https://www.json.org/) format for mapping comple
 The main features are:
 
 + Open Source
-+ JSON documents can be validated against the [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.4/schema.json).
++ JSON documents can be validated against the [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.5/schema.json).
 + Support of events of any kind (e.g. lessons, activities, exams, meetings etc.).
 + Support of attendees of any kind (e.g. teachers, students, examiners, etc.).
 + Support of timetable changes (substitutions, time shifts, cancellations, etc.)
@@ -23,4 +23,4 @@ The documentation website is part of this repository. We have implemented it usi
 
 ## Can I help?
 
-Yes, that would be much appreciated. OpenT8 is currently a draft. We are open for any feedback! Use the Issue Tracker for asking and/or submitting a Pull Request.
+Yes, that would be much appreciated. OpenT8 is currently in intensive development. We are open for any feedback! Use the Issue Tracker for asking and/or submitting a Pull Request.
