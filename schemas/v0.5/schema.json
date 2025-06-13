@@ -1,0 +1,2466 @@
+﻿{
+  "$id": "https://schemahub.openpotato.org/opent8/v0.5/schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OpenT8 Document Schema Specification",
+  "description": "The specification of OpenT8 v0.5.0 documents",
+  "type": "object",
+  "required": [
+    "opent8",
+    "info",
+    "schedule"
+  ],
+  "properties": {
+    "opent8": {
+      "description": "The version of the OpenT8 Document Schema",
+      "type": "string",
+      "pattern": "^0\\.5\\.\\d+$"
+    },
+    "info": {
+      "$ref": "#/$defs/info"
+    },
+    "absenceTypes": {
+      "description": "A list of absence types",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/absenceType"
+      }
+    },
+    "activityTypes": {
+      "description": "A list of activity types",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/activityType"
+      }
+    },
+    "buildings": {
+      "description": "A list of buildings",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/building"
+      }
+    },
+    "campuses": {
+      "description": "A list of campuses",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/campus"
+      }
+    },
+    "courses": {
+      "description": "A list of courses",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/course"
+      }
+    },
+    "courseTypes": {
+      "description": "A list of course types",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/courseType"
+      }
+    },
+    "eventTypes": {
+      "description": "A list of event types",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/eventType"
+      }
+    },
+    "exemptionTypes": {
+      "description": "A list of exemption types",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/exemptionType"
+      }
+    },
+    "genders": {
+      "description": "A list of genders",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/gender"
+      }
+    },
+    "groups": {
+      "description": "A list of groups",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/group"
+      }
+    },
+    "groupTypes": {
+      "description": "A list of group types",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/groupType"
+      }
+    },
+    "persons": {
+      "description": "A list of persons",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/person"
+      }
+    },
+    "personRoles": {
+      "description": "A list of person roles",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/personRole"
+      }
+    },
+    "rooms": {
+      "description": "A list of rooms",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/room"
+      }
+    },
+    "subjects": {
+      "description": "A list of subjects",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/subject"
+      }
+    },
+    "supervisionAreas": {
+      "description": "A list of supervision areas",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/supervisionArea"
+      }
+    },
+    "supervisionTypes": {
+      "description": "A list of supervision types",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/supervisionType"
+      }
+    },
+    "teachingFormats": {
+      "description": "A list of teaching formats",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/teachingFormat"
+      }
+    },
+    "timeFrames": {
+      "description": "A list of time frames",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/timeFrame"
+      }
+    },
+    "weeksPatterns": {
+      "description": "A list of weeks patterns",
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/weeksPattern"
+      }
+    },
+    "schedule": {
+      "description": "The schedule definition",
+      "type": "object",
+      "required": [
+        "validFrom",
+        "validTo"
+      ],
+      "properties": {
+        "validFrom": {
+          "description": "Valid from",
+          "type": "string",
+          "format": "date-time",
+          "examples": [
+            "2023-09-01"
+          ]
+        },
+        "validTo": {
+          "description": "Valid to",
+          "type": "string",
+          "format": "date-time",
+          "examples": [
+            "2024-01-31"
+          ]
+        },
+        "defaultTimeFrame": {
+          "description": "Reference by id to a default time frame",
+          "$ref": "#/$defs/referenceById"
+        },
+        "scheduleElements": {
+          "description": "A list of schedule elements",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/activity"
+              },
+              {
+                "$ref": "#/$defs/announcement"
+              },
+              {
+                "$ref": "#/$defs/event"
+              },
+              {
+                "$ref": "#/$defs/gap"
+              },
+              {
+                "$ref": "#/$defs/holiday"
+              },
+              {
+                "$ref": "#/$defs/lesson"
+              },
+              {
+                "$ref": "#/$defs/supervision"
+              }
+            ]
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "absence": {
+      "description": "An absence as gap reason (e.g. absence of a teacher)",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the gap reason",
+          "const": "absence"
+        },
+        "notes": {
+          "description": "Additional notes on the absence",
+          "type": "string"
+        },
+        "absenceType": {
+          "description": "Reference by id to an absence type",
+          "$ref": "#/$defs/referenceById"
+        },
+        "appliesTo": {
+          "description": "A person, a group or a room for which the absence applies",
+          "type": "object",
+          "required": [
+            "type",
+            "refId"
+          ],
+          "properties": {
+            "type": {
+              "description": "Reference type",
+              "enum": [
+                "person",
+                "group",
+                "room"
+              ]
+            },
+            "refId": {
+              "description": "Reference by id",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "absenceType": {
+      "description": "An absence type (e.g. illness or school trip)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the absence type",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the absence type",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the absence type",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the absence type",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the absence type",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "activity": {
+      "description": "An activity of a person as schedule element (e.g. after-school supervision or standby duty)",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the schedule element",
+          "const": "activity"
+        },
+        "id": {
+          "description": "The unique identification of the activity",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The short name of the activity",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the activity",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the activity",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the announcement as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "activityType": {
+          "description": "Reference by id to an activity type",
+          "$ref": "#/$defs/referenceById"
+        },
+        "groups": {
+          "description": "A list of group references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by id to a group",
+            "$ref": "#/$defs/referenceById"
+          }
+        },
+        "attendees": {
+          "description": "A list of attendees",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "An attendee",
+            "type": "object",
+            "required": [
+              "refId",
+              "role"
+            ],
+            "properties": {
+              "refId": {
+                "description": "A reference by id to a person",
+                "type": "string"
+              },
+              "role": {
+                "description": "A person role",
+                "type": "object",
+                "required": [
+                  "refId"
+                ],
+                "properties": {
+                  "refId": {
+                    "description": "A reference by id to a person role",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "rooms": {
+          "description": "A list of room references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by if to a room",
+            "$ref": "#/$defs/referenceById"
+          }
+        },
+        "temporalExpressions": {
+          "$ref": "#/$defs/temporalExpressions"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "activityType": {
+      "description": "An activity type (e.g. after-school supervision or standby duty)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the activity type",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the activity type",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the activity type",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the activity type",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the activity type",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "announcement": {
+      "description": "An announcement as schedule element",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "shortDescription"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the schedule element",
+          "const": "announcement"
+        },
+        "id": {
+          "description": "The unique identification of the announcement",
+          "type": "string"
+        },
+        "shortDescription": {
+          "description": "A short description for the announcement",
+          "type": "string"
+        },
+        "longDescription": {
+          "description": "A more detailed description for the announcement",
+          "type": "string"
+        },
+        "notes": {
+          "description": "Additional notes on the announcement",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the announcement as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "priority": {
+          "description": "The priority of the announcement",
+          "enum": [
+            "important",
+            "alarm"
+          ]
+        },
+        "appliesTo": {
+          "description": "An optional list of groups and/or persons for which the announcement applies",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "A person or a group",
+            "type": "object",
+            "required": [
+              "type",
+              "refId"
+            ],
+            "properties": {
+              "type": {
+                "description": "Reference type",
+                "enum": [
+                  "person",
+                  "group"
+                ]
+              },
+              "refId": {
+                "description": "A reference by id to a person or a group",
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "temporalExpressions": {
+          "$ref": "#/$defs/temporalExpressions"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "building": {
+      "description": "A building",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the building",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "A short name of the building",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the building",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the building",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the building as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "campus": {
+          "description": "Reference by id to a campus",
+          "$ref": "#/$defs/referenceById"
+        },
+        "externalIds": {
+          "description": "A list of external identifiers",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalId"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "campus": {
+      "description": "A campus",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the campus",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "A short name of the campus",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the campus",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the campus",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the campus as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "externalIds": {
+          "description": "A list of external identifiers",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalId"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "cancellation": {
+      "description": "A cancellation",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the gap resolution",
+          "const": "cancellation"
+        },
+        "notes": {
+          "description": "Additional notes on the cancellation",
+          "type": "string"
+        },
+        "behaviour": {
+          "description": "Cancellation behaviour",
+          "enum": [
+            "leaveRoom",
+            "stayInRoom"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "course": {
+      "description": "A course (e.g. Advanced maths course in grade 11)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the course",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The short name of the course",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the course",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the course",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the course as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "subject": {
+          "description": "Reference by id to a subject",
+          "$ref": "#/$defs/referenceById"
+        },
+        "courseNo": {
+          "description": "An additional course number",
+          "type": "string"
+        },
+        "courseType": {
+          "description": "Reference by id to a course type",
+          "$ref": "#/$defs/referenceById"
+        },
+        "courseUrl": {
+          "description": "External url of website with additional information",
+          "type": "string",
+          "format": "uri"
+        },
+        "groups": {
+          "description": "A list of group references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by id to a group",
+            "$ref": "#/$defs/referenceById"
+          }
+        },
+        "attendees": {
+          "description": "A list of attendees",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "An attendee",
+            "type": "object",
+            "required": [
+              "refId",
+              "role"
+            ],
+            "properties": {
+              "refId": {
+                "description": "A reference by id to a person",
+                "type": "string"
+              },
+              "role": {
+                "description": "A person role",
+                "type": "object",
+                "required": [
+                  "refId"
+                ],
+                "properties": {
+                  "refId": {
+                    "description": "A reference by id to a person role",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "externalIds": {
+          "description": "A list of external identifiers",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalId"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "courseType": {
+      "description": "A course type (e.g. intensive course, basic course etc.)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the course type",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the course type",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the course type",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the course type",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the course type",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "event": {
+      "description": "An event as schedule element (e.g. an exam or a meeting)",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the schedule element",
+          "const": "event"
+        },
+        "id": {
+          "description": "The unique identification of the event",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The short name of the event",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the event",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the event",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the event as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "eventType": {
+          "description": "Reference by id to an event type",
+          "$ref": "#/$defs/referenceById"
+        },
+        "groups": {
+          "description": "A list of group references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by id to a group",
+            "$ref": "#/$defs/referenceById"
+          }
+        },
+        "attendees": {
+          "description": "A list of attendees",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "An attendee",
+            "type": "object",
+            "required": [
+              "refId",
+              "role"
+            ],
+            "properties": {
+              "refId": {
+                "description": "A reference by id to a person",
+                "type": "string"
+              },
+              "role": {
+                "description": "A person role",
+                "type": "object",
+                "properties": {
+                  "refId": {
+                    "description": "A reference by id to a person role",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "rooms": {
+          "description": "A list of room references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by if to a room",
+            "$ref": "#/$defs/referenceById"
+          }
+        },
+        "temporalExpressions": {
+          "$ref": "#/$defs/temporalExpressions"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "eventType": {
+      "description": "An event type (e.g. an exam or a meeting)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the event type",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the event type",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the event type",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the event type",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the event type",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "exemption": {
+      "description": "An exemption as gap reason (e.g. Teacher exemption)",
+      "type": "object",
+      "required": [
+        "type",
+        "appliesTo"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the gap reason",
+          "const": "exemption"
+        },
+        "notes": {
+          "description": "Additional notes on the exemption",
+          "type": "string"
+        },
+        "exemptionType": {
+          "description": "Reference by id to an exemption type",
+          "$ref": "#/$defs/referenceById"
+        },
+        "appliesTo": {
+          "description": "A reference to a person",
+          "type": "object",
+          "required": [
+            "type",
+            "refId"
+          ],
+          "properties": {
+            "type": {
+              "description": "Reference type",
+              "enum": [
+                "person"
+              ]
+            },
+            "refId": {
+              "description": "Reference by id",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "exemptionType": {
+      "description": "An exemption type (e.g. Teacher exemption)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the exemption type",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the exemption type",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the exemption type",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the exemption type",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the exemption type",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "externalCode": {
+      "description": "Code from an external code list, in OpenCodeList format",
+      "type": "object",
+      "required": [
+        "codeListRef",
+        "keyId",
+        "value"
+      ],
+      "properties": {
+        "codeListRef": {
+          "description": "A reference to the external code list",
+          "type": "object",
+          "required": [
+            "canonicalUri"
+          ],
+          "properties": {
+            "canonicalUri": {
+              "description": "Canonical URI which uniquely identifies all versions (collectively) of the external code list",
+              "type": "string",
+              "format": "uri"
+            },
+            "canonicalVersionUri": {
+              "description": "Canonical URI which uniquely identifies  a specific version of the external code list",
+              "type": "string",
+              "format": "uri"
+            },
+            "locationUrls": {
+              "description": "Suggested retrieval locations for the external code list version, in OpenCodeList format",
+              "type": "array",
+              "unqiueItems": true,
+              "minItems": 1,
+              "items": {
+                "description": "An url of the external code list",
+                "type": "string",
+                "format": "uri"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "keyId": {
+          "description": "The key ID in the external code list",
+          "type": "string"
+        },
+        "value": {
+          "description": "A code from the external code list",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "externalId": {
+      "description": "An external identifier",
+      "type": "object",
+      "required": [
+        "canonicalUri",
+        "globallyUnique",
+        "value"
+      ],
+      "properties": {
+        "canonicalUri": {
+          "description": "Canonical URI which uniquely identifies the source of the external identifier",
+          "type": "string",
+          "format": "uri"
+        },
+        "globallyUnique": {
+          "description": "Indicates whether the external identifier is designed to be globally unique.",
+          "type": "boolean"
+        },
+        "value": {
+          "description": "The external identifier value",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "gap": {
+      "description": "A gap for a lesson, supervision or activity as schedule element",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "appliesTo"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the schedule element",
+          "const": "gap"
+        },
+        "id": {
+          "description": "The unique identification of the gap",
+          "type": "string"
+        },
+        "notes": {
+          "description": "Additional notes on the gap",
+          "type": "string"
+        },
+        "appliesTo": {
+          "description": "A reference to an activity, a lesson or a supervision",
+          "type": "object",
+          "required": [
+            "type",
+            "refId"
+          ],
+          "properties": {
+            "type": {
+              "description": "Reference type",
+              "enum": [
+                "activity",
+                "lesson",
+                "supervision"
+              ]
+            },
+            "refId": {
+              "description": "Reference by id",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "reasons": {
+          "description": "The reason(s) of the gap",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/absence"
+              },
+              {
+                "$ref": "#/$defs/exemption"
+              }
+            ]
+          }
+        },
+        "resolutions": {
+          "description": "The resolution(s) of the gap",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/substitution"
+              },
+              {
+                "$ref": "#/$defs/cancellation"
+              }
+            ]
+          }
+        },
+        "temporalExpressions": {
+          "$ref": "#/$defs/temporalExpressions"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "gender": {
+      "description": "A gender value",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the gender",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the gender",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the gender",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the gender",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the gender",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "group": {
+      "description": "A group (e.g. a class or a study group)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the group",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The code of the group",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The name of the group",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the group",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the group as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "groupType": {
+          "description": "Reference by id to a group type",
+          "$ref": "#/$defs/referenceById"
+        },
+        "members": {
+          "description": "A list of members",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "A member",
+            "type": "object",
+            "required": [
+              "refId",
+              "role"
+            ],
+            "properties": {
+              "refId": {
+                "description": "A reference by id to a person",
+                "type": "string"
+              },
+              "role": {
+                "description": "A person role",
+                "type": "object",
+                "required": [
+                  "refId"
+                ],
+                "properties": {
+                  "refId": {
+                    "description": "A reference by id to a person role",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "timeFrame": {
+          "description": "Reference by id to a time frame",
+          "$ref": "#/$defs/referenceById"
+        },
+        "externalIds": {
+          "description": "A list of external identifiers",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalId"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "groupType": {
+      "description": "A group type (e.g. a class or a study group)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the group type",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the group type",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the group type",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the group type",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the group type",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "holiday": {
+      "description": "A holiday (e.g. summer holidays)",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "shortName",
+        "holidayType"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the schedule element",
+          "const": "holiday"
+        },
+        "id": {
+          "description": "The unique identification of the holiday",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The code of the holiday",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The name of the holiday",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the holiday",
+          "type": "string"
+        },
+        "holidayType": {
+          "description": "Holiday type",
+          "enum": [
+            "public",
+            "school",
+            "custom"
+          ]
+        },
+        "color": {
+          "description": "The color of the holiday as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "temporalExpressions": {
+          "$ref": "#/$defs/temporalExpressions"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "info": {
+      "description": "Meta information about the timetable data",
+      "type": "object",
+      "required": [
+        "title"
+      ],
+      "properties": {
+        "title": {
+          "description": "The title of the timetable",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description for the timetable",
+          "type": "string"
+        },
+        "summary": {
+          "description": "A summary for the timetable",
+          "type": "string"
+        },
+        "publishedAt": {
+          "description": "The timepoint of the publication",
+          "type": "string",
+          "format": "date-time",
+          "examples": [
+            "2023-09-01T10:00:00Z",
+            "2023-09-01T10:00:00+02:00Z"
+          ]
+        },
+        "publishedFrom": {
+          "description": "The person responsible for the publication",
+          "type": "string"
+        },
+        "language": {
+          "description": "The ISO 639-1 language code for the content",
+          "type": "string",
+          "examples": [
+            "de",
+            "en",
+            "fr",
+            "rm",
+            "it"
+          ]
+        },
+        "source": {
+          "$ref": "#/$defs/sourceInfo"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "lesson": {
+      "description": "A lesson as schedule element",
+      "type": "object",
+      "required": [
+        "type",
+        "id",
+        "course"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the schedule element",
+          "const": "lesson"
+        },
+        "id": {
+          "description": "The unique identification of the lesson",
+          "type": "string"
+        },
+        "course": {
+          "description": "Reference by id to a course",
+          "$ref": "#/$defs/referenceById"
+        },
+        "notes": {
+          "description": "Additional notes on the lesson",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the lesson as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "relevance": {
+          "description": "Relevance of the lesson",
+          "enum": [
+            "scheduled",
+            "additional",
+            "substitution"
+          ],
+          "default": "scheduled"
+        },
+        "teachingFormat": {
+          "description": "Teaching format (e.g. in-person, remote, hybrid)",
+          "$ref": "#/$defs/teachingFormat"
+        },
+        "groups": {
+          "description": "A list of group references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by id to a group",
+            "$ref": "#/$defs/referenceById"
+          }
+        },
+        "attendees": {
+          "description": "A list of attendees",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "An attendee",
+            "type": "object",
+            "required": [
+              "refId",
+              "role"
+            ],
+            "properties": {
+              "refId": {
+                "description": "A reference by id to a person",
+                "type": "string"
+              },
+              "role": {
+                "description": "A person role",
+                "type": "object",
+                "required": [
+                  "refId"
+                ],
+                "properties": {
+                  "refId": {
+                    "description": "A reference by id to a person role",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "rooms": {
+          "description": "A list of room references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by id to a room",
+            "$ref": "#/$defs/referenceById"
+          }
+        },
+        "temporalExpressions": {
+          "$ref": "#/$defs/temporalExpressions"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "nameOfPerson": {
+      "description": "Name of a natural person",
+      "type": "object",
+      "required": [
+        "shortName"
+      ],
+      "properties": {
+        "shortName": {
+          "description": "A (possible unique) short name or code of the person",
+          "type": "string"
+        },
+        "fullName": {
+          "description": "The full name as it should be written",
+          "type": "string"
+        },
+        "sortingName": {
+          "description": "Name respresenation for sorting",
+          "type": "string"
+        },
+        "salutations": {
+          "description": "Salutaion(s)",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "title": {
+          "description": "Title (e.g. academic degree)",
+          "type": "string"
+        },
+        "givenName": {
+          "description": "Given name or first name",
+          "type": "string"
+        },
+        "middleNames": {
+          "description": "Middle name(s)",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "familyName": {
+          "description": "Family name or last name",
+          "type": "string"
+        },
+        "declaredName": {
+          "description": "Declared name (e.g. married name or name for civil partners)",
+          "type": "string"
+        },
+        "declaredNameType": {
+          "description": "Type of the name declaration",
+          "enum": [
+            "marriedName",
+            "civilPartnershipName"
+          ],
+          "default": "MarriedName"
+        },
+        "nameSuffixes": {
+          "description": "Name suffix(es)",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "nickName": {
+          "description": "Nickname",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "oneTimeExpression": {
+      "description": "An one-time temporal expression",
+      "type": "object",
+      "required": [
+        "type",
+        "startTimepoint",
+        "endTimepoint"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the temporal expression",
+          "const": "onetime"
+        },
+        "startTimepoint": {
+          "description": "Start timepoint of the temporal expression",
+          "type": "string",
+          "format": "date-time",
+          "examples ": [
+            "2023-09-01T10:00:00Z",
+            "2023-09-01T10:00:00+02:00Z"
+          ]
+        },
+        "endTimepoint": {
+          "description": "End timepoint of the temporal expression",
+          "type": "string",
+          "format": "date-time",
+          "examples ": [
+            "2023-09-01T10:45:00Z",
+            "2023-09-01T10:45:00+02:00Z"
+          ]
+        },
+        "operation": {
+          "description": "Should this temporal expression be included or excluded?",
+          "enum": [
+            "include",
+            "exclude"
+          ],
+          "default": "include"
+        }
+      },
+      "additionalProperties": false
+    },
+    "person": {
+      "description": "A person (e.g. a teacher or a student)",
+      "type": "object",
+      "required": [
+        "id",
+        "name"
+      ],
+      "properties": {
+        "id": {
+          "description": "A unique identification of the person",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the person",
+          "$ref": "#/$defs/nameOfPerson"
+        },
+        "gender": {
+          "description": "Gender of the person",
+          "$ref": "#/$defs/gender"
+        },
+        "birthdate": {
+          "description": "Birth date of the person",
+          "type": "string",
+          "format": "date",
+          "examples": [
+            "1969-07-20"
+          ]
+        },
+        "color": {
+          "description": "The color of the person as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "timeFrame": {
+          "description": "Reference by id to a time frame",
+          "$ref": "#/$defs/referenceById"
+        },
+        "externalIds": {
+          "description": "A list of external identifiers",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalId"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "personRole": {
+      "description": "A role of a person (e.g. a teacher or a student)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the role",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the role",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the grole",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the role",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the role",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "referenceById": {
+      "description": "A reference by id",
+      "type": "object",
+      "required": [
+        "refId"
+      ],
+      "properties": {
+        "refId": {
+          "description": "The id",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "room": {
+      "description": "A room",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the room",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The short name of the room",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the room",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the room",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the room as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "building": {
+          "description": "Reference by id to a building",
+          "$ref": "#/$defs/referenceById"
+        },
+        "externalIds": {
+          "description": "A list of external identifiers",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalId"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "sourceInfo": {
+      "description": "Information about the source of the timetable data",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the service, application or tool that generated the data",
+          "type": "string"
+        },
+        "version": {
+          "description": "Version of the service, application or tool that generated the data",
+          "type": "string"
+        },
+        "url": {
+          "description": "More information about the service, application or tool that generated the data",
+          "type": "string",
+          "format": "uri",
+          "examples": [
+            "https://www.example.com"
+          ]
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "subject": {
+      "description": "A subject (e.g. Mathematics)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the subject",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the subject",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the subject",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the subject",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the subject",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the subject as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "externalIds": {
+          "description": "A list of external identifiers",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalId"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "substitution": {
+      "description": "A substitution as schedule element",
+      "type": "object",
+      "required": [
+        "type",
+        "realisedBy"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the gap resolution",
+          "const": "substitution"
+        },
+        "notes": {
+          "description": "Additional notes on the substitution",
+          "type": "string"
+        },
+        "realisedBy": {
+          "description": "A reference to a lesson, a supervision or an activity",
+          "type": "object",
+          "required": [
+            "type",
+            "refId"
+          ],
+          "properties": {
+            "type": {
+              "description": "Reference type",
+              "enum": [
+                "activity",
+                "lesson",
+                "supervision"
+              ]
+            },
+            "refId": {
+              "description": "Reference by id",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "supervision": {
+      "description": "A supervision as schedule element",
+      "type": "object",
+      "required": [
+        "type",
+        "id"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the schedule element",
+          "const": "supervision"
+        },
+        "id": {
+          "description": "The unique identification of the supervision",
+          "type": "string"
+        },
+        "notes": {
+          "description": "Additional notes on the supervision",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the supervision as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "supervisionType": {
+          "description": "Reference by id to a supervision type",
+          "$ref": "#/$defs/referenceById"
+        },
+        "attendees": {
+          "description": "A list of attendees",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "An attendee",
+            "type": "object",
+            "required": [
+              "refId",
+              "role"
+            ],
+            "properties": {
+              "refId": {
+                "description": "A reference by id to a person",
+                "type": "string"
+              },
+              "role": {
+                "description": "A person role",
+                "type": "object",
+                "required": [
+                  "refId"
+                ],
+                "properties": {
+                  "refId": {
+                    "description": "A reference by id to a person role",
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "areas": {
+          "description": "A list of supervision area references",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "Reference by if to a supervision area",
+            "$ref": "#/$defs/referenceById"
+          }
+        },
+        "temporalExpressions": {
+          "$ref": "#/$defs/temporalExpressions"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "supervisionArea": {
+      "description": "A supervision area (e.g. schoolyard)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the area",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The short name of the area",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the area",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the area",
+          "type": "string"
+        },
+        "color": {
+          "description": "The color of the area as hex code",
+          "type": "string",
+          "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+          "examples": [
+            "#ff0000",
+            "#FF0000"
+          ]
+        },
+        "campus": {
+          "description": "Reference by id to a campus",
+          "$ref": "#/$defs/referenceById"
+        },
+        "externalIds": {
+          "description": "A list of external identifiers",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/externalId"
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "supervisionType": {
+      "description": "A supervision type (e.g. Break supervision)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the supervision type",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the supervision type",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the supervision type",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the supervision type",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the supervision type",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "teachingFormat": {
+      "description": "A teaching format (e.g. in-person, remote, hybrid)",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the teaching format",
+          "type": "string"
+        },
+        "code": {
+          "description": "A standardised value from an external code list that specifies the teaching format",
+          "$ref": "#/$defs/externalCode"
+        },
+        "shortName": {
+          "description": "The short name of the teaching format",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the teaching format",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the teaching format",
+          "type": "string"
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "temporalExpressions": {
+      "description": "A list of temporal expressions",
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/oneTimeExpression"
+          },
+          {
+            "$ref": "#/$defs/weeklyExpression"
+          }
+        ]
+      }
+    },
+    "timeFrame": {
+      "description": "A time frame",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName",
+        "scopeOfWeek",
+        "timeSlots"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the time frame",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The short name of the time frame",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The long name of the time frame",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the time frame",
+          "type": "string"
+        },
+        "scopeOfWeek": {
+          "description": "Set of valid week days",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "mon",
+              "tue",
+              "wed",
+              "thu",
+              "fri",
+              "sat",
+              "sun"
+            ]
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        },
+        "startOfWeek": {
+          "description": "Start of the week",
+          "enum": [
+            "mon",
+            "tue",
+            "wed",
+            "thu",
+            "fri",
+            "sat",
+            "sun"
+          ],
+          "default": "mon"
+        },
+        "timeSlots": {
+          "description": "A list of time slots",
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "description": "A time slot for a time frame",
+            "type": "object",
+            "required": [
+              "shortLabel",
+              "startTime",
+              "endTime"
+            ],
+            "properties": {
+              "shortLabel": {
+                "description": "The short label of the time slot",
+                "type": "string"
+              },
+              "longLabel": {
+                "description": "The long label of the time slot",
+                "type": "string"
+              },
+              "color": {
+                "description": "The color of the time slot as hex code",
+                "type": "string",
+                "pattern": "^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3})$",
+                "examples": [
+                  "#ff0000",
+                  "#FF0000"
+                ]
+              },
+              "startTime": {
+                "description": "Start time",
+                "type": "string",
+                "format": "time",
+                "examples ": [
+                  "10:00:00Z"
+                ]
+              },
+              "endTime": {
+                "description": "End time",
+                "type": "string",
+                "format": "time",
+                "examples ": [
+                  "10:45:00Z"
+                ]
+              }
+            },
+            "patternProperties": {
+              "^x-": {
+                "$ref": "#/$defs/customExtension"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "patternProperties": {
+        "^x-": {
+          "$ref": "#/$defs/customExtension"
+        }
+      },
+      "additionalProperties": false
+    },
+    "weeklyExpression": {
+      "description": "A weekly temporal expression",
+      "type": "object",
+      "required": [
+        "startTimepoint",
+        "endTimepoint"
+      ],
+      "properties": {
+        "type": {
+          "description": "The type keyword of the temporal expression",
+          "const": "weekly"
+        },
+        "startTimepoint": {
+          "description": "Start timepoint of the temporal expression",
+          "type": "string",
+          "format": "date-time",
+          "examples ": [
+            "2023-09-01T10:00:00Z",
+            "2023-09-01T10:00:00+02:00Z"
+          ]
+        },
+        "endTimepoint": {
+          "description": "End timepoint of the temporal expression",
+          "type": "string",
+          "format": "date-time",
+          "examples ": [
+            "2023-09-01T10:45:00Z",
+            "2023-09-01T10:45:00+02:00Z"
+          ]
+        },
+        "validFrom": {
+          "description": "Valid from",
+          "type": "string",
+          "format": "date",
+          "examples ": [
+            "2023-09-01"
+          ]
+        },
+        "validTo": {
+          "description": "Valid to",
+          "type": "string",
+          "format": "date",
+          "examples ": [
+            "2024-01-31"
+          ]
+        },
+        "validWeeks": {
+          "description": "Set of valid date weeks per year (embedded or by reference)",
+          "oneOf": [
+            {
+              "description": "Set of valid date weeks per year",
+              "$ref": "#/$defs/weeks"
+            },
+            {
+              "description": "Reference to a set of valid date weeks per year",
+              "$ref": "#/$defs/referenceById"
+            }
+          ]
+        },
+        "operation": {
+          "description": "Should this temporal expression be included or excluded?",
+          "type": "string",
+          "enum": [
+            "include",
+            "exclude"
+          ],
+          "default": "include"
+        }
+      },
+      "additionalProperties": false
+    },
+    "weeks": {
+      "description": "Set of valid date weeks per year",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^\\d+:(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9]))(,(([1-4][0-9]?|5[0-3]?|[6-9])|([1-4][0-9]?|5[0-3]?|[6-9])-([1-4][0-9]?|5[0-3]?|[6-9])))*$"
+      },
+      "examples ": [
+        [
+          "2023:36,38,41,44,47,50",
+          "2024:1,2,3,4"
+        ],
+        [
+          "2023:37-40,44-47,51",
+          "2024:1-4"
+        ]
+      ]
+    },
+    "weeksPattern": {
+      "description": "A week pattern",
+      "type": "object",
+      "required": [
+        "id",
+        "shortName",
+        "weeks"
+      ],
+      "properties": {
+        "id": {
+          "description": "The unique identification of the week pattern",
+          "type": "string"
+        },
+        "shortName": {
+          "description": "The short name of the week pattern",
+          "type": "string"
+        },
+        "longName": {
+          "description": "The detailed name of the week pattern",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the week pattern",
+          "type": "string"
+        },
+        "weeks": {
+          "description": "Set of valid date weeks per year",
+          "$ref": "#/$defs/weeks"
+        }
+      },
+      "additionalProperties": false
+    },
+    "customExtension": {
+      "description": "Any property starting with x- is valid.",
+      "additionalProperties": true,
+      "additionalItems": true
+    }
+  }
+}

@@ -5,10 +5,10 @@ OpenT8 ist ein standardisiertes [JSON](https://www.json.org/)-Format zum Abbilde
 Die wesentlichen Eigenschaften sind:
 
 + Open Source
-+ OpenT8-Dokumente können gegen das [OpenT8 Document Schema](https://github.com/openpotato/opent8/blob/main/schemas/v0.4/schema.json) validiert werden.
++ OpenT8-Dokumente können gegen das [OpenT8 Document Schema](https://github.com/openpotato/opent8/blob/main/schemas/v0.5/schema.json) validiert werden.
 + Unterstützung von Veranstaltungen jeglicher Art (z.B. Unterricht, Prüfungen, Treffen etc.)
 + Unterstützung von Teilnehmern jeglicher Art (z.B. Lehrer:in, Schüler:in, Erzieher:in etc.)
-+ Unterstützung von Planänderungen (Vertretungen, Verschiebungen, Ausfall etc.)
++ Unterstützung von Planänderungen (Vertretungen, zeitliche Verschiebungen, Ausfall etc.)
 + Unterstützung von Aufsichten
 + Unterstützung von Schulferien und Feiertagen
 + Unterstützung von Zeitrahmen (Von wann bis wann geht die erste Stunde am Tag? Wann ist Mittagspause? etc.)
@@ -26,4 +26,4 @@ Die folgenden OpenT8-Beispiel-Dokumente stehen zur Verfügung:
 
 ## Aktueller Status
 
-OpenT8 ist noch relativ frisch und hier bereits in einer zweiten Version veröffentlicht. Über [Feedback](community.md) jeglicher Art würden wir uns sehr freuen.
+OpenT8 hat sich in letzter Zeit intensiv weiterentwickelt und ist inzwischen recht stabil. Über [Feedback](community.md) jeglicher Art würden wir uns sehr freuen.

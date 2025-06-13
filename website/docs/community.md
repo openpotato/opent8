@@ -1,6 +1,6 @@
 # Community
 
-OpenT8 ist Open Source, herstellerneutral und versucht die richtige Balance zwischen Komplexität und Simplizität zu finden. Die aktuelle Version ist ein erster Vorschlag, der sich vor allem an Schulen im deutschen Schulsystem orientiert. Dies soll aber nicht der alleinige Fokus bleiben.
+OpenT8 ist Open Source, herstellerneutral und versucht die richtige Balance zwischen Komplexität und Simplizität zu finden. Die aktuelle Version orientiert sich vor allem an Schulen im deutschen Schulsystem. Dies soll aber nicht der alleinige Fokus bleiben.
 
 Wie freuen uns über Feedback jeglicher Art, egal ob positiv oder negativ:
 
