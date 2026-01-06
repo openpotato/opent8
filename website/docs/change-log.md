@@ -1,5 +1,11 @@
 # Änderungslog
 
+## 0.5.1 <small>_ 06. Januar 2026</small>
+
+**Hinzugefügt**:
+
++ Die Entitäten `cancellation` und `substitution` haben eine zusätzliche Eigenschaft `message` erhalten.
+
 ## 0.5.0 <small>_ 12. Juni 2025</small>
 
 **Hinzugefügt**:

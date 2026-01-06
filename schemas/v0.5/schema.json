@@ -2,7 +2,7 @@
   "$id": "https://schemahub.openpotato.org/opent8/v0.5/schema.json",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "OpenT8 Document Schema Specification",
-  "description": "The specification of OpenT8 v0.5.0 documents",
+  "description": "The specification of OpenT8 v0.5.1 documents",
   "type": "object",
   "required": [
     "opent8",
@@ -665,6 +665,10 @@
         "type": {
           "description": "The type keyword of the gap resolution",
           "const": "cancellation"
+        },
+        "message": {
+          "description": "Additional message for display",
+          "type": "string"
         },
         "notes": {
           "description": "Additional notes on the cancellation",
@@ -1956,6 +1960,10 @@
         "type": {
           "description": "The type keyword of the gap resolution",
           "const": "substitution"
+        },
+        "message": {
+          "description": "Additional message for display",
+          "type": "string"
         },
         "notes": {
           "description": "Additional notes on the substitution",

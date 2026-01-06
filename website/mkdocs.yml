@@ -6,7 +6,7 @@ site_url: 'https://openpotato.github.io/opent8/'
 
 # Copyright
 copyright: 
-  '&copy; 2025 STÜBER SYSTEMS GmbH : <a href="https://legal.stueber.de/imprint.php">Impressum</a> : <a href="https://legal.stueber.de/privacy.php">Datenschutz</a>'
+  '&copy; 2026 STÜBER SYSTEMS GmbH : <a href="https://legal.stueber.de/imprint.php">Impressum</a> : <a href="https://legal.stueber.de/privacy.php">Datenschutz</a>'
 
 # Repository
 repo_name: 'Auf GitHub'
@@ -55,10 +55,13 @@ extra:
       link: https://bsky.app/profile/openpotato.org
     - icon: fontawesome/brands/mastodon 
       link: https://fosstodon.org/@openpotato
+    - icon: fontawesome/brands/github 
+      link: https://github.com/openpotato
 
 # Plugins
 plugins:
     - search
+    - typeset
     - minify:
         minify_html: true
 

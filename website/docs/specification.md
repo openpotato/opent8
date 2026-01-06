@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.5.0
+#### Version 0.5.1
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -114,10 +114,10 @@ Hier ein Beispiel für zwei Klassen der ersten Jahrgangsstufe:
     "longName": "Klasse",
     "code": {
       "codeListRef": {
-	    "canonicalUri": "urn:opene8:school:codelist:de:groupType",
-  	    "locationUrls": [
-	      "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupType"
-	    ]
+        "canonicalUri": "urn:opene8:school:codelist:de:groupType",
+        "locationUrls": [
+            "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupType"
+          ]
       },
       "keyId": "key",
       "value": "KLA"
@@ -201,9 +201,9 @@ Hier ein Beispiel für die Veranstaltungen eines Musikkurses. Dieser findet jede
 
 Veranstaltungen haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
-+ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassich verplante Veranstaltung.
-+ `additional`: Dieser Wert soll Veranstaltungen kennzeichnen, die kurzfristig (z.B. im Rahmen der Änderungsplanung) hinzugefügt wurden. Es handelt sich dabei um keinen Vertretungsunterricht sondern vielmahr um einen Zusatzunterricht.
-+ `substitution`: Dieser Wert soll Veranstaltungen kennzeichnen, die durch die Vertetungsplanung entstanden sind. Sie ersetzen eine andere Veranstaltung, sei es geplant (also `scheduled`), zusätzlich (also `additional`) oder ebenfalls vertreten (also `substitution`).
++ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassisch verplante Veranstaltung.
++ `additional`: Dieser Wert soll Veranstaltungen kennzeichnen, die kurzfristig (z.B. im Rahmen der Änderungsplanung) hinzugefügt wurden. Es handelt sich dabei um keinen Vertretungsunterricht sondern vielmehr um einen Zusatzunterricht.
++ `substitution`: Dieser Wert soll Veranstaltungen kennzeichnen, die durch die Vertretungsplanung entstanden sind. Sie ersetzen eine andere Veranstaltung, sei es geplant (also `scheduled`), zusätzlich (also `additional`) oder ebenfalls vertreten (also `substitution`).
 
 #### Aufsichten
 
@@ -259,8 +259,8 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
 
 Aufsichten haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
-+ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassich verplante Aufsicht.
-+ `substitution`: Dieser Wert soll Aufsichten kennzeichnen, die durch die Vertetungsplanung entstanden sind. Sie ersetzen eine andere Aufsicht, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
++ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassisch verplante Aufsicht.
++ `substitution`: Dieser Wert soll Aufsichten kennzeichnen, die durch die Vertretungsplanung entstanden sind. Sie ersetzen eine andere Aufsicht, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
 
 #### Aktivitäten
 
@@ -275,7 +275,7 @@ Hier ein Beispiel für eine Hortaufsicht:
     "id": "ho-1",
     "shortName": "HoAmAbend",
     "longName": "Hortaufsicht am Abend",
-	"activityType": {
+    "activityType": {
       "refId": "HA"
     },
     "attendees": [
@@ -311,8 +311,8 @@ Hier ein Beispiel für eine Hortaufsicht:
 
 Aktivitäten haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
-+ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassich verplante Aktivität.
-+ `substitution`: Dieser Wert soll Aktivitäten kennzeichnen, die durch die Vertetungsplanung entstanden sind. Sie ersetzen eine andere Aktivität, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
++ `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassisch verplante Aktivität.
++ `substitution`: Dieser Wert soll Aktivitäten kennzeichnen, die durch die Vertretungsplanung entstanden sind. Sie ersetzen eine andere Aktivität, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
 
 #### Ereignisse
 
@@ -327,7 +327,7 @@ Hier ein Beispiel für ein Meeting:
     "id": "meet-1",
     "shortName": "Meeting",
     "longName": "Abstimmung zur Einschulung",
-	"eventType": {
+    "eventType": {
       "refId": "KONFI"
     },
     "attendees": [
@@ -469,7 +469,7 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
       "refId": "DE-1A"
     },
     "notes": "Das ist eine Vertretung",
-	"relevance": "substitution",
+    "relevance": "substitution",
     "attendees": [
       {
         "refId": "Leo",
@@ -580,7 +580,7 @@ Wochenmuster können auch separat als `weeksPattern`-Entitäten gespeichert werd
 
 #### Kombination
 
-Zeitliche Ausdrücke können miteinander kombiniert und sowohl positiv (findet statt) als auch negativ (findet nicht statt) definiert werden. Die Kombination aus positiven und negativen zeitlichen Ausdrücken erlaubt die Repräsentation von zeitlichen Ausnahmen (z.B. Immer Montags von 8:00 bis 8:45, nur nicht im Juli und im August).
+Zeitliche Ausdrücke können miteinander kombiniert und sowohl positiv (findet statt) als auch negativ (findet nicht statt) definiert werden. Die Kombination aus positiven und negativen zeitlichen Ausdrücken erlaubt die Repräsentation von zeitlichen Ausnahmen (z.B. Immer montags von 8:00 bis 8:45, nur nicht im Juli und im August).
 
 Hier ein Beispiel für einen zeitlichen Ausdruck, bestehend aus einem wöchentlichen Termin, der jedoch an einem bestimmten Tag nicht stattfindet:
 
@@ -671,7 +671,7 @@ Die folgenden Objekte besitzen jeweils ein Code-Attribut, das einen Verweis auf 
 + `groupType`-Objekt (Gruppentyp)
 + `personRole`-Objekt (Personenrolle)
 + `subject`-Objekt (Fach)
-+ `supervisionType`-Objekt (Aufichtstyp)
++ `supervisionType`-Objekt (Aufsichtstyp)
 + `teachingFormat`-Objekt (Unterrichtsformat)
 
 In einigen Fällen wird eine Standard-Code-Liste spezifiziert. Alle Standard-Code-Listen sind via [CodeListHub](https://www.codelisthub.org/de/) verfügbar und abrufbar.
@@ -686,10 +686,10 @@ Hier ein Beispiel für ein Gruppentyp mit einem standardisierten Code:
     "longName": "Klasse",
     "code": {
       "codeListRef": {
-	    "canonicalUri": "urn:opene8:school:codelist:de:groupType",
-  	    "locationUrls": [
-	      "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupType"
-	    ]
+        "canonicalUri": "urn:opene8:school:codelist:de:groupType",
+        "locationUrls": [
+          "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupType"
+        ]
       },
       "keyId": "key",
       "value": "KLA"
@@ -721,15 +721,15 @@ Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
     "longName": "Deutsch",
     "externalIds": [
       {
-	    "canonicalUri": "urn:myTimeTableApp1",
-	    "globallyUnique": true,
-  	    "value": "eb002793-570e-45c7-af17-423831240b83"
-	  },
-	  {
-	    "canonicalUri": "urn:myTimeTableApp2",
-	    "globallyUnique": false,
-  	    "value": "42"
-	  }
+        "canonicalUri": "urn:myTimeTableApp1",
+        "globallyUnique": true,
+        "value": "eb002793-570e-45c7-af17-423831240b83"
+      },
+      {
+        "canonicalUri": "urn:myTimeTableApp2",
+        "globallyUnique": false,
+        "value": "42"
+      }
     ]
   }
 ]
@@ -836,7 +836,7 @@ Hier:
 
 + `urn` zeigt an, dass es sich um eine URN handelt.
 + `isbn` ist der Namespace-Identifier.
-+ `978-3-96111-268-5` ist der spezifische Ressourcename innerhalb des `isbn` Namespace.
++ `978-3-96111-268-5` ist der spezifische Ressourcenname innerhalb des `isbn` Namespace.
 
 ### Schema
 
@@ -1232,6 +1232,10 @@ Das `cancellation`-Objekt definiert einen Unterrichtsausfall:
 
 :   Eindeutige Identifikation des Unterrichtsausfalls. **Dieses Feld ist ERFORDERLICH**.
 
+**`message`** 
+
+:   Mitteilungstext zum Unterrichtsausfall.
+
 **`notes`** 
 
 :   Bemerkungen zum Unterrichtsausfall.
@@ -1519,7 +1523,7 @@ Das `externalId`-Objekt definiert einen externen Identifikator:
 
 **`canonicalUri`** 
 
-:   Ein JSON-String im Format `uri`. Diese URI legt den Namensraum des externen Identifikator fest bzw. gibt Auskunft darüberm, zu wem der Identifikator gehört. **Dieses Feld ist ERFORDERLICH**.
+:   Ein JSON-String im Format `uri`. Diese URI legt den Namensraum des externen Identifikators fest bzw. gibt Auskunft darüber, zu wem der Identifikator gehört. **Dieses Feld ist ERFORDERLICH**.
 
 **`globallyUnique`** 
 
@@ -1694,15 +1698,15 @@ Das `holiday`-Objekt repräsentiert schulfreie Zeit (Feiertage oder Schulferien)
 
 **`shortName`** 
 
-:   Kürzel der schulfreie Zeit. **Dieses Feld ist ERFORDERLICH**.
+:   Kürzel der schulfreien Zeit. **Dieses Feld ist ERFORDERLICH**.
 
 **`longName`** 
 
-:   Ausführlicher Name der schulfreie Zeit 
+:   Ausführlicher Name der schulfreien Zeit 
 
 **`description`** 
 
-:   Eine kurze Beschreibung der schulfreie Zeit.
+:   Eine kurze Beschreibung der schulfreien Zeit.
 
 **`color`** 
 
@@ -1930,14 +1934,14 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 :  Die Typisierung des Feldes `name.declaredName`. 
     
-        Mögliche Werte sind:
+    Mögliche Werte sind:
     
-        Wert                   | Beschreibung
-        ---------------------- | ------------
-        `marriedName`          | Ehename
-        `civilPartnershipName` | Lebenspartnerschaftsname
-		
-		Der Standardwert ist `marriedName`.
+    Wert                   | Beschreibung
+    ---------------------- | ------------
+    `marriedName`          | Ehename
+    `civilPartnershipName` | Lebenspartnerschaftsname
+        
+        Der Standardwert ist `marriedName`.
 
 **`name.middleNames`** 
 
@@ -1983,7 +1987,7 @@ Dieses Objekt KANN erweitert werden.
     
 #### personRole-Objekt
 
-Das `personRole`-Objekt repräsentiert einen Rolle, mit der Mitglieder oder Teilnehmer kategorisiert werden können:
+Das `personRole`-Objekt repräsentiert eine Rolle, mit der Mitglieder oder Teilnehmer kategorisiert werden können:
 
 **`id`** 
 
@@ -2053,11 +2057,11 @@ Das `schedule`-Objekt enthält die eigentliche zeitliche Verplanung:
 
 **`validFrom`** 
 
-:   Definiert den Startzeitpunkt (RFC 3339) des Gültigkeit des Stundenplans. **Dieses Feld ist ERFORDERLICH**.
+:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit des Stundenplans. **Dieses Feld ist ERFORDERLICH**.
 
 **`validTo`** 
 
-:   Definiert den Endzeitpunkt (RFC 3339) des Gültigkeit des Stundenplans. **Dieses Feld ist ERFORDERLICH**.
+:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit des Stundenplans. **Dieses Feld ist ERFORDERLICH**.
 
 **`defaultTimeFrame`** 
 
@@ -2121,6 +2125,10 @@ Das `substitution`-Objekt definiert eine Vertretung:
 
 :   Eindeutige Identifikation der Vertretung. **Dieses Feld ist ERFORDERLICH**.
 
+**`message`** 
+
+:   Mitteilungstext zur Vertretung.
+
 **`notes`** 
 
 :   Bemerkungen zur Vertretung.
@@ -2145,7 +2153,7 @@ Dieses Objekt KANN erweitert werden.
 
 #### supervision-Objekt
 
-Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehren Aufsichtsbereichen zugeordnet ist und zeitlich verplant wird:
+Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehreren Aufsichtsbereichen zugeordnet ist und zeitlich verplant wird:
 
 **`type`** 
 
@@ -2237,7 +2245,7 @@ Das `supervisionType`-Objekt repräsentiert einen Aufsichtstyp, mit dem Aufsicht
 
 **`id`** 
 
-:   Eindeutige Identifikation des Aufsichtstyp. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation des Aufsichtstyps. **Dieses Feld ist ERFORDERLICH**.
 
 **`code`** 
 
@@ -2247,15 +2255,15 @@ Das `supervisionType`-Objekt repräsentiert einen Aufsichtstyp, mit dem Aufsicht
 
 **`shortName`** 
 
-:   Kürzel des Aufsichtstyp. **Dieses Feld ist ERFORDERLICH**.
+:   Kürzel des Aufsichtstyps. **Dieses Feld ist ERFORDERLICH**.
 
 **`longName`** 
 
-:   Ausführlicher Name des Aufsichtstyp. 
+:   Ausführlicher Name des Aufsichtstyps. 
 
 **`description`** 
 
-:   Eine kurze Beschreibung des Aufsichtstyp.
+:   Eine kurze Beschreibung des Aufsichtstyps.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2317,7 +2325,7 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
 
 **`scopeOfWeek`** 
 
-:   Die Menge der Wochentage, die bei einer wöchenlichen Darstellung des Stundenplans berücksichtigt werden sollen (z.B. nur Montag bis Samstag). **Dieses Feld ist ERFORDERLICH**.
+:   Die Menge der Wochentage, die bei einer wöchentlichen Darstellung des Stundenplans berücksichtigt werden sollen (z.B. nur Montag bis Samstag). **Dieses Feld ist ERFORDERLICH**.
 
     Folgende Werte sind definiert:
 
@@ -2333,7 +2341,7 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
 
 **`startOfWeek`** 
 
-:   Der Wochentag, mit dem bei einer wöchenlichen Darstellung des Stundenplans begonnen werden soll. Der Standardwert ist `mon`.
+:   Der Wochentag, mit dem bei einer wöchentlichen Darstellung des Stundenplans begonnen werden soll. Der Standardwert ist `mon`.
 
     Folgende Werte sind definiert:
 
@@ -2397,17 +2405,17 @@ Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden z
 
 **`validFrom`** 
 
-:   Definiert den Startzeitpunkt (RFC 3339) des Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Startzeitpunkt der Gültigkeit des `schedule`-Objekts.
+:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Startzeitpunkt der Gültigkeit des `schedule`-Objekts.
 
 **`validTo`** 
 
-:   Definiert den Endzeitpunkt (RFC 3339) des Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Endzeitpunkt der Gültigkeit des `schedule`-Objekts.
+:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Endzeitpunkt der Gültigkeit des `schedule`-Objekts.
 
 **`validWeeks`** 
 
 :   Eine Liste von Kalenderwochen, an denen dieser zeitliche Ausdruck sich wiederholt. Ist dieses Feld nicht definiert, dann wiederholt sich dieser zeitliche Ausdruck in jeder Woche innerhalb der Gültigkeit. 
 
-    Dieses Feld MUSS entweder ein JSON-String-Array mit eingebettetn Kalenderwochen oder ein JSON-Objekt mit einem Verweis (`validWeeks.idRef`) auf die `id` eines `weeksPattern`-Objekts sein. Zum besseren Verständnis siehe auch die beiden Beispiele im weiteren Verlauf. 
+    Dieses Feld MUSS entweder ein JSON-String-Array mit eingebetteten Kalenderwochen oder ein JSON-Objekt mit einem Verweis (`validWeeks.idRef`) auf die `id` eines `weeksPattern`-Objekts sein. Zum besseren Verständnis siehe auch die beiden Beispiele im weiteren Verlauf. 
 
 **`operation`** 
 
@@ -2416,7 +2424,7 @@ Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden z
     + **`inlcude`** : Findet statt (das ist der Standardwert)
     + **`exclude`** : Findet nicht statt
 
-Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das Jahr 2023 die Kalenderwochen 36,38,40,42,44,46,48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:
+Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das Jahr 2023 die Kalenderwochen 36, 38, 40, 42, 44, 46, 48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:
 
 ``` json
 "temporalExpressions": [
@@ -2449,23 +2457,23 @@ Und hier das gleiche Beispiel mit einem Verweis auf ein `weeksPattern`-Objekt:
 
 #### weeksPattern-Objekt
 
-Das `weeksPattern`-Objekt repräsentiert ein Kalendaerwochenmuster, mit dem `weeklyExpression`-Objekt ausgezeichnet werden können:
+Das `weeksPattern`-Objekt repräsentiert ein Kalenderwochenmuster, mit dem `weeklyExpression`-Objekt ausgezeichnet werden können:
 
 **`id`** 
 
-:   Eindeutige Identifikation des Aufsichtstyp. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation des Wochenmusters. **Dieses Feld ist ERFORDERLICH**.
 
 **`shortName`** 
 
-:   Kürzel des Aufsichtstyp. **Dieses Feld ist ERFORDERLICH**.
+:   Kürzel des Wochenmusters. **Dieses Feld ist ERFORDERLICH**.
 
 **`longName`** 
 
-:   Ausführlicher Name des Aufsichtstyp. 
+:   Ausführlicher Name des Wochenmusters.
 
 **`description`** 
 
-:   Eine kurze Beschreibung des Aufsichtstyp.
+:   Eine kurze Beschreibung des Wochenmusters.
 
 **`weeks`** 
 
