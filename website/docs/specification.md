@@ -1,14 +1,14 @@
 # OpenT8-Spezifikation
 
-#### Version 0.5.1
+#### Version 0.6.0
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
-Dieses Spezifikation ist lizenziert unter der [Apache License, Version 2.0](https://opensource.org/license/apache-2-0/).
+Diese Spezifikation ist lizenziert unter der [Apache License, Version 2.0](https://opensource.org/license/apache-2-0/).
 
 ## Einführung
 
-OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.5/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
+OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.6/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
 
 OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendungen genutzt werden, als Quelle für die grafische Anzeige von Stundenplänen oder als Antwortformat für API-Anfragen (z.B. für RESTful Web-Services).
 
@@ -16,7 +16,7 @@ OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendunge
 
 ### OpenT8-Dokument
 
-Ein OpenT8-Dokument ist eine in sich geschlossene Ressource, die einen Stundenplan oder Dienstplan definiert und beschreibt. Es MÜSSEN mindestens die Felder `opent8`, `info` und `schedule` enthalten sein. Ein OpenT8-Dokument verwendet die OpenT8-Spezifikation und ist mit ihr konform.
+Ein OpenT8-Dokument ist eine in sich geschlossene Ressource, die einen Stundenplan oder Dienstplan definiert und beschreibt. Es MÜSSEN mindestens die Felder `opent8`, `info` und `schedule` enthalten sein. Ein OpenT8-Dokument basiert auf der OpenT8-Spezifikation und ist mit ihr konform.
 
 ### Personen
 
@@ -150,11 +150,11 @@ Hier ein Beispiel für einen Kurs:
       {
         "refId": "Leo",
         "role": {
-          "refId": "LK",
+          "refId": "LEHR"
         }
       }
     ]
-  },
+  }
 ]
 ```
 
@@ -199,7 +199,7 @@ Hier ein Beispiel für die Veranstaltungen eines Musikkurses. Dieser findet jede
 ]
 ```
 
-Veranstaltungen haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
+Veranstaltungen haben ein optionales Feld `classification`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
 + `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassisch verplante Veranstaltung.
 + `additional`: Dieser Wert soll Veranstaltungen kennzeichnen, die kurzfristig (z.B. im Rahmen der Änderungsplanung) hinzugefügt wurden. Es handelt sich dabei um keinen Vertretungsunterricht sondern vielmehr um einen Zusatzunterricht.
@@ -257,7 +257,7 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
 ]
 ```
 
-Aufsichten haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
+Aufsichten haben ein optionales Feld `classification`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
 + `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassisch verplante Aufsicht.
 + `substitution`: Dieser Wert soll Aufsichten kennzeichnen, die durch die Vertretungsplanung entstanden sind. Sie ersetzen eine andere Aufsicht, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
@@ -309,7 +309,7 @@ Hier ein Beispiel für eine Hortaufsicht:
 ]
 ```
 
-Aktivitäten haben ein optionales Feld `relevance`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
+Aktivitäten haben ein optionales Feld `classification`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
 + `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassisch verplante Aktivität.
 + `substitution`: Dieser Wert soll Aktivitäten kennzeichnen, die durch die Vertretungsplanung entstanden sind. Sie ersetzen eine andere Aktivität, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
@@ -431,7 +431,7 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
     "id": "G-1",
     "notes": "Das ist eine Fehlstelle",
     "appliesTo": {
-      "type": "lesson",
+      "refType": "lesson",
       "refId": "DE-1A"
     },
     "reasons": [
@@ -439,7 +439,7 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
         "type": "absence",
         "notes": "Lehrer ist krank",
         "appliesTo": {
-          "type": "person",
+          "refType": "person",
           "refId": "Max"
         }
       }
@@ -448,8 +448,8 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
       {
         "type": "substitution",
         "notes": "Der Erzieher springt ein",
-        "realisedBy": {
-          "type": "lesson",
+        "realizedBy": {
+          "refType": "lesson",
           "refId": "V-1"
         }
       }
@@ -469,7 +469,7 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
       "refId": "DE-1A"
     },
     "notes": "Das ist eine Vertretung",
-    "relevance": "substitution",
+    "classification": "substitution",
     "attendees": [
       {
         "refId": "Leo",
@@ -529,7 +529,7 @@ Die folgenden zeitlichen Ausdrücke werden unterstützt:
 
 #### Einmalig 
 
-Einmalige (*Englisch: one time*) Ausdrücke repräsentieren einen einmaligen Termin, definiert durch ein Startzeitpunkt und einem Endzeitpunkt. Ein einmaliger Termin kann auch mehrtägig sein (z.B. Sommerferien).
+Einmalige (*Englisch: one time*) Ausdrücke repräsentieren einen einmaligen Termin, definiert durch einen Startzeitpunkt und einen Endzeitpunkt. Ein einmaliger Termin kann auch mehrtägig sein (z.B. Sommerferien).
 
 Hier ein Beispiel für einen einmaligen Termin.
 
@@ -545,7 +545,7 @@ Hier ein Beispiel für einen einmaligen Termin.
 
 #### Wöchentlich
 
-Wöchentlich (*Englisch: weekly*) Ausdrücke repräsentieren sich wöchentlich wiederholendende Termine, beginnend mit einem konkretem Termin, definiert durch ein Startzeitpunkt und einem Endzeitpunkt. Standardmäßig findet dieser Termin in jeder Woche innerhalb des Gültigkeitszeitraum des Stundenplans statt. Es können jedoch optional einzelne Wochen deaktiviert werden, so dass ein Wochenmuster (*Englisch: weeks pattern*) entsteht (z.B. 14-tägig, jede dritte Woche, etc.).
+Wöchentlich (*Englisch: weekly*) Ausdrücke repräsentieren sich wöchentlich wiederholende Termine, beginnend mit einem konkreten Termin, definiert durch einen Startzeitpunkt und einen Endzeitpunkt. Standardmäßig findet dieser Termin in jeder Woche innerhalb des Gültigkeitszeitraums des Stundenplans statt. Es können jedoch optional einzelne Wochen deaktiviert werden, so dass ein Wochenmuster (*Englisch: weeks pattern*) entsteht (z.B. 14-tägig, jede dritte Woche, etc.).
 
 Hier ein Beispiel für einen wöchentlichen Termin, der jedoch nur in bestimmten Kalenderwochen stattfindet:
 
@@ -594,7 +594,7 @@ Hier ein Beispiel für einen zeitlichen Ausdruck, bestehend aus einem wöchentli
   },
   {
     "type": "onetime",
-    "startTimepoint": "2023-09-22:00:00Z",
+    "startTimepoint": "2023-09-22T00:00:00Z",
     "endTimepoint": "2023-09-22T00:00:00Z",
     "operation": "exclude"
   }
@@ -665,7 +665,8 @@ Die folgenden Objekte besitzen jeweils ein Code-Attribut, das einen Verweis auf 
 + `absenceType`-Objekt (Abwesenheitstyp)
 + `activityType`-Objekt (Aktivitätstyp)
 + `courseType`-Objekt (Kurstyp)
-+ `eventType`-Objekt (Eriegbistyp)
++ `electronicAddressType`-Objekt (elektronischer Addresstyp)
++ `eventType`-Objekt (Ereignistyp)
 + `exemptionType`-Objekt (Freistellungsformat)
 + `gender`-Objekt (Geschlecht)
 + `groupType`-Objekt (Gruppentyp)
@@ -739,7 +740,7 @@ Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
 
 ### Versionierung
 
-Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.5`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.5` unterstützen, MÜSSEN mit allen `0.5.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.5.1` und `0.5.2` gemacht wird.
+Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.6`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.6` unterstützen, MÜSSEN mit allen `0.6.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.6.1` und `0.6.2` gemacht wird.
 
 Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
@@ -753,7 +754,7 @@ Das Schema sieht zwei Arten von Feldern vor: Fest definierte Felder, die einen d
 
 #### JSON Schema
 
-[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.5/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
+[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.6/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
 
 #### Datums- und Zeitangaben
 
@@ -792,7 +793,7 @@ Ein Beispiel, bei dem für das Jahr 2023 die Kalenderwochen 36, 38, 40, 42, 44, 
 
 #### Farbwerte
 
-Die Formatierung der Farbwerte in OpenT8 orientiert sich am [hexadezimale Farbsystem](https://www.w3schools.com/html/html_colors_hex.asp), so wie es auch im HTML-Standard definiert ist.
+Die Formatierung der Farbwerte in OpenT8 orientiert sich am [hexadezimalen Farbsystem](https://www.w3schools.com/html/html_colors_hex.asp), so wie es auch im HTML-Standard definiert ist.
 
 Eine hexadezimale Farbe wird angegeben mit: #RRGGBB, wobei die hexadezimalen Ganzzahlen RR (Rot), GG (Grün) und BB (Blau) die Komponenten der Farbe angeben.
 
@@ -875,6 +876,10 @@ Dies ist das Wurzelobjekt eines OpenT8-Dokuments und enthält folgende Felder:
 **`courseTypes`**
 
 :   Eine Liste von Kurstypen. Es MUSS ein JSON-Array mit `courseType`-Objekten sein. 
+
+**`electronicAddressTypes`** 
+
+:   Eine Liste von elektronischen Adresstypen. Es MUSS ein JSON-Array mit `electronicAddressType`-Objekten sein. 
 
 **`eventTypes`** 
 
@@ -962,7 +967,7 @@ Das `absence`-Objekt definiert eine Abwesenheit:
 
 :   Eine Person, eine Gruppe oder ein Raum, für welche(n) die Abwesenheit gilt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refType`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
     
         Mögliche Werte sind:
     
@@ -982,7 +987,7 @@ Das `absenceType`-Objekt repräsentiert einen Abwesenheitstyp, mit dem Abwesenhe
 
 **`id`** 
 
-:   Eindeutige Identifikation des Abwesenheitstyp. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation des Abwesenheitstyps. **Dieses Feld ist ERFORDERLICH**.
 
 **`code`** 
 
@@ -1032,9 +1037,9 @@ Das `activity`-Objekt definiert eine Aktivität:
 
 :   Ein Farbwert (Hex-Kodierung) für die Mitteilung.
 
-**`relevance`** 
+**`classification`** 
 
-:   Relevanz der Aktivität. 
+:   Klassifikation der Aktivität. 
 
     Folgende Werte sind definiert:
 
@@ -1046,6 +1051,10 @@ Das `activity`-Objekt definiert eine Aktivität:
 **`activityType.refId`** 
 
 :   Typ der Aktivität. Dies MUSS ein Verweis auf die `id` eines `activityType`-Objekts sein. 
+
+**`activityUrl`** 
+
+:   Eine URL zu einer externen Website mit zusätzlichen Infos zu dieser Aktivität.
 
 **`groups`** 
 
@@ -1074,7 +1083,7 @@ Das `activityType`-Objekt repräsentiert einen Aktivitätstyp, mit dem Aktivitä
 
 **`id`** 
 
-:   Eindeutige Identifikation des Aktivitätstyp. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation des Aktivitätstyps. **Dieses Feld ist ERFORDERLICH**.
 
 **`code`** 
 
@@ -1139,7 +1148,7 @@ Das `announcement`-Objekt repräsentiert eine freie Mitteilung im Stundenplan:
 
 :   Eine Liste von Gruppen oder Personen, für welche die Mitteilung gilt. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
 
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refType`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
     
         Mögliche Werte sind:
     
@@ -1186,7 +1195,7 @@ Das `building`-Objekt repräsentiert ein Gebäude, in dem sich Räume befinden:
 
 **`externalIds`** 
 
-:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+:   Eine optionale Liste von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1216,42 +1225,39 @@ Das `campus`-Objekt repräsentiert einen Campus, auf dem sich Gebäude und/oder 
 
 **`externalIds`** 
 
-:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+:   Eine optionale Liste von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
 #### cancellation-Objekt
 
-Das `cancellation`-Objekt definiert einen Unterrichtsausfall:
+Das `cancellation`-Objekt definiert einen Ausfall einer Aktivität, einer Unterrichtseinheit oder einer Aufsicht:
 
 **`type`** 
 
 :   MUSS den Wert `cancellation` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
-**`id`** 
-
-:   Eindeutige Identifikation des Unterrichtsausfalls. **Dieses Feld ist ERFORDERLICH**.
-
 **`message`** 
 
-:   Mitteilungstext zum Unterrichtsausfall.
+:   Mitteilungstext zum Ausfall.
 
 **`notes`** 
 
-:   Bemerkungen zum Unterrichtsausfall.
+:   Bemerkungen zum Ausfall.
 
-**`behaviour`** 
+**`behavior`** 
 
 :   Mögliches Verhalten
 
-    + **`leaveRoom`** : Den Unterrichtsraum verlassen
-    + **`stayInRoom`** : Im Unterrichtsraum bleiben
+    + **`none`** : Keine Angabe oder nicht relevant
+    + **`leaveLocation`** : Den Unterrichtsraum oder Bereich verlassen
+    + **`stayInLocation`** : Im Unterrichtsraum oder Bereich bleiben
 
 Dieses Objekt KANN erweitert werden.
 
 #### course-Objekt
 
-Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teilnehmer treffen und der Veranstaltungen zugeordnet werden kann:
+Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teilnehmer treffen und der Unterrichtseinheiten zugeordnet werden kann:
 
 **`id`** 
 
@@ -1281,13 +1287,13 @@ Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teil
 
 :   Eine Kursnummer.
 
-**`courseType.idRef`** 
+**`courseType.refId`** 
 
 :   Ein Kurstyp zur Differenzierung des Kurses. Dies MUSS ein Verweis auf die `id` eines `courseType`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
 
 **`courseUrl`** 
 
-:   Eine URL zu einer externen Website mit zusätzlichen Infos zu diesem  Kurs.
+:   Eine URL zu einer externen Website mit zusätzlichen Infos zu diesem Kurs.
 
 **`groups`** 
 
@@ -1302,9 +1308,17 @@ Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teil
     + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
     + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
 
+**`validFrom`** 
+
+:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit des Kurses. 
+
+**`validTo`** 
+
+:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit des Kurses.
+
 **`externalIds`** 
 
-:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+:   Eine optionale Liste von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1340,6 +1354,34 @@ Das `courseType`-Objekt repräsentiert die Art bzw. Differenzierung eines Kurses
 
 Dieses Objekt KANN erweitert werden.
 
+#### electronicAddressType-Objekt
+
+Das `electronicAddressType`-Objekt repräsentiert eine Adresstyp, mit dem elektronische Adressen (z.B. E-Mail, Telefon) kategorisiert werden können:
+
+**`id`** 
+
+:   Eindeutige Identifikation des Addresstyps. **Dieses Feld ist ERFORDERLICH**.
+
+**`code`** 
+
+:   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
+
+    Es wird keine Code-Liste empfohlen.
+
+**`shortName`** 
+
+:   Kürzel des Addresstyps. **Dieses Feld ist ERFORDERLICH**.
+
+**`longName`** 
+
+:   Ausführlicher Name des Addresstyps. 
+
+**`description`** 
+
+:   Eine kurze Beschreibung des Addresstyps.
+
+Dieses Objekt KANN erweitert werden.
+
 #### event-Objekt
 
 Das `event`-Objekt repräsentiert einen Termin, der sich nicht durch eine Veranstaltung ausdrücken lässt (z.B. eine Prüfung oder ein Meeting):
@@ -1371,6 +1413,10 @@ Das `event`-Objekt repräsentiert einen Termin, der sich nicht durch eine Verans
 **`eventType.refId`** 
 
 :   Typ des Ereignisses. Dies MUSS ein Verweis auf die `id` eines `eventType`-Objekts sein. 
+
+**`eventUrl`** 
+
+:   Eine URL zu einer externen Website mit zusätzlichen Infos zu diesem Ereignis.
 
 **`groups`** 
 
@@ -1449,7 +1495,7 @@ Das `exemption`-Objekt definiert eine Freistellung:
 
 :   Eine Person, für welche(n) die Freistellung gilt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refType`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
     
         Mögliche Werte sind:
     
@@ -1467,7 +1513,7 @@ Das `exemptionType`-Objekt repräsentiert einen Freistellungstyp, mit dem Ereign
 
 **`id`** 
 
-:   Eindeutige Identifikation des Freistellungstyp. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation des Freistellungstyps. **Dieses Feld ist ERFORDERLICH**.
 
 **`code`** 
 
@@ -1553,7 +1599,7 @@ Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
 
 :   Eine Aktivität, eine Unterrichtseinheit oder eine Aufsicht, für welche(n) die Fehlstelle gilt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refType`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
     
         Mögliche Werte sind:
     
@@ -1635,7 +1681,7 @@ Das `group`-Objekt repräsentiert eine Gruppe (z.B. Klasse, Jahrgang, etc.), der
 
 :   Ein Farbwert (Hex-Kodierung) für die Gruppe.
     
-**`groupType.idRef`** 
+**`groupType.refId`** 
 
 :   Typ der Gruppe. Dies MUSS ein Verweis auf die `id` eines `groupType`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
 
@@ -1650,9 +1696,17 @@ Das `group`-Objekt repräsentiert eine Gruppe (z.B. Klasse, Jahrgang, etc.), der
 
 :   Der Zeitrahmen des Teilnehmers. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
 
+**`validFrom`** 
+
+:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit der Gruppe. 
+
+**`validTo`** 
+
+:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit der Gruppe.
+
 **`externalIds`** 
 
-:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+:   Eine optionale Liste von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1690,11 +1744,15 @@ Dieses Objekt KANN erweitert werden.
 
 #### holiday-Objekt
 
-Das `holiday`-Objekt repräsentiert schulfreie Zeit (Feiertage oder Schulferien):
+Das `holiday`-Objekt repräsentiert ein schulfreie Zeit (Feiertage oder Schulferien):
 
 **`type`** 
 
 :   MUSS den Wert `holiday` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+
+**`id`** 
+
+:   Eindeutige Identifikation der schulfreien Zeit. **Dieses Feld ist ERFORDERLICH**.
 
 **`shortName`** 
 
@@ -1750,7 +1808,7 @@ Das `info`-Objekt enthält Metadaten zum Stundenplan:
 
 :   Zeitpunkt der Veröffentlichung des Stundenplans.
 
-**`publishedFrom`**
+**`publishedBy`**
 
 :   Wem gehört der Stundenplan?
 
@@ -1785,7 +1843,7 @@ Beispiel:
   "summary": "Der aktuelle Stundenplan inklusive Aufsichten und Vertretungen.",
   "version": "201",
   "publishedAt": "2023-09-01T12:00:00Z",
-  "publishedFrom": "Meine-Schule, Berlin",
+  "publishedBy": "Meine-Schule, Berlin",
   "language": "de",
   "source": {
     "name": "MyTimeTableApp",
@@ -1810,9 +1868,9 @@ Das `lesson`-Objekt repräsentiert eine Veranstaltung bzw. Unterrichtseinheit, d
 
 :   Der zugeordnete Kurs. Dies MUSS ein Verweis auf die `id` eines `course`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
 
-**`relevance`** 
+**`classification`** 
 
-:   Relevanz der Veranstaltung. 
+:   Klassifikation der Veranstaltung. 
 
     Folgende Werte sind definiert:
 
@@ -1830,7 +1888,7 @@ Das `lesson`-Objekt repräsentiert eine Veranstaltung bzw. Unterrichtseinheit, d
 
 :   Ein Farbwert (Hex-Kodierung) für die Veranstaltung.
 
-**`teachingFormat.idRef`** 
+**`teachingFormat.refId`** 
 
 :   Unterrichtsformat. Dies MUSS ein Verweis auf die `id` eines `teachingFormat`-Objekts sein. 
 
@@ -1865,7 +1923,7 @@ Das `oneTimeExpression`-Objekt definiert einen einmaligen zeitlichen Ausdruck:
 
 **`type`** 
 
-:   MUSS den Wert `oneTime` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `onetime` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`startTimepoint`** 
 
@@ -1967,6 +2025,18 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 :   Geburtsdatum (RFC 3339) der Person. 
 
+**`electronicAddresses`** 
+
+:   Liste der digitalen Adressen (z.B. E-Mail, Telefon, etc.)
+
+**`electronicAddresses.*.addressType.refId`** 
+
+:   Art der elektronischen Adresse. Dies MUSS ein Verweis auf die `id` eines `electronicAddressTypes`-Objekts sein. 
+
+**`electronicAddresses.*.identifier`** 
+
+:   Kennung dieser elektronischen Adresse (z.B. die konkrete E-Mail-Adresse)
+
 **`color`** 
 
 :   Ein Farbwert (Hex-Kodierung) für die Person.
@@ -1977,7 +2047,7 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 **`externalIds`** 
 
-:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+:   Eine optionale Liste von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2047,7 +2117,7 @@ Das `room`-Objekt repräsentiert einen Raum, in dem Unterricht oder ein anderwei
 
 **`externalIds`** 
 
-:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+:   Eine optionale Liste von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2109,7 +2179,7 @@ Das `subject`-Objekt repräsentiert ein Fach, das mit Kursen verknüpft werden k
 
 **`externalIds`** 
 
-:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+:   Eine optionale Liste von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2133,11 +2203,11 @@ Das `substitution`-Objekt definiert eine Vertretung:
 
 :   Bemerkungen zur Vertretung.
 
-**`appliesTo`** 
+**`realizedBy`** 
 
 :   Eine Aktivität, eine Unterrichtseinheit oder eine Aufsicht, welche die Vertretung darstellt. Dies MUSS ein JSON-Objekt mit folgenden Feldern sein:
 
-    + **`type`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refType`** : Die Typisierung des Feldes `refId`. **Dieses Feld ist ERFORDERLICH**.
     
         Mögliche Werte sind:
     
@@ -2171,9 +2241,9 @@ Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehreren A
 
 :   Ein Farbwert (Hex-Kodierung) für die Aufsicht.
 
-**`relevance`** 
+**`classification`** 
 
-:   Relevanz der Aufsicht. 
+:   Klassifikation der Aufsicht. 
 
     Folgende Werte sind definiert:
 
@@ -2182,7 +2252,7 @@ Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehreren A
     `scheduled`    | Wie geplant (das ist der Standardwert)
     `substitution` | Vertretungsaufsicht
 
-**`supervisionType.idRef`** 
+**`supervisionType.refId`** 
 
 :   Typ der Aufsicht. Dies MUSS ein Verweis auf die `id` eines `supervisionType`-Objekts sein. 
 
@@ -2233,9 +2303,13 @@ Das `supervisionArea`-Objekt repräsentiert ein Aufsichtsbereich, für den Aufsi
 
 :   Der Campus, auf dem sich der Aufsichtsbereich befindet. Dies MUSS ein Verweis auf die `id` eines `campus`-Objekts sein. 
 
+**`timeFrame`** 
+
+:   Der Zeitrahmen des Aufsichtsbereichs. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein.
+
 **`externalIds`** 
 
-:   Eine optionale List von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
+:   Eine optionale Liste von externen Identifikatoren. Es MUSS ein JSON-Array mit `externalId`-Objekten sein. 
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2273,7 +2347,7 @@ Das `teachingFormat`-Objekt repräsentiert ein Unterrichtsformat, mit dem Unterr
 
 **`id`** 
 
-:   Eindeutige Identifikation des Unterrichtsformat. **Dieses Feld ist ERFORDERLICH**.
+:   Eindeutige Identifikation des Unterrichtsformats. **Dieses Feld ist ERFORDERLICH**.
 
 **`code`** 
 
@@ -2325,7 +2399,7 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
 
 **`scopeOfWeek`** 
 
-:   Die Menge der Wochentage, die bei einer wöchentlichen Darstellung des Stundenplans berücksichtigt werden sollen (z.B. nur Montag bis Samstag). **Dieses Feld ist ERFORDERLICH**.
+:   Die Menge der Wochentage, die bei einer wöchentlichen Darstellung des Stundenplans berücksichtigt werden sollen (z.B. nur Montag bis Samstag). Dies MUSS ein JSON-String-Array sein. **Dieses Feld ist ERFORDERLICH**.
 
     Folgende Werte sind definiert:
 
@@ -2333,7 +2407,7 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
     --------- | ------------
     `mon`     | Montag
     `tue`     | Dienstag
-    `wef`     | Mittwoch
+    `wed`     | Mittwoch
     `thu`     | Donnerstag
     `fri`     | Freitag
     `sat`     | Samstag
@@ -2349,7 +2423,7 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
     --------- | ------------
     `mon`     | Montag
     `tue`     | Dienstag
-    `wef`     | Mittwoch
+    `wed`     | Mittwoch
     `thu`     | Donnerstag
     `fri`     | Freitag
     `sat`     | Samstag
@@ -2365,11 +2439,11 @@ Dieses Objekt KANN erweitert werden.
 
 Das `timeSlot`-Objekt definiert ein benanntes Zeitfenster für einen Zeitrahmen (z.B. 1. Stunde von 8:00 bis 8:45):
 
-**`shortlabel`** 
+**`shortLabel`** 
 
 :   Kürzel des Zeitfenster. **Dieses Feld ist ERFORDERLICH**.
 
-**`longlabel`** 
+**`longLabel`** 
 
 :   Ausführlicher Name des Zeitfenster. 
 
@@ -2405,23 +2479,23 @@ Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden z
 
 **`validFrom`** 
 
-:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Startzeitpunkt der Gültigkeit des `schedule`-Objekts.
+:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit der wöchentlichen Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Startzeitpunkt der Gültigkeit des `schedule`-Objekts.
 
 **`validTo`** 
 
-:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit der wöchentlich Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Endzeitpunkt der Gültigkeit des `schedule`-Objekts.
+:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit der wöchentlichen Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Endzeitpunkt der Gültigkeit des `schedule`-Objekts.
 
 **`validWeeks`** 
 
 :   Eine Liste von Kalenderwochen, an denen dieser zeitliche Ausdruck sich wiederholt. Ist dieses Feld nicht definiert, dann wiederholt sich dieser zeitliche Ausdruck in jeder Woche innerhalb der Gültigkeit. 
 
-    Dieses Feld MUSS entweder ein JSON-String-Array mit eingebetteten Kalenderwochen oder ein JSON-Objekt mit einem Verweis (`validWeeks.idRef`) auf die `id` eines `weeksPattern`-Objekts sein. Zum besseren Verständnis siehe auch die beiden Beispiele im weiteren Verlauf. 
+    Dieses Feld MUSS entweder ein JSON-String-Array mit eingebetteten Kalenderwochen oder ein JSON-Objekt mit einem Verweis (`validWeeks.refId`) auf die `id` eines `weeksPattern`-Objekts sein. Zum besseren Verständnis siehe auch die beiden Beispiele im weiteren Verlauf. 
 
 **`operation`** 
 
 :   Soll der zeitliche Ausdruck hinzugefügt oder abgezogen werden? 
 
-    + **`inlcude`** : Findet statt (das ist der Standardwert)
+    + **`include`** : Findet statt (das ist der Standardwert)
     + **`exclude`** : Findet nicht statt
 
 Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das Jahr 2023 die Kalenderwochen 36, 38, 40, 42, 44, 46, 48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:

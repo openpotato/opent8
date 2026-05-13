@@ -1,11 +1,11 @@
 {
-  "opent8": "0.5.1",
+  "opent8": "0.6.0",
   "info": {
     "title": "Stundenplan 2023/2024",
     "description": "Stundenplan für das Schuljahr 2023/2024",
     "summary": "Der aktuelle Stundenplan für eine Grundschule (Jahrgangsstufe 1).",
     "publishedAt": "2023-09-01T12:00:00Z",
-    "publishedFrom": "Meine-Grundschule, Berlin",
+    "publishedBy": "Meine-Grundschule, Berlin",
     "source": {
       "name": "MyTimeTableApp",
       "version": "1.0"
@@ -504,7 +504,7 @@
       {
         "type": "lesson",
         "id": "DE-1A",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "DE-1A"
         },
@@ -554,7 +554,7 @@
       {
         "type": "lesson",
         "id": "MA-1A",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "MA-1A"
         },
@@ -594,7 +594,7 @@
       {
         "type": "lesson",
         "id": "BK-1A",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "BK-1A"
         },
@@ -619,7 +619,7 @@
       {
         "type": "lesson",
         "id": "MU-1A",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "MU-1A"
         },
@@ -644,7 +644,7 @@
       {
         "type": "lesson",
         "id": "SK-1A",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "SK-1A"
         },
@@ -669,7 +669,7 @@
       {
         "type": "lesson",
         "id": "KR-1A",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "KR-1A"
         },
@@ -693,7 +693,7 @@
       {
         "type": "lesson",
         "id": "DE-1B",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "DE-1B"
         },
@@ -743,7 +743,7 @@
       {
         "type": "lesson",
         "id": "MA-1B",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "MA-1B"
         },
@@ -783,7 +783,7 @@
       {
         "type": "lesson",
         "id": "BK-1B",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "BK-1B"
         },
@@ -808,7 +808,7 @@
       {
         "type": "lesson",
         "id": "MU-1B",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "MU-1B"
         },
@@ -833,7 +833,7 @@
       {
         "type": "lesson",
         "id": "SK-1B",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "SK-1B"
         },
@@ -858,7 +858,7 @@
       {
         "type": "lesson",
         "id": "RE-1",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "RE-1"
         },
@@ -878,7 +878,7 @@
       {
         "type": "lesson",
         "id": "LK-1",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "LK-1"
         },
@@ -898,7 +898,7 @@
       {
         "type": "lesson",
         "id": "SP-1",
-        "relevance": "scheduled",
+        "classification": "scheduled",
         "course": {
           "refId": "SP-1"
         },
@@ -1021,7 +1021,7 @@
         "id": "G-1",
         "notes": "Das ist eine Fehlstelle",
         "appliesTo": {
-          "type": "lesson",
+          "refType": "lesson",
           "refId": "DE-1A"
         },
         "reasons": [
@@ -1032,7 +1032,7 @@
               "refId": "krank"
             },
             "appliesTo": {
-              "type": "person",
+              "refType": "person",
               "refId": "Max"
             }
           }
@@ -1041,8 +1041,8 @@
           {
             "type": "substitution",
             "notes": "Der Erzieher springt ein",
-            "realisedBy": {
-              "type": "lesson",
+            "realizedBy": {
+              "refType": "lesson",
               "refId": "Vertretung-1"
             }
           }
@@ -1058,7 +1058,7 @@
       {
         "type": "lesson",
         "id": "Vertretung-1",
-        "relevance": "substitution",
+        "classification": "substitution",
         "notes": "Das ist eine Vertretung",
         "course": {
           "refId": "DE-1A"

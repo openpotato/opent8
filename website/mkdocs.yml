@@ -1,6 +1,6 @@
 # Project information
 site_name: OpenT8
-site_description: 'Documentation for OpenT8'
+site_description: 'Dokumentation zu OpenT8'
 site_author: 'STÜBER SYSTEMS GmbH'
 site_url: 'https://openpotato.github.io/opent8/'
 
@@ -67,8 +67,6 @@ plugins:
 
 # Extensions    
 markdown_extensions:
-  - toc:
-      permalink: true
   - def_list
   - admonition
   - attr_list
@@ -83,6 +81,8 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg      
+  - toc:
+      permalink: true
 
 # Navigation  
 nav:
