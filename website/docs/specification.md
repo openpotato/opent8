@@ -951,10 +951,6 @@ Das `absence`-Objekt definiert eine Abwesenheit:
 
 :   MUSS den Wert `absence` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
-**`id`** 
-
-:   Eindeutige Identifikation der Abwesenheit. **Dieses Feld ist ERFORDERLICH**.
-
 **`notes`** 
 
 :   Bemerkungen zur Abwesenheit.
@@ -1289,7 +1285,7 @@ Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teil
 
 **`courseType.refId`** 
 
-:   Ein Kurstyp zur Differenzierung des Kurses. Dies MUSS ein Verweis auf die `id` eines `courseType`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+:   Ein Kurstyp zur Differenzierung des Kurses. Dies MUSS ein Verweis auf die `id` eines `courseType`-Objekts sein.
 
 **`courseUrl`** 
 
@@ -1478,10 +1474,6 @@ Das `exemption`-Objekt definiert eine Freistellung:
 **`type`** 
 
 :   MUSS den Wert `exemption` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Freistellung. **Dieses Feld ist ERFORDERLICH**.
 
 **`notes`** 
 
@@ -2190,10 +2182,6 @@ Das `substitution`-Objekt definiert eine Vertretung:
 **`type`** 
 
 :   MUSS den Wert `substitution` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
-
-**`id`** 
-
-:   Eindeutige Identifikation der Vertretung. **Dieses Feld ist ERFORDERLICH**.
 
 **`message`** 
 

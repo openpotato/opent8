@@ -11,6 +11,13 @@
       "version": "1.0"
     }
   },
+  "absenceTypes": [
+    {
+      "id": "krank",
+      "shortName": "Krank",
+      "longName": "krank"
+    }
+  ],
   "buildings": [
     {
       "id": "HG",
@@ -374,9 +381,9 @@
       "longName": "Klasse",
       "code": {
         "codeListRef": {
-          "canonicalUri": "urn:opene8:codelist:de:groupType",
+          "canonicalUri": "urn:opene8:school:codelist:de:groupType",
           "locationUrls": [
-            "https://localhost:44365/v1/documents/urn%3Aopent8%3Acodelist%3AgroupType%3Av1?metaOnly=false&language=de"
+            "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupType%3Av1"
           ]
         },
         "keyId": "key",
@@ -438,9 +445,9 @@
       "longName": "Lehrer:in",
       "code": {
         "codeListRef": {
-          "canonicalUri": "urn:opent8:codelist:de:personRole",
+          "canonicalUri": "urn:opene8:school:codelist:de:personRole",
           "locationUrls": [
-            "https://localhost:44365/v1/documents/urn%3Aopent8%3Acodelist%3ApersonRole%3Av1?metaOnly=false&language=de"
+            "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3ApersonRole%3Av1"
           ]
         },
         "keyId": "key",
@@ -453,9 +460,9 @@
       "longName": "Erzieher:in",
       "code": {
         "codeListRef": {
-          "canonicalUri": "urn:opent8:codelist:de:personRole",
+          "canonicalUri": "urn:opene8:school:codelist:de:personRole",
           "locationUrls": [
-            "https://localhost:44365/v1/documents/urn%3Aopent8%3Acodelist%3ApersonRole%3Av1?metaOnly=false&language=de"
+            "https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3ApersonRole%3Av1"
           ]
         },
         "keyId": "key",
@@ -476,6 +483,14 @@
       "id": "101",
       "shortName": "101",
       "longName": "Raum 101",
+      "building": {
+        "refId": "HG"
+      }
+    },
+    {
+      "id": "102",
+      "shortName": "102",
+      "longName": "Raum 102",
       "building": {
         "refId": "HG"
       }
@@ -517,37 +532,37 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T09:05:00Z",
-            "endTimepoint": "2023-09-04T09:50:00"
+            "endTimepoint": "2023-09-04T09:50:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T09:05:00Z",
-            "endTimepoint": "2023-09-05T09:50:00"
+            "endTimepoint": "2023-09-05T09:50:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T09:05:00Z",
-            "endTimepoint": "2023-09-06T09:50:00"
+            "endTimepoint": "2023-09-06T09:50:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T10:10:00Z",
-            "endTimepoint": "2023-09-06T10:55:00"
+            "endTimepoint": "2023-09-06T10:55:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T08:00:00Z",
-            "endTimepoint": "2023-09-07T08:45:00"
+            "endTimepoint": "2023-09-07T08:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-08T09:05:00Z",
-            "endTimepoint": "2023-09-08T09:50:00"
+            "endTimepoint": "2023-09-08T09:50:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-08T10:10:00Z",
-            "endTimepoint": "2023-09-08T10:55:00"
+            "endTimepoint": "2023-09-08T10:55:00Z"
           }
         ]
       },
@@ -567,27 +582,27 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T10:10:00Z",
-            "endTimepoint": "2023-09-04T10:55:00"
+            "endTimepoint": "2023-09-04T10:55:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T10:10:00Z",
-            "endTimepoint": "2023-09-05T10:55:00"
+            "endTimepoint": "2023-09-05T10:55:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T08:00:00Z",
-            "endTimepoint": "2023-09-06T08:45:00"
+            "endTimepoint": "2023-09-06T08:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T09:05:00Z",
-            "endTimepoint": "2023-09-07T05:50:00"
+            "endTimepoint": "2023-09-07T09:50:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-08T08:00:00Z",
-            "endTimepoint": "2023-09-08T08:45:00"
+            "endTimepoint": "2023-09-08T08:45:00Z"
           }
         ]
       },
@@ -607,12 +622,12 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T11:00:00Z",
-            "endTimepoint": "2023-09-04T11:45:00"
+            "endTimepoint": "2023-09-04T11:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T12:20:00Z",
-            "endTimepoint": "2023-09-04T13:05:00"
+            "endTimepoint": "2023-09-04T13:05:00Z"
           }
         ]
       },
@@ -632,12 +647,12 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T11:00:00Z",
-            "endTimepoint": "2023-09-06T11:45:00"
+            "endTimepoint": "2023-09-06T11:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T12:20:00Z",
-            "endTimepoint": "2023-09-07T13:05:00"
+            "endTimepoint": "2023-09-07T13:05:00Z"
           }
         ]
       },
@@ -657,12 +672,12 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T11:00:00Z",
-            "endTimepoint": "2023-09-05T11:45:00"
+            "endTimepoint": "2023-09-05T11:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T10:10:00Z",
-            "endTimepoint": "2023-09-07T10:55:00"
+            "endTimepoint": "2023-09-07T10:55:00Z"
           }
         ]
       },
@@ -706,37 +721,37 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T09:05:00Z",
-            "endTimepoint": "2023-09-04T09:50:00"
+            "endTimepoint": "2023-09-04T09:50:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T10:10:00Z",
-            "endTimepoint": "2023-09-04T10:55:00"
+            "endTimepoint": "2023-09-04T10:55:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T09:05:00Z",
-            "endTimepoint": "2023-09-05T09:50:00"
+            "endTimepoint": "2023-09-05T09:50:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T10:10:00Z",
-            "endTimepoint": "2023-09-05T10:55:00"
+            "endTimepoint": "2023-09-05T10:55:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T09:05:00Z",
-            "endTimepoint": "2023-09-06T09:50:00"
+            "endTimepoint": "2023-09-06T09:50:00Z"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-08-07T08:00:00Z",
-            "endTimepoint": "2023-08-07T08:45:00"
+            "startTimepoint": "2023-09-07T08:00:00Z",
+            "endTimepoint": "2023-09-07T08:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-08T09:05:00Z",
-            "endTimepoint": "2023-09-08T09:50:00"
+            "endTimepoint": "2023-09-08T09:50:00Z"
           }
         ]
       },
@@ -756,27 +771,27 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T08:00:00Z",
-            "endTimepoint": "2023-09-04T08:45:00"
+            "endTimepoint": "2023-09-04T08:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T08:00:00Z",
-            "endTimepoint": "2023-09-05T08:45:00"
+            "endTimepoint": "2023-09-05T08:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T10:10:00Z",
-            "endTimepoint": "2023-09-06T10:55:00"
+            "endTimepoint": "2023-09-06T10:55:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T09:05:00Z",
-            "endTimepoint": "2023-09-07T05:50:00"
+            "endTimepoint": "2023-09-07T09:50:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-08T10:10:00Z",
-            "endTimepoint": "2023-09-08T10:55:00"
+            "endTimepoint": "2023-09-08T10:55:00Z"
           }
         ]
       },
@@ -796,12 +811,12 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T11:00:00Z",
-            "endTimepoint": "2023-09-06T11:45:00"
+            "endTimepoint": "2023-09-06T11:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T12:20:00Z",
-            "endTimepoint": "2023-09-06T13:05:00"
+            "endTimepoint": "2023-09-06T13:05:00Z"
           }
         ]
       },
@@ -821,12 +836,12 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T11:00:00Z",
-            "endTimepoint": "2023-09-05T11:45:00"
+            "endTimepoint": "2023-09-05T11:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T10:10:00Z",
-            "endTimepoint": "2023-09-07T10:55:00"
+            "endTimepoint": "2023-09-07T10:55:00Z"
           }
         ]
       },
@@ -846,12 +861,12 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T12:20:00Z",
-            "endTimepoint": "2023-09-07T13:05:00"
+            "endTimepoint": "2023-09-07T13:05:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-08T11:00:00Z",
-            "endTimepoint": "2023-09-08T11:45:00"
+            "endTimepoint": "2023-09-08T11:45:00Z"
           }
         ]
       },
@@ -871,7 +886,7 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T11:00:00Z",
-            "endTimepoint": "2023-09-07T11:45:00"
+            "endTimepoint": "2023-09-07T11:45:00Z"
           }
         ]
       },
@@ -891,7 +906,7 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T11:00:00Z",
-            "endTimepoint": "2023-09-07T11:45:00"
+            "endTimepoint": "2023-09-07T11:45:00Z"
           }
         ]
       },
@@ -911,17 +926,17 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T08:00:00Z",
-            "endTimepoint": "2023-09-04T08:45:00"
+            "endTimepoint": "2023-09-04T08:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T08:00:00Z",
-            "endTimepoint": "2023-09-05T08:45:00"
+            "endTimepoint": "2023-09-05T08:45:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T12:20:00Z",
-            "endTimepoint": "2023-09-06T13:05:00"
+            "endTimepoint": "2023-09-06T13:05:00Z"
           }
         ]
       },
@@ -950,27 +965,27 @@
           {
             "type": "weekly",
             "startTimepoint": "2023-09-04T12:20:00Z",
-            "endTimepoint": "2023-09-04T16:30:00"
+            "endTimepoint": "2023-09-04T16:30:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-05T12:20:00Z",
-            "endTimepoint": "2023-09-05T16:30:00"
+            "endTimepoint": "2023-09-05T16:30:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-06T12:20:00Z",
-            "endTimepoint": "2023-09-06T16:30:00"
+            "endTimepoint": "2023-09-06T16:30:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-07T12:20:00Z",
-            "endTimepoint": "2023-09-07T16:30:00"
+            "endTimepoint": "2023-09-07T16:30:00Z"
           },
           {
             "type": "weekly",
             "startTimepoint": "2023-09-08T12:20:00Z",
-            "endTimepoint": "2023-09-08T16:00:00"
+            "endTimepoint": "2023-09-08T16:00:00Z"
           }
         ]
       },
@@ -983,8 +998,8 @@
         "temporalExpressions": [
           {
             "type": "onetime",
-            "startTimepoint": "2023-11-23T12:00:00Z",
-            "endTimepoint": "2023-11-04T12:00:00"
+            "startTimepoint": "2023-11-04T12:00:00Z",
+            "endTimepoint": "2023-11-23T12:00:00Z"
           }
         ]
       },
@@ -998,21 +1013,7 @@
           {
             "type": "onetime",
             "startTimepoint": "2023-12-23T12:00:00Z",
-            "endTimepoint": "2024-01-05T12:00:00"
-          }
-        ]
-      },
-      {
-        "type": "holiday",
-        "id": "WinFe",
-        "shortName": "WinFe",
-        "longName": "Winterferien",
-        "holidayType": "school",
-        "temporalExpressions": [
-          {
-            "type": "onetime",
-            "startTimepoint": "2024-02-05T12:00:00Z",
-            "endTimepoint": "2024-02-10T12:00:00"
+            "endTimepoint": "2024-01-05T12:00:00Z"
           }
         ]
       },
@@ -1051,7 +1052,7 @@
           {
             "type": "onetime",
             "startTimepoint": "2023-09-04T08:00:00Z",
-            "endTimepoint": "2023-09-04T08:45:00"
+            "endTimepoint": "2023-09-04T08:45:00Z"
           }
         ]
       },
@@ -1080,7 +1081,7 @@
           {
             "type": "onetime",
             "startTimepoint": "2023-09-04T08:00:00Z",
-            "endTimepoint": "2023-09-04T08:45:00"
+            "endTimepoint": "2023-09-04T08:45:00Z"
           }
         ]
       }
@@ -1094,12 +1095,12 @@
     },
     {
       "id": "MA",
-      "shortName": "DE",
+      "shortName": "MA",
       "longName": "Mathematik"
     },
     {
       "id": "MU",
-      "shortName": "DE",
+      "shortName": "MU",
       "longName": "Musik"
     },
     {
