@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.6.0
+#### Version 0.7.0
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -8,7 +8,7 @@ Diese Spezifikation ist lizenziert unter der [Apache License, Version 2.0](https
 
 ## Einführung
 
-OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.6/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
+OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.7/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
 
 OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendungen genutzt werden, als Quelle für die grafische Anzeige von Stundenplänen oder als Antwortformat für API-Anfragen (z.B. für RESTful Web-Services).
 
@@ -86,7 +86,7 @@ Hier ein Beispiel für die Kursteilnahme eines Lehrers:
 
 Gruppen (*Englisch: group*) sind organisatorische Einheiten für Teilnehmer. Sie repräsentieren beispielsweise Klassen, Jahrgänge, Betreuungsgruppen und können durch Gruppentypen kategorisiert werden.
 
-Hier ein Beispiel für zwei Klassen der ersten Jahrgangsstufe:
+Hier ein Beispiel für zwei Klassen der zehnten Jahrgangsstufe:
 
 ``` json
 "groups": [
@@ -236,21 +236,21 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
         "startTimepoint": "2023-09-04T08:45:00Z",
         "endTimepoint": "2023-09-04T09:05:00Z",
         "validFrom": "2023-09-04T00:00:00Z",
-        "validTo": "2023-09-15T00:00:00Z"
+        "validTo": "2023-09-16T00:00:00Z"
       },
       {
         "type": "weekly",
         "startTimepoint": "2023-09-06T08:45:00Z",
         "endTimepoint": "2023-09-06T09:05:00Z",
         "validFrom": "2023-09-04T00:00:00Z",
-        "validTo": "2023-09-15T00:00:00Z"
+        "validTo": "2023-09-16T00:00:00Z"
       },
       {
         "type": "weekly",
         "startTimepoint": "2023-09-08T08:45:00Z",
         "endTimepoint": "2023-09-08T09:05:00Z",
         "validFrom": "2023-09-04T00:00:00Z",
-        "validTo": "2023-09-15T00:00:00Z"
+        "validTo": "2023-09-16T00:00:00Z"
       }
     ]
   }
@@ -260,6 +260,7 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
 Aufsichten haben ein optionales Feld `classification`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
 + `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassisch verplante Aufsicht.
++ `additional`: Dieser Wert soll Aufsichten kennzeichnen, die kurzfristig (z.B. im Rahmen von größeren Schulveranstaltungen) hinzugefügt wurden und somit gesondert visualisiert werden.
 + `substitution`: Dieser Wert soll Aufsichten kennzeichnen, die durch die Vertretungsplanung entstanden sind. Sie ersetzen eine andere Aufsicht, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
 
 #### Aktivitäten
@@ -312,6 +313,7 @@ Hier ein Beispiel für eine Hortaufsicht:
 Aktivitäten haben ein optionales Feld `classification`, mit dem deren Bedeutung festgelegt werden kann. Folgende Werte sind möglich:
 
 + `scheduled`: Das ist der Standardwert, wenn das Feld nicht definiert ist. Er kennzeichnet eine klassisch verplante Aktivität.
++ `additional`: Dieser Wert soll Aktivitäten kennzeichnen, die kurzfristig (z.B. im Rahmen von größeren Schulveranstaltungen) hinzugefügt wurden und somit gesondert visualisiert werden.
 + `substitution`: Dieser Wert soll Aktivitäten kennzeichnen, die durch die Vertretungsplanung entstanden sind. Sie ersetzen eine andere Aktivität, sei es geplant (also `scheduled`) oder ebenfalls vertreten (also `substitution`).
 
 #### Ereignisse
@@ -595,7 +597,7 @@ Hier ein Beispiel für einen zeitlichen Ausdruck, bestehend aus einem wöchentli
   {
     "type": "onetime",
     "startTimepoint": "2023-09-22T00:00:00Z",
-    "endTimepoint": "2023-09-22T00:00:00Z",
+    "endTimepoint": "2023-09-23T00:00:00Z",
     "operation": "exclude"
   }
 ]
@@ -667,7 +669,7 @@ Die folgenden Objekte besitzen jeweils ein Code-Attribut, das einen Verweis auf 
 + `courseType`-Objekt (Kurstyp)
 + `electronicAddressType`-Objekt (elektronischer Addresstyp)
 + `eventType`-Objekt (Ereignistyp)
-+ `exemptionType`-Objekt (Freistellungsformat)
++ `exemptionType`-Objekt (Freistellungstyp)
 + `gender`-Objekt (Geschlecht)
 + `groupType`-Objekt (Gruppentyp)
 + `personRole`-Objekt (Personenrolle)
@@ -677,7 +679,7 @@ Die folgenden Objekte besitzen jeweils ein Code-Attribut, das einen Verweis auf 
 
 In einigen Fällen wird eine Standard-Code-Liste spezifiziert. Alle Standard-Code-Listen sind via [CodeListHub](https://www.codelisthub.org/de/) verfügbar und abrufbar.
 
-Hier ein Beispiel für ein Gruppentyp mit einem standardisierten Code:
+Hier ein Beispiel für einen Gruppentyp mit einem standardisierten Code:
 
 ``` json
 "groupTypes": [
@@ -740,7 +742,7 @@ Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
 
 ### Versionierung
 
-Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.6`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.6` unterstützen, MÜSSEN mit allen `0.6.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.6.1` und `0.6.2` gemacht wird.
+Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.7`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.7` unterstützen, MÜSSEN mit allen `0.7.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.7.1` und `0.7.2` gemacht wird.
 
 Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
@@ -754,7 +756,7 @@ Das Schema sieht zwei Arten von Feldern vor: Fest definierte Felder, die einen d
 
 #### JSON Schema
 
-[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.6/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
+[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.7/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
 
 #### Datums- und Zeitangaben
 
@@ -762,9 +764,44 @@ Die Formatierung der Datums- und Zeitangaben in OpenT8 sind, wie von [JSON Schem
 
 Beispiele:
 
-+ **`date-time`** : Datum und Zeit zusammen, z.B. `2023-11-13T20:20:39` oder `2023-11-13T20:20:39+00:00`.
-+ **`time`** : Nur Uhrzeit, z.B. `20:20:39` oder `20:20:39+00:00`.
++ **`date-time`** : Datum und Zeit zusammen, z.B. `2023-11-13T20:20:39Z` oder `2023-11-13T20:20:39+00:00`.
++ **`time`** : Nur Uhrzeit, z.B. `20:20:39Z` oder `20:20:39+00:00`.
 + **`date`** : Nur Datum, z.B. `2023-11-13`.
+
+#### Zeitspannen
+
+Zeitspannen sind zeitliche Angaben, die durch einen Startzeitpunkt und einen Endzeitpunkt definiert werden.
+
+Beispiel:
+
+``` json
+"temporalExpressions": [
+  {
+    "type": "onetime",
+    "startTimepoint": "2024-01-05T08:00:00Z",
+    "endTimepoint": "2024-01-05T08:45:00Z"
+  }
+]
+```
+
+Eine häufig wiederkehrende Frage in diesem Zusammenhang ist, ob Start- und Endzeitpunkt **inklusiv** oder **exklusiv** zu interpretieren sind. OpenT8 macht hierzu keine verbindliche Vorgabe. Empfohlen wird jedoch folgende Konvention:
+
++ Der **Startzeitpunkt ist inklusiv**.
++ Der **Endzeitpunkt ist exklusiv**.
+
+Eine Zeitspanne umfasst damit den Startzeitpunkt selbst, nicht jedoch den angegebenen Endzeitpunkt. Diese Konvention ermöglicht insbesondere eine eindeutige und überschneidungsfreie Darstellung aufeinanderfolgender Zeitspannen.
+
+Ein vollständiger Kalendertag lässt sich beispielsweise wie folgt darstellen:
+
+``` json
+"temporalExpressions": [
+  {
+    "type": "onetime",
+    "startTimepoint": "2024-01-05T00:00:00Z",
+    "endTimepoint": "2024-01-06T00:00:00Z"
+  }
+]
+```
 
 #### Kalenderwochen
 
@@ -867,7 +904,7 @@ Dies ist das Wurzelobjekt eines OpenT8-Dokuments und enthält folgende Felder:
 
 **`campuses`** 
 
-:   Eine Liste von Campus. Es MUSS ein JSON-Array mit `campus`-Objekten sein. 
+:   Eine Liste von Campussen. Es MUSS ein JSON-Array mit `campus`-Objekten sein. 
 
 **`courses`** 
 
@@ -935,7 +972,7 @@ Dies ist das Wurzelobjekt eines OpenT8-Dokuments und enthält folgende Felder:
 
 **`weeksPatterns`**
 
-:   Eine Liste von Kalenderwochenmuster. Es MUSS ein JSON-Array mit `weeksPattern`-Objekten sein. 
+:   Eine Liste von Kalenderwochenmustern. Es MUSS ein JSON-Array mit `weeksPattern`-Objekten sein. 
 
 **`schedule`** 
 
@@ -957,7 +994,7 @@ Das `absence`-Objekt definiert eine Abwesenheit:
 
 **`absenceType.refId`** 
 
-:   Typ des Abwesenheit. Dies MUSS ein Verweis auf die `id` eines `absenceType`-Objekts sein. 
+:   Typ der Abwesenheit. Dies MUSS ein Verweis auf die `id` eines `absenceType`-Objekts sein. 
 
 **`appliesTo`** 
 
@@ -973,7 +1010,7 @@ Das `absence`-Objekt definiert eine Abwesenheit:
         `group`  | Eine Gruppe ist abwesend.
         `room`   | Der Raum steht nicht zur Verfügung.
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts, eines vorhandenen `group`-Objekts oder eines vorhandenen `room`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts, eines vorhandenen `group`-Objekts oder eines vorhandenen `room`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `refType`. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1031,7 +1068,7 @@ Das `activity`-Objekt definiert eine Aktivität:
 
 **`color`** 
 
-:   Ein Farbwert (Hex-Kodierung) für die Mitteilung.
+:   Ein Farbwert (Hex-Kodierung) für die Aktivität.
 
 **`classification`** 
 
@@ -1042,6 +1079,7 @@ Das `activity`-Objekt definiert eine Aktivität:
     Wert           | Beschreibung
     -------------- | ------------
     `scheduled`    | Wie geplant (das ist der Standardwert)
+    `additional`   | Zusatzaktivität
     `substitution` | Vertretungsaktivität
 
 **`activityType.refId`** 
@@ -1070,6 +1108,10 @@ Das `activity`-Objekt definiert eine Aktivität:
 :   Eine Liste von genutzten Räumen. Dies MUSS ein JSON-Array mit Objekten sein, welche folgende Felder besitzen: 
     
     + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `room`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+
+**`temporalExpressions`** 
+
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1153,11 +1195,11 @@ Das `announcement`-Objekt repräsentiert eine freie Mitteilung im Stundenplan:
         `person` | Eine Person
         `group`  | Eine Gruppe
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts, eines vorhandenen `group`-Objekts oder eines vorhandenen `room`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts oder eines vorhandenen `group`-Objekts, jeweils in Abhängigkeit vom Wert in Feld `refType`. **Dieses Feld ist ERFORDERLICH**.
 
 **`temporalExpressions`** 
 
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1338,7 +1380,7 @@ Das `courseType`-Objekt repräsentiert die Art bzw. Differenzierung eines Kurses
 
 **`shortName`** 
 
-:   Kürzel des Gruppentyps. **Dieses Feld ist ERFORDERLICH**.
+:   Kürzel des Kurstyps. **Dieses Feld ist ERFORDERLICH**.
 
 **`longName`** 
 
@@ -1352,7 +1394,7 @@ Dieses Objekt KANN erweitert werden.
 
 #### electronicAddressType-Objekt
 
-Das `electronicAddressType`-Objekt repräsentiert eine Adresstyp, mit dem elektronische Adressen (z.B. E-Mail, Telefon) kategorisiert werden können:
+Das `electronicAddressType`-Objekt repräsentiert einen Adresstyp, mit dem elektronische Adressen (z.B. E-Mail, Telefon) kategorisiert werden können:
 
 **`id`** 
 
@@ -1435,7 +1477,7 @@ Das `event`-Objekt repräsentiert einen Termin, der sich nicht durch eine Verans
 
 **`temporalExpressions`** 
 
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1495,13 +1537,13 @@ Das `exemption`-Objekt definiert eine Freistellung:
         -------- | ------------
         `person` | Eine Person ist freigestellt.
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `person`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `refType`. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
 #### exemptionType-Objekt
 
-Das `exemptionType`-Objekt repräsentiert einen Freistellungstyp, mit dem Ereignisse kategorisiert werden können:
+Das `exemptionType`-Objekt repräsentiert einen Freistellungstyp, mit dem Freistellungen kategorisiert werden können:
 
 **`id`** 
 
@@ -1601,7 +1643,7 @@ Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
         `lesson`      | Fehlstelle für eine Unterrichtseinheit
         `supervision` | Fehlstelle für eine Aufsicht
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objekts, eines vorhandenen `lesson`-Objekts oder eines vorhandenen `supervision`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objekts, eines vorhandenen `lesson`-Objekts oder eines vorhandenen `supervision`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `refType`. **Dieses Feld ist ERFORDERLICH**.
 
 **`reasons`** 
 
@@ -1613,7 +1655,7 @@ Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
 
 **`temporalExpressions`** 
 
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1684,9 +1726,9 @@ Das `group`-Objekt repräsentiert eine Gruppe (z.B. Klasse, Jahrgang, etc.), der
     + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
     + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
 
-**`timeFrame`** 
+**`timeFrame.refId`** 
 
-:   Der Zeitrahmen des Teilnehmers. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
+:   Der Zeitrahmen des Teilnehmers. Dies MUSS ein Verweis auf die `id` eines `timeFrame`-Objekts sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
 
 **`validFrom`** 
 
@@ -1718,7 +1760,7 @@ Das `groupType`-Objekt repräsentiert einen Gruppentyp, mit dem Gruppen kategori
     
     CanonicalURI                              | URL
     ----------------------------------------- | ---
-    `urn:opene8:school:codelist:de:groupType` | [Link](https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupTyp)
+    `urn:opene8:school:codelist:de:groupType` | [Link](https://api.codelisthub.org/v1/documents/urn%3Aopene8%3Aschool%3Acodelist%3Ade%3AgroupType)
 
 **`shortName`** 
 
@@ -1736,7 +1778,7 @@ Dieses Objekt KANN erweitert werden.
 
 #### holiday-Objekt
 
-Das `holiday`-Objekt repräsentiert ein schulfreie Zeit (Feiertage oder Schulferien):
+Das `holiday`-Objekt repräsentiert eine schulfreie Zeit (Feiertage oder Schulferien):
 
 **`type`** 
 
@@ -1776,7 +1818,7 @@ Das `holiday`-Objekt repräsentiert ein schulfreie Zeit (Feiertage oder Schulfer
 
 **`temporalExpressions`**
 
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -1833,7 +1875,6 @@ Beispiel:
   "title": "Stundenplan 2023/2024",
   "description": "Stundenplan für das Schuljahr 2023/2024",
   "summary": "Der aktuelle Stundenplan inklusive Aufsichten und Vertretungen.",
-  "version": "201",
   "publishedAt": "2023-09-01T12:00:00Z",
   "publishedBy": "Meine-Schule, Berlin",
   "language": "de",
@@ -1905,7 +1946,7 @@ Das `lesson`-Objekt repräsentiert eine Veranstaltung bzw. Unterrichtseinheit, d
 
 **`temporalExpressions`** 
 
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2023,7 +2064,7 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 **`electronicAddresses.*.addressType.refId`** 
 
-:   Art der elektronischen Adresse. Dies MUSS ein Verweis auf die `id` eines `electronicAddressTypes`-Objekts sein. 
+:   Art der elektronischen Adresse. Dies MUSS ein Verweis auf die `id` eines `electronicAddressType`-Objekts sein. 
 
 **`electronicAddresses.*.identifier`** 
 
@@ -2033,9 +2074,9 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 :   Ein Farbwert (Hex-Kodierung) für die Person.
 
-**`timeFrame`** 
+**`timeFrame.refId`** 
 
-:   Der zugeordnete Zeitrahmen der Person. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
+:   Der zugeordnete Zeitrahmen der Person. Dies MUSS ein Verweis auf die `id` eines `timeFrame`-Objekts sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
 
 **`externalIds`** 
 
@@ -2125,9 +2166,9 @@ Das `schedule`-Objekt enthält die eigentliche zeitliche Verplanung:
 
 :   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit des Stundenplans. **Dieses Feld ist ERFORDERLICH**.
 
-**`defaultTimeFrame`** 
+**`defaultTimeFrame.refId`** 
 
-:   Verweis auf den Standardzeitrahmen. Dies MUSS ein `reference`-Objekt sein.
+:   Verweis auf den Standardzeitrahmen. Dies MUSS ein Verweis auf die `id` eines `timeFrame`-Objekts sein.  
 
 **`scheduleElements`** 
 
@@ -2205,7 +2246,7 @@ Das `substitution`-Objekt definiert eine Vertretung:
         `lesson`      | Vertretung durch eine Unterrichtseinheit
         `supervision` | Vertretung durch eine Aufsicht
         
-    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objekts, eines vorhandenen `lesson`-Objekts oder eines vorhandenen `supervision`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `type`. **Dieses Feld ist ERFORDERLICH**.
+    + **`refId`** : Dies MUSS ein Verweis auf das Feld `id` eines vorhandenen `activity`-Objekts, eines vorhandenen `lesson`-Objekts oder eines vorhandenen `supervision`-Objekts sein, jeweils in Abhängigkeit vom Wert in Feld `refType`. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2215,7 +2256,7 @@ Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehreren A
 
 **`type`** 
 
-:   MUSS den Wert `supervision` haben. **Dieses Feld ist ERFORDERLICH**.
+:   MUSS den Wert `supervision` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -2238,11 +2279,12 @@ Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehreren A
     Wert           | Beschreibung
     -------------- | ------------
     `scheduled`    | Wie geplant (das ist der Standardwert)
+    `additional`   | Zusatzaufsicht
     `substitution` | Vertretungsaufsicht
 
 **`supervisionType.refId`** 
 
-:   Typ der Aufsicht. Dies MUSS ein Verweis auf die `id` eines `supervisionType`-Objekts sein. 
+:   Typ der Aufsicht. Dies  MUSS ein Verweis auf die `id` eines `supervisionType`-Objekts sein. 
 
 **`attendees`** 
 
@@ -2259,13 +2301,13 @@ Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehreren A
 
 **`temporalExpressions`** 
 
-:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. 
+:   Eine Liste von zeitlichen Ausdrücken. Es MUSS ein JSON-Array mit `oneTimeExpression`-Objekten und/oder `weeklyExpression`-Objekten sein. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
 #### supervisionArea-Objekt
 
-Das `supervisionArea`-Objekt repräsentiert ein Aufsichtsbereich, für den Aufsichten verplant werden können:
+Das `supervisionArea`-Objekt repräsentiert einen Aufsichtsbereich, für den Aufsichten verplant werden können:
 
 **`id`** 
 
@@ -2291,9 +2333,9 @@ Das `supervisionArea`-Objekt repräsentiert ein Aufsichtsbereich, für den Aufsi
 
 :   Der Campus, auf dem sich der Aufsichtsbereich befindet. Dies MUSS ein Verweis auf die `id` eines `campus`-Objekts sein. 
 
-**`timeFrame`** 
+**`timeFrame.refId`** 
 
-:   Der Zeitrahmen des Aufsichtsbereichs. Dies MUSS ein `reference`-Objekt, das auf ein `timeFrame`-Objekt verweist, sein.
+:   Der Zeitrahmen des Aufsichtsbereichs. Dies MUSS ein Verweis auf die `id` eines `timeFrame`-Objekts sein.  
 
 **`externalIds`** 
 
@@ -2313,7 +2355,7 @@ Das `supervisionType`-Objekt repräsentiert einen Aufsichtstyp, mit dem Aufsicht
 
 :   Ein standardisierter Schlüssel. Dies MUSS ein `externalCode`-Objekt sein, das auf einen Code aus einer externen Code-Liste verweist. 
 
-    Standardmäßig wird keine folgende Code-Liste empfohlen.
+    Standardmäßig wird keine Code-Liste empfohlen.
 
 **`shortName`** 
 
@@ -2349,15 +2391,15 @@ Das `teachingFormat`-Objekt repräsentiert ein Unterrichtsformat, mit dem Unterr
 
 **`shortName`** 
 
-:   Kürzel des Unterrichtsformat. **Dieses Feld ist ERFORDERLICH**.
+:   Kürzel des Unterrichtsformats. **Dieses Feld ist ERFORDERLICH**.
 
 **`longName`** 
 
-:   Ausführlicher Name des Unterrichtsformat. 
+:   Ausführlicher Name des Unterrichtsformats. 
 
 **`description`** 
 
-:   Eine kurze Beschreibung des Unterrichtsformat.
+:   Eine kurze Beschreibung des Unterrichtsformats.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2429,11 +2471,11 @@ Das `timeSlot`-Objekt definiert ein benanntes Zeitfenster für einen Zeitrahmen 
 
 **`shortLabel`** 
 
-:   Kürzel des Zeitfenster. **Dieses Feld ist ERFORDERLICH**.
+:   Kürzel des Zeitfensters. **Dieses Feld ist ERFORDERLICH**.
 
 **`longLabel`** 
 
-:   Ausführlicher Name des Zeitfenster. 
+:   Ausführlicher Name des Zeitfensters. 
 
 **`color`** 
 
@@ -2441,11 +2483,11 @@ Das `timeSlot`-Objekt definiert ein benanntes Zeitfenster für einen Zeitrahmen 
 
 **`startTime`** 
 
-:   Die Startuhrzeit (RFC 3339) des Zeitfenster. **Dieses Feld ist ERFORDERLICH**.
+:   Die Startuhrzeit (RFC 3339) des Zeitfensters. **Dieses Feld ist ERFORDERLICH**.
 
 **`endTime`** 
 
-:   Die Enduhrzeit (RFC 3339) des Zeitfenster. **Dieses Feld ist ERFORDERLICH**.
+:   Die Enduhrzeit (RFC 3339) des Zeitfensters. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
@@ -2519,7 +2561,7 @@ Und hier das gleiche Beispiel mit einem Verweis auf ein `weeksPattern`-Objekt:
 
 #### weeksPattern-Objekt
 
-Das `weeksPattern`-Objekt repräsentiert ein Kalenderwochenmuster, mit dem `weeklyExpression`-Objekt ausgezeichnet werden können:
+Das `weeksPattern`-Objekt repräsentiert ein Kalenderwochenmuster, mit dem `weeklyExpression`-Objekte verknüpft werden können:
 
 **`id`** 
 
@@ -2576,8 +2618,8 @@ Beispiel:
 "buildings": [
   {
     "id": "100",
-    "code": "HG",
-    "name": "Hauptgebäude",
+    "shortName": "HG",
+    "longName": "Hauptgebäude",
     "x-postalAddress": "Berliner Weg 42, 30100 Braunschweig",
     "x-website": "https://beispiel.de"
   }

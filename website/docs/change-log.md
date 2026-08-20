@@ -1,5 +1,21 @@
 # Änderungslog
 
+## 0.7.0 <small>_ 20. August 2026</small>
+
+**Hinzugefügt**:
+
++ Die Eigenschaften `activity.classification` und `supervision.classification` sind jeweils um den Wert `additional` erweitert worden.
+
+**Geändert**:
+
++ Breaking Change: Die Eigenschaft `temporalExpressions` ist jetzt überall durchgehend erforderlich.
+
+    + *Begründung*: Ein Zeitelement ohne Zeitangaben macht keinen Sinn.
+
+**Korrigiert**:
+
++ Es wurden einige Fehler in der Dokumentation und in der Beispieldatei korrigiert.
+
 ## 0.6.0 <small>_ 13. Mai 2026</small>
 
 **Hinzugefügt**:
