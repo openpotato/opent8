@@ -51,3 +51,10 @@ body, input {
 pre, code, kbd {
   font-family: 'Roboto Mono', SFMono-Regular, Consolas, Menlo, monospace;
 }
+/* Logos */
+[data-md-color-scheme="default"] .md-logo img {
+  content: url("../logos/logo-light.svg");
+}
+[data-md-color-scheme="slate"] .md-logo img {
+  content: url("../logos/logo-dark.svg");
+}

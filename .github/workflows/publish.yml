@@ -3,25 +3,31 @@ on:
   push:
     branches: 
       - main
-  workflow_dispatch:      
-env:
-  NO_MKDOCS_2_WARNING: 1
+  workflow_dispatch:  
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 jobs:
   deploy:
-    name: Build and publish MkDocs website
+    name: Build and publish Zensical website
     if: github.event.repository.fork == false    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo content
-        uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/configure-pages@v6
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
         with:
           python-version: 3.x
-      - name: Install dependencies
-        run: pip install mkdocs-material mkdocs-minify-plugin
-      - name: Build and Deploy to GitHub Pages
-        run: mkdocs gh-deploy --force
+      - run: pip install zensical
         working-directory: website
+      - run: zensical build --clean
+        working-directory: website
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: website/site
+      - uses: actions/deploy-pages@v5
+        id: deployment

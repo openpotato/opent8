@@ -1,0 +1,121 @@
+[project]
+site_name = "OpenT8"
+site_description = "Dokumentation zu OpenT8"
+site_author = "STÜBER SYSTEMS GmbH"
+site_url = 'https://openpotato.github.io/opent8/'
+
+copyright = '&copy; 2026 STÜBER SYSTEMS GmbH : <a href="https://legal.stueber.de/imprint.php">Impressum</a> : <a href="https://legal.stueber.de/privacy.php">Datenschutz</a>'
+
+repo_name = "Auf GitHub"
+repo_url = 'https://github.com/openpotato/opent8'
+
+nav = [
+  { "Einführung" = "index.md" },
+  { "Spezifikation" = "specification.md" },
+  { "Bibliotheken" = "libraries.md" },
+  { "Community" = "community.md" },
+  { "Änderungslog" = "change-log.md" }
+]
+
+extra_css = ["assets/css/custom.css"]
+# extra_javascript = ["javascripts/extra.js"]
+
+[project.plugins.tags]
+
+[project.plugins.minify]
+minify_html = false
+
+[project.theme]
+font = false
+# variant = "classic"
+# custom_dir = "overrides"
+language = "de"
+features = [
+  "announce.dismiss",
+  # "content.action.edit",
+  # "content.action.view",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.code.select",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  # "header.autohide",
+  # "navigation.expand",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  # "navigation.instant.progress",
+  "navigation.path",
+  # "navigation.prune",
+  "navigation.sections",
+  # "navigation.tabs",
+  # "navigation.tabs.sticky",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  # "toc.follow",
+  # "toc.integrate",
+]
+
+favicon = "assets/logos/favicon.ico"
+logo = "assets/logos/logo-light.svg"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "In den Hellmodus wechseln"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+toggle.icon = "lucide/sun"
+toggle.name = "In den Dunkelmodus wechseln"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+toggle.icon = "lucide/moon"
+toggle.name = "Systemeinstellung verwenden"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/bluesky"
+link = "https://bsky.app/profile/openpotato.org"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/mastodon"
+link = "https://fosstodon.org/@openpotato"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/openpotato"
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+toc.permalink = true
+pymdownx.arithmatex.generic = true
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+# pymdownx.snippets.base_path = "includes"
+pymdownx.superfences.custom_fences = []
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}
