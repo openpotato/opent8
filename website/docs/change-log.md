@@ -1,6 +1,6 @@
 # Änderungslog
 
-## 0.8.0
+## 0.8.0 <small>_ 15. Oktober 2026</small>
 
 **Hinzugefügt**:
 
