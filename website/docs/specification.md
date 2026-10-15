@@ -1,6 +1,6 @@
 # OpenT8-Spezifikation
 
-#### Version 0.7.0
+#### Version 0.8.0
 
 Die Schlüsselwörter "MUSS/MÜSSEN" (*Englisch: "MUST"*), "ERFORDERLICH" (*Englisch: "REQUIRED"*), "EMPFOHLEN" (*Englisch: "RECOMMENDED"*), "SOLLTE" (*Englisch: "SHOULD"*), "SOLLTE NICHT" (*Englisch: "SHOULD NOT"*) und "KANN" *(Englisch: "MAY"*) in diesem Dokument sind so zu interpretieren, wie sie in ihrer englischen Übersetzung in [RFC2119 und RFC8174](https://tools.ietf.org/html/bcp14) spezifiziert sind, und nur dann, wenn sie, wie hier, in Großbuchstaben geschrieben sind.
 
@@ -8,7 +8,7 @@ Diese Spezifikation ist lizenziert unter der [Apache License, Version 2.0](https
 
 ## Einführung
 
-OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.7/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
+OpenT8 definiert ein Standard-Datenformat zur Repräsentation von Stundenplandaten, unabhängig von ihrer Herkunft. Basierend auf dem [JSON-Standard](https://datatracker.ietf.org/doc/html/rfc8259) kann dieses Format mit nahezu jeder Programmiersprache leicht erzeugt und gelesen werden. Mit Hilfe des [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.8/schema.json) können Dokumente im OpenT8-Format auf ihre syntaktische Korrektheit hin validiert werden.
 
 OpenT8 kann zum Austausch von Stundenplandaten zwischen Diensten oder Anwendungen genutzt werden, als Quelle für die grafische Anzeige von Stundenplänen oder als Antwortformat für API-Anfragen (z.B. für RESTful Web-Services).
 
@@ -186,13 +186,13 @@ Hier ein Beispiel für die Veranstaltungen eines Musikkurses. Dieser findet jede
     "temporalExpressions": [
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-06T11:00:00Z",
-        "endTimepoint": "2023-09-06T11:45:00Z"
+        "startTimepoint": "2023-09-06T11:00:00+02:00",
+        "endTimepoint": "2023-09-06T11:45:00+02:00"
       },
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-07T12:20:00Z",
-        "endTimepoint": "2023-09-07T13:05:00Z"
+        "startTimepoint": "2023-09-07T12:20:00+02:00",
+        "endTimepoint": "2023-09-07T13:05:00+02:00"
       }
     ]
   }
@@ -233,24 +233,24 @@ Hier ein Beispiel für eine Pausenhofaufsicht (montags, mittwochs und freitags, 
     "temporalExpressions": [
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-04T08:45:00Z",
-        "endTimepoint": "2023-09-04T09:05:00Z",
-        "validFrom": "2023-09-04T00:00:00Z",
-        "validTo": "2023-09-16T00:00:00Z"
+        "startTimepoint": "2023-09-04T08:45:00+02:00",
+        "endTimepoint": "2023-09-04T09:05:00+02:00",
+        "validFrom": "2023-09-04",
+        "validTo": "2023-09-16"
       },
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-06T08:45:00Z",
-        "endTimepoint": "2023-09-06T09:05:00Z",
-        "validFrom": "2023-09-04T00:00:00Z",
-        "validTo": "2023-09-16T00:00:00Z"
+        "startTimepoint": "2023-09-06T08:45:00+02:00",
+        "endTimepoint": "2023-09-06T09:05:00+02:00",
+        "validFrom": "2023-09-04",
+        "validTo": "2023-09-16"
       },
       {
         "type": "weekly",
-        "startTimepoint": "2023-09-08T08:45:00Z",
-        "endTimepoint": "2023-09-08T09:05:00Z",
-        "validFrom": "2023-09-04T00:00:00Z",
-        "validTo": "2023-09-16T00:00:00Z"
+        "startTimepoint": "2023-09-08T08:45:00+02:00",
+        "endTimepoint": "2023-09-08T09:05:00+02:00",
+        "validFrom": "2023-09-04",
+        "validTo": "2023-09-16"
       }
     ]
   }
@@ -295,8 +295,8 @@ Hier ein Beispiel für eine Hortaufsicht:
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-09-01T16:00:00Z",
-        "endTimepoint": "2023-09-01T18:00:00Z"
+        "startTimepoint": "2023-09-01T16:00:00+02:00",
+        "endTimepoint": "2023-09-01T18:00:00+02:00"
       }
     ]
   }
@@ -354,8 +354,8 @@ Hier ein Beispiel für ein Meeting:
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-09-01T08:00:00Z",
-        "endTimepoint": "2023-09-01T10:00:00Z"
+        "startTimepoint": "2023-09-01T08:00:00+02:00",
+        "endTimepoint": "2023-09-01T10:00:00+02:00"
       }
     ]
   }
@@ -386,8 +386,8 @@ Hier die Weihnachtsferien 2023/2024 als Beispiel:
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-12-23T00:00:00Z",
-        "endTimepoint": "2024-01-05T00:00:00Z"
+        "startTimepoint": "2023-12-23T00:00:00+01:00",
+        "endTimepoint": "2024-01-05T00:00:00+01:00"
       }
     ]
   }
@@ -412,8 +412,8 @@ Hier ein Beispiel für einen Hinweis zum Feueralarm:
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-12-23T08:00:00Z",
-        "endTimepoint": "2024-01-05T08:25:00Z"
+        "startTimepoint": "2023-12-22T08:00:00+01:00",
+        "endTimepoint": "2023-12-22T08:25:00+01:00"
       }
     ]
   }
@@ -459,8 +459,8 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-09-04T08:00:00Z",
-        "endTimepoint": "2023-09-04T08:45:00Z"
+        "startTimepoint": "2023-09-04T08:00:00+02:00",
+        "endTimepoint": "2023-09-04T08:45:00+02:00"
       }
     ]
   },
@@ -488,8 +488,8 @@ Hier ein Beispiel für einen Lehrerausfall. Der Unterricht wird durch einen Erzi
     "temporalExpressions": [
       {
         "type": "onetime",
-        "startTimepoint": "2023-09-04T08:00:00Z",
-        "endTimepoint": "2023-09-04T08:45:00Z"
+        "startTimepoint": "2023-09-04T08:00:00+02:00",
+        "endTimepoint": "2023-09-04T08:45:00+02:00"
       }
     ]
   }
@@ -539,15 +539,17 @@ Hier ein Beispiel für einen einmaligen Termin.
 "temporalExpressions": [
   {
     "type": "onetime",
-    "startTimepoint": "2023-09-04T08:00:00Z",
-    "endTimepoint": "2023-09-04T08:45:00Z"
+    "startTimepoint": "2023-09-04T08:00:00+02:00",
+    "endTimepoint": "2023-09-04T08:45:00+02:00"
   }
 ]
 ```
 
 #### Wöchentlich
 
-Wöchentlich (*Englisch: weekly*) Ausdrücke repräsentieren sich wöchentlich wiederholende Termine, beginnend mit einem konkreten Termin, definiert durch einen Startzeitpunkt und einen Endzeitpunkt. Standardmäßig findet dieser Termin in jeder Woche innerhalb des Gültigkeitszeitraums des Stundenplans statt. Es können jedoch optional einzelne Wochen deaktiviert werden, so dass ein Wochenmuster (*Englisch: weeks pattern*) entsteht (z.B. 14-tägig, jede dritte Woche, etc.).
+Wöchentliche (*Englisch: weekly*) Ausdrücke repräsentieren sich wöchentlich wiederholende Termine. Sie werden durch eine Referenzveranstaltung mit einem absoluten Start- und Endzeitpunkt definiert. Aus dieser werden der lokale Wochentag und die lokalen Uhrzeiten in der Zeitzone des Stundenplans abgeleitet. Die Referenzveranstaltung kann außerhalb des Gültigkeitszeitraums liegen.
+
+Standardmäßig findet die Wiederholung in jeder Woche innerhalb des Gültigkeitszeitraums statt. Über die optionale Eigenschaft validWeeks können einzelne ISO-Kalenderwochen ausgewählt werden, beispielsweise für einen 14-tägigen Wechsel oder andere Wochenmuster.
 
 Hier ein Beispiel für einen wöchentlichen Termin, der jedoch nur in bestimmten Kalenderwochen stattfindet:
 
@@ -555,8 +557,8 @@ Hier ein Beispiel für einen wöchentlichen Termin, der jedoch nur in bestimmten
 "temporalExpressions": [
   {
     "type": "weekly",
-    "startTimepoint": "2023-09-08T11:00:00Z",
-    "endTimepoint": "2023-09-08T11:45:00Z",
+    "startTimepoint": "2023-09-08T11:00:00+02:00",
+    "endTimepoint": "2023-09-08T11:45:00+02:00",
     "validWeeks": [
       "2023:36,38,40,42,44,46,48,50",
       "2024:1-4"
@@ -571,8 +573,8 @@ Wochenmuster können auch separat als `weeksPattern`-Entitäten gespeichert werd
 "temporalExpressions": [
   {
     "type": "weekly",
-    "startTimepoint": "2023-09-08T11:00:00Z",
-    "endTimepoint": "2023-09-08T11:45:00Z",
+    "startTimepoint": "2023-09-08T11:00:00+02:00",
+    "endTimepoint": "2023-09-08T11:45:00+02:00",
     "validWeeks": {
       "refId": "A-Woche"
     }
@@ -582,7 +584,7 @@ Wochenmuster können auch separat als `weeksPattern`-Entitäten gespeichert werd
 
 #### Kombination
 
-Zeitliche Ausdrücke können miteinander kombiniert und sowohl positiv (findet statt) als auch negativ (findet nicht statt) definiert werden. Die Kombination aus positiven und negativen zeitlichen Ausdrücken erlaubt die Repräsentation von zeitlichen Ausnahmen (z.B. Immer montags von 8:00 bis 8:45, nur nicht im Juli und im August).
+Zeitliche Ausdrücke können miteinander kombiniert und sowohl positiv (findet statt) als auch negativ (findet nicht statt) definiert werden. Die Kombination aus positiven und negativen zeitlichen Ausdrücken erlaubt die Repräsentation von zeitlichen Ausnahmen (z.B. Immer freitags von 11:00 bis 11:45, nur nicht im Juli und im August).
 
 Hier ein Beispiel für einen zeitlichen Ausdruck, bestehend aus einem wöchentlichen Termin, der jedoch an einem bestimmten Tag nicht stattfindet:
 
@@ -590,14 +592,14 @@ Hier ein Beispiel für einen zeitlichen Ausdruck, bestehend aus einem wöchentli
 "temporalExpressions": [
   {
     "type": "weekly",
-    "startTimepoint": "2023-09-08T11:00:00Z",
-    "endTimepoint": "2023-09-08T11:45:00Z",
+    "startTimepoint": "2023-09-08T11:00:00+02:00",
+    "endTimepoint": "2023-09-08T11:45:00+02:00",
     "operation": "include"
   },
   {
     "type": "onetime",
-    "startTimepoint": "2023-09-22T00:00:00Z",
-    "endTimepoint": "2023-09-23T00:00:00Z",
+    "startTimepoint": "2023-09-22T00:00:00+02:00",
+    "endTimepoint": "2023-09-23T00:00:00+02:00",
     "operation": "exclude"
   }
 ]
@@ -626,32 +628,32 @@ Hier ein Beispiel für einen Zeitrahmen in einer Grundschule (Jahrgangsstufe 1):
       {
         "shortLabel": "1",
         "longLabel": "1. Stunde",
-        "startTime": "08:00:00Z",
-        "endTime": "08:45:00Z"
+        "startTime": "08:00:00",
+        "endTime": "08:45:00"
       },
       {
         "shortLabel": "2",
         "longLabel": "2. Stunde",
-        "startTime": "09:05:00Z",
-        "endTime": "09:50:00Z"
+        "startTime": "09:05:00",
+        "endTime": "09:50:00"
       },
       {
         "shortLabel": "3",
         "longLabel": "3. Stunde",
-        "startTime": "10:10:00Z",
-        "endTime": "10:55:00Z"
+        "startTime": "10:10:00",
+        "endTime": "10:55:00"
       },
       {
         "shortLabel": "4",
         "longLabel": "4. Stunde",
-        "startTime": "11:00:00Z",
-        "endTime": "11:45:00Z"
+        "startTime": "11:00:00",
+        "endTime": "11:45:00"
       },
       {
         "shortLabel": "5",
         "longLabel": "5. Stunde",
-        "startTime": "12:20:00Z",
-        "endTime": "13:05:00Z"
+        "startTime": "12:20:00",
+        "endTime": "13:05:00"
       }
     ]
   }
@@ -742,7 +744,7 @@ Hier ein Beispiel für ein Fach mit zwei externen Identifikatoren:
 
 ### Versionierung
 
-Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.7`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.7` unterstützen, MÜSSEN mit allen `0.7.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.7.1` und `0.7.2` gemacht wird.
+Die OpenT8-Spezifikation wird nach dem Schema `major.minor.patch` versioniert. Der Major-Minor-Teil der Versionsnummer (z.B. `0.8`) MUSS den Funktionssatz der Spezifikation bezeichnen. Die Patch-Versionen betreffen Fehler in diesem Dokument oder stellen Klarstellungen zu diesem Dokument bereit, nicht zum Funktionsumfang. Werkzeuge, die OpenT8 in der Version `0.8` unterstützen, MÜSSEN mit allen `0.8.*` Versionen von OpenT8 kompatibel sein. Die Patch-Version SOLLTE von den Werkzeugen NICHT berücksichtigt werden, so dass zum Beispiel kein Unterschied zwischen `0.8.1` und `0.8.2` gemacht wird.
 
 Ein OpenT8-Dokument enthält stets ein obligatorisches Feld `opent8`, das die verwendete Version der OpenT8-Spezifikation angibt.
 
@@ -756,77 +758,164 @@ Das Schema sieht zwei Arten von Feldern vor: Fest definierte Felder, die einen d
 
 #### JSON Schema
 
-[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.7/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
+[JSON Schema](https://json-schema.org/) ist eine Spezifikation zur Definition von JSON-Datenstrukturen. Ein JSON-Schema wird selbst deklarativ durch [JSON](https://www.json.org/) ausgedrückt. Das [OpenT8 Document Schema](https://github.com/openpotato/opent8/tree/main/schemas/v0.8/schema.json) ist ein JSON-Schema für OpenT8-Dokumente.
 
 #### Datums- und Zeitangaben
 
-Die Formatierung der Datums- und Zeitangaben in OpenT8 sind, wie von [JSON Schema](https://json-schema.org/understanding-json-schema/reference/string.html#dates-and-times) vorgegeben, durch [RFC 3339, Abschnitt 5.6](https://tools.ietf.org/html/rfc3339#section-5.6) spezifiziert.
+Die Formatierung von Datums- und Zeitangaben in OpenT8 orientiert sich an [JSON Schema](https://json-schema.org/understanding-json-schema/reference/string.html#dates-and-times) und [RFC 3339, Abschnitt 5.6](https://www.rfc-editor.org/rfc/rfc3339#section-5.6).
 
-Beispiele:
+OpenT8 unterscheidet zwischen absoluten Zeitpunkten, lokalen Uhrzeiten und Kalenderdaten:
 
-+ **`date-time`** : Datum und Zeit zusammen, z.B. `2023-11-13T20:20:39Z` oder `2023-11-13T20:20:39+00:00`.
-+ **`time`** : Nur Uhrzeit, z.B. `20:20:39Z` oder `20:20:39+00:00`.
-+ **`date`** : Nur Datum, z.B. `2023-11-13`.
++ **`date-time`**: Datum und Uhrzeit mit Zeitzonenoffset, z. B. `2026-10-19T08:00:00Z` oder `2026-10-19T08:00:00+02:00`. Ein solcher Wert beschreibt einen eindeutigen absoluten Zeitpunkt.
++ **`localTime`**: Lokale Uhrzeit ohne Zeitzonenoffset, z. B. `08:00:00` oder `14:45:30.5`. Dieses OpenT8-spezifische Format wird für die Zeitfenster eines Stundenrasters verwendet.
++ **`date`**: Kalenderdatum ohne Uhrzeit und Zeitzonenoffset, z. B. `2026-10-19`.
+
+Die Zeitzone eines Stundenplans wird durch die verpflichtende Eigenschaft `schedule.timeZone` festgelegt. Verwendet werden Zeitzonenbezeichner aus der [IANA Time Zone Database](https://www.iana.org/time-zones).
+
+Beispiel:
+
+```json
+"timeZone": "Europe/Berlin"
+```
+
+Die angegebene Zeitzone ist maßgeblich für die Interpretation lokaler Uhrzeiten und Kalenderdaten sowie für die Berechnung wöchentlicher Wiederholungen. Dabei werden auch die jeweiligen Regeln für die Umstellung zwischen Sommer- und Winterzeit berücksichtigt.
+
+Ein Zeitzonenoffset wie `+02:00` ist dagegen keine vollständige Zeitzonenangabe, da er keine Informationen über zeitabhängige Zeitzonenregeln enthält.
 
 #### Zeitspannen
 
 Zeitspannen sind zeitliche Angaben, die durch einen Startzeitpunkt und einen Endzeitpunkt definiert werden.
 
+OpenT8 unterscheidet zwischen einmaligen und wöchentlich wiederkehrenden Zeitspannen.
+
+*Einmalige Zeitspannen*
+
+Einmalige Zeitspannen (`oneTimeExpression`) werden durch zwei absolute Zeitpunkte definiert. Die Eigenschaften `startTimepoint` und `endTimepoint` verwenden das Format `date-time`.
+
 Beispiel:
 
-``` json
+```json
 "temporalExpressions": [
   {
     "type": "onetime",
-    "startTimepoint": "2024-01-05T08:00:00Z",
-    "endTimepoint": "2024-01-05T08:45:00Z"
+    "startTimepoint": "2026-10-19T08:00:00+02:00",
+    "endTimepoint": "2026-10-19T08:45:00+02:00"
   }
 ]
 ```
 
-Eine häufig wiederkehrende Frage in diesem Zusammenhang ist, ob Start- und Endzeitpunkt **inklusiv** oder **exklusiv** zu interpretieren sind. OpenT8 macht hierzu keine verbindliche Vorgabe. Empfohlen wird jedoch folgende Konvention:
+Die angegebenen Zeitpunkte sind unabhängig von der Zeitzone des Stundenplans eindeutig. Anwendungen können sie bei Bedarf in die lokale Zeitzone umrechnen.
 
-+ Der **Startzeitpunkt ist inklusiv**.
-+ Der **Endzeitpunkt ist exklusiv**.
+*Wöchentlich wiederkehrende Zeitspannen*
 
-Eine Zeitspanne umfasst damit den Startzeitpunkt selbst, nicht jedoch den angegebenen Endzeitpunkt. Diese Konvention ermöglicht insbesondere eine eindeutige und überschneidungsfreie Darstellung aufeinanderfolgender Zeitspannen.
+Wöchentlich wiederkehrende Zeitspannen (`weeklyExpression`) werden durch eine Referenzzeitspanne definiert, die einen absoluten Startzeitpunkt und einen absoluten Endzeitpunkt besitzt.
 
-Ein vollständiger Kalendertag lässt sich beispielsweise wie folgt darstellen:
+Aus dieser Referenzzeitspanne werden der lokale Wochentag, die lokalen Uhrzeiten sowie gegebenenfalls ein Tagesversatz zwischen Beginn und Ende abgeleitet. Maßgeblich hierfür ist die durch `schedule.timeZone` festgelegte Zeitzone.
 
-``` json
+Beispiel:
+
+```json
 "temporalExpressions": [
   {
-    "type": "onetime",
-    "startTimepoint": "2024-01-05T00:00:00Z",
-    "endTimepoint": "2024-01-06T00:00:00Z"
+    "type": "weekly",
+    "startTimepoint": "2026-08-31T08:00:00+02:00",
+    "endTimepoint": "2026-08-31T08:45:00+02:00",
+    "validFrom": "2026-10-01",
+    "validTo": "2027-07-31"
   }
 ]
 ```
+
+Die Referenzzeitspanne findet hier am Montag, dem 31. August 2026, von 08:00 bis 08:45 Uhr statt. Daraus ergibt sich eine wöchentliche Wiederholung jeden Montag zur gleichen lokalen Uhrzeit.
+
+Die optionalen Eigenschaften `validFrom` und `validTo` legen den Gültigkeitszeitraum der Wiederholung fest. Sie können entweder ein Kalenderdatum (`date`) oder einen absoluten Zeitpunkt (`date-time`) enthalten.
+
+Die Referenzveranstaltung selbst darf außerhalb dieses Gültigkeitszeitraums liegen. Im Beispiel beginnt die Gültigkeit am 1. Oktober 2026. Das erste gültige Vorkommen findet deshalb am Montag, dem 5. Oktober 2026, statt.
+
+Fehlen `validFrom` oder `validTo`, gelten die entsprechenden Gültigkeitsgrenzen des übergeordneten `schedule`-Objekts.
+
+Der tatsächlich gültige Zeitraum ergibt sich aus der Schnittmenge der Gültigkeitszeiträume des Stundenplans und des wöchentlichen Ausdrucks. Ob ein erzeugtes Vorkommen gültig ist, bestimmt sich anhand seines Startzeitpunkts.
+
+Mit der optionalen Eigenschaft `validWeeks` kann die Wiederholung zusätzlich auf bestimmte Kalenderwochen eingeschränkt werden.
+
+Die Wiederholungen werden anhand lokaler Kalendertage und Uhrzeiten berechnet. Dadurch bleiben beispielsweise Unterrichtsstunden auch nach einer Umstellung zwischen Sommer- und Winterzeit zur gleichen lokalen Uhrzeit bestehen. Die Berechnung erfolgt somit nicht durch das wiederholte Addieren einer festen Dauer von 168 Stunden.
+
+Erstreckt sich die Referenzveranstaltung über mehrere lokale Kalendertage, wird der entsprechende Tagesversatz bei den Wiederholungen beibehalten.
+
+Bei Zeitumstellungen gelten folgende Regeln:
+
++ Existiert eine für das Vorkommen benötigte lokale Uhrzeit aufgrund der Umstellung auf Sommerzeit nicht, wird das betreffende Vorkommen übersprungen.
++ Kommt eine für das Vorkommen benötigte lokale Uhrzeit aufgrund der Umstellung auf Winterzeit zweimal vor, wird der frühere der beiden möglichen Zeitpunkte verwendet.
+
+*Inklusive und exklusive Grenzen*
+
+Für Zeitspannen und Gültigkeitszeiträume gelten in OpenT8 folgende verbindliche Regeln:
+
++ Der **Startzeitpunkt** (`startTimepoint`, `validFrom`) ist **inklusiv**.
++ Der **Endzeitpunkt** (`endTimepoint`, `validTo`) ist **exklusiv**.
+
+Eine Zeitspanne umfasst damit ihren Beginn, nicht jedoch ihr Ende. Diese Konvention ermöglicht insbesondere eine eindeutige und überschneidungsfreie Darstellung aufeinanderfolgender Zeitspannen.
+
+Bei Gültigkeitsgrenzen im Format `date` beginnt die Gültigkeit um 00:00 Uhr des angegebenen Startdatums und endet um 00:00 Uhr des angegebenen Enddatums, jeweils in der Zeitzone des Stundenplans.
+
+Soll ein Gültigkeitszeitraum einen vollständigen Kalendertag umfassen, wird `validFrom` auf diesen Kalendertag und `validTo` auf den darauffolgenden Kalendertag gesetzt.
+
+Beispiel für den vollständigen 19. Oktober 2026:
+
+```json
+"validFrom": "2026-10-19",
+"validTo": "2026-10-20"
+```
+
+Auch mehrere vollständige Kalendertage lassen sich auf diese Weise darstellen.
+
+Ein vollständiger Kalendertag kann alternativ mit einem einmaligen zeitlichen Ausdruck (`oneTimeExpression`) dargestellt werden. Dabei müssen die absoluten Zeitpunkte den jeweiligen lokalen Tagesgrenzen entsprechen.
+
+Beispiel:
+
+```json
+"temporalExpressions": [
+  {
+    "type": "onetime",
+    "startTimepoint": "2026-10-25T00:00:00+02:00",
+    "endTimepoint": "2026-10-26T00:00:00+01:00"
+  }
+]
+```
+
+Das Beispiel beschreibt den 25. Oktober 2026 in der Zeitzone `Europe/Berlin`. Da an diesem Tag die Umstellung von Sommer- auf Winterzeit stattfindet, umfasst die Zeitspanne tatsächlich 25 Stunden.
+
+Ein vollständiger lokaler Kalendertag entspricht somit nicht notwendigerweise einer Dauer von 24 Stunden.
 
 #### Kalenderwochen
 
-Kalenderwochen werden durch ein JSON-Array mit formatierten Strings repräsentiert. Jeder formatierte String definiert die Menge der gewünschten Kalenderwochen für genau ein benanntes Jahr. Der Syntax lautet:
+Kalenderwochen werden durch ein JSON-Array mit formatierten Strings repräsentiert. Jeder formatierte String definiert die Menge der gewünschten ISO-Kalenderwochen für genau ein ISO-Wochenjahr.
+
+Die Syntax lautet:
 
 ```
-<Jahr>:(<Kalenderwoche>|<Kalenderwoche>-<Kalenderwoche>)[,(<Kalenderwoche>|<Kalenderwoche>-<Kalenderwoche>)]
+<Jahr>:(<Kalenderwoche>|<Kalenderwoche>-<Kalenderwoche>)[,(<Kalenderwoche>|<Kalenderwoche>-<Kalenderwoche>)]*
 ```
 
 Eine Kalenderwoche ist nach ISO 8601 wie folgt definiert:
 
-+ Kalenderwochen haben 7 Tage, beginnen an einem Montag und werden über das Jahr fortlaufend nummeriert.
++ Kalenderwochen haben 7 Tage, beginnen an einem Montag und werden fortlaufend nummeriert.
 + Die Kalenderwoche 1 eines Jahres ist diejenige, die den ersten Donnerstag enthält.
 + Je nach Jahr kann es entweder 52 oder 53 Kalenderwochen geben.
++ Das ISO-Wochenjahr kann an den Jahresgrenzen vom Kalenderjahr abweichen. Beispielsweise gehört der 31. Dezember 2024 bereits zur Kalenderwoche 1 des ISO-Wochenjahres 2025.
 
-Statt einzelner Kalenderwochen (z.B. `10`) können auch Kalenderwochenbereiche (z.B. `10-12`) definiert werden.
+Statt einzelner Kalenderwochen (z. B. `10`) können auch Kalenderwochenbereiche (z. B. `10-12`) definiert werden.
 
-Ein Beispiel, bei dem für das Jahr 2023 die Kalenderwochen 36, 38, 40, 42, 44, 46, 48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:
+Ein Beispiel, bei dem für das ISO-Wochenjahr 2023 die Kalenderwochen 36, 38, 40, 42, 44, 46, 48 und 50 sowie für das ISO-Wochenjahr 2024 die ersten vier Wochen markiert sind:
 
-``` json
+```json
 "weeks": [
   "2023:36,38,40,42,44,46,48,50",
   "2024:1-4"
 ]
 ```
+
+Bei wöchentlich wiederkehrenden Zeitspannen bezieht sich die Eigenschaft `validWeeks` auf die ISO-Kalenderwoche des lokalen Startdatums des jeweiligen Vorkommens in `schedule.timeZone`.
 
 #### Farbwerte
 
@@ -978,15 +1067,13 @@ Dies ist das Wurzelobjekt eines OpenT8-Dokuments und enthält folgende Felder:
 
 :   Die eigentliche zeitliche Verplanung. **Dieses Objekt ist ERFORDERLICH**.
 
-Dieses Objekt KANN erweitert werden.
-
 #### absence-Objekt
 
 Das `absence`-Objekt definiert eine Abwesenheit:
 
 **`type`** 
 
-:   MUSS den Wert `absence` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `absence` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`notes`** 
 
@@ -994,7 +1081,7 @@ Das `absence`-Objekt definiert eine Abwesenheit:
 
 **`absenceType.refId`** 
 
-:   Typ der Abwesenheit. Dies MUSS ein Verweis auf die `id` eines `absenceType`-Objekts sein. 
+:   Typ der Abwesenheit. Dies MUSS ein Verweis auf die `id` eines `absenceType`-Objekts sein. **Ist `absenceType` angegeben, ist das Feld `refId` ERFORDERLICH**.
 
 **`appliesTo`** 
 
@@ -1048,7 +1135,7 @@ Das `activity`-Objekt definiert eine Aktivität:
 
 **`type`** 
 
-:   MUSS den Wert `activity` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `activity` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1149,7 +1236,7 @@ Das `announcement`-Objekt repräsentiert eine freie Mitteilung im Stundenplan:
 
 **`type`** 
 
-:   MUSS den Wert `announcement` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `announcement` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1229,7 +1316,7 @@ Das `building`-Objekt repräsentiert ein Gebäude, in dem sich Räume befinden:
 
 **`campus.refId`** 
 
-:   Der Campus, auf dem sich das Gebäude befindet. Dies MUSS ein Verweis auf die `id` eines `campus`-Objekts sein. 
+:   Der Campus, auf dem sich das Gebäude befindet. Dies MUSS ein Verweis auf die `id` eines `campus`-Objekts sein. **Ist `campus` angegeben, ist das Feld `refId` ERFORDERLICH**.
 
 **`externalIds`** 
 
@@ -1273,7 +1360,7 @@ Das `cancellation`-Objekt definiert einen Ausfall einer Aktivität, einer Unterr
 
 **`type`** 
 
-:   MUSS den Wert `cancellation` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `cancellation` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`message`** 
 
@@ -1319,7 +1406,7 @@ Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teil
 
 **`subject.refId`** 
 
-:   Das zugeordnete Fach. Dies MUSS ein Verweis auf die `id` eines vorhandenen `subject`-Objekts sein. 
+:   Das zugeordnete Fach. Dies MUSS ein Verweis auf die `id` eines vorhandenen `subject`-Objekts sein. **Ist `subject` angegeben, ist das Feld `refId` ERFORDERLICH**.
 
 **`courseNo`** 
 
@@ -1327,7 +1414,7 @@ Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teil
 
 **`courseType.refId`** 
 
-:   Ein Kurstyp zur Differenzierung des Kurses. Dies MUSS ein Verweis auf die `id` eines `courseType`-Objekts sein.
+:   Ein Kurstyp zur Differenzierung des Kurses. Dies MUSS ein Verweis auf die `id` eines `courseType`-Objekts sein. **Ist `courseType` angegeben, ist das Feld `refId` ERFORDERLICH**.
 
 **`courseUrl`** 
 
@@ -1346,13 +1433,13 @@ Das `course`-Objekt repräsentiert einen Kurs, in dem sich Gruppen und/oder Teil
     + **`refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `person`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
     + **`role.refId`** : Dies MUSS ein Verweis auf die `id` eines vorhandenen `personRole`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
 
-**`validFrom`** 
+**`validFrom`**
 
-:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit des Kurses. 
+:   Definiert den inklusiven Beginn des Gültigkeitszeitraums des Kurses. Die Angabe kann entweder ein Kalenderdatum (`date`) oder ein absoluter Zeitpunkt (`date-time` gemäß RFC 3339) sein. Kalenderdaten werden als 00:00 Uhr in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert.
 
-**`validTo`** 
+**`validTo`**
 
-:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit des Kurses.
+:   Definiert das exklusive Ende des Gültigkeitszeitraums des Kurses. Die Angabe kann entweder ein Kalenderdatum (`date`) oder ein absoluter Zeitpunkt (`date-time` gemäß RFC 3339) sein. Kalenderdaten werden als 00:00 Uhr in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert.
 
 **`externalIds`** 
 
@@ -1426,7 +1513,7 @@ Das `event`-Objekt repräsentiert einen Termin, der sich nicht durch eine Verans
 
 **`type`** 
 
-:   MUSS den Wert `event` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `event` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1450,7 +1537,7 @@ Das `event`-Objekt repräsentiert einen Termin, der sich nicht durch eine Verans
 
 **`eventType.refId`** 
 
-:   Typ des Ereignisses. Dies MUSS ein Verweis auf die `id` eines `eventType`-Objekts sein. 
+:   Typ des Ereignisses. Dies MUSS ein Verweis auf die `id` eines `eventType`-Objekts sein. **Ist `eventType` angegeben, ist das Feld `refId` ERFORDERLICH**.
 
 **`eventUrl`** 
 
@@ -1515,7 +1602,7 @@ Das `exemption`-Objekt definiert eine Freistellung:
 
 **`type`** 
 
-:   MUSS den Wert `exemption` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `exemption` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`notes`** 
 
@@ -1523,7 +1610,7 @@ Das `exemption`-Objekt definiert eine Freistellung:
 
 **`exemptionType.refId`** 
 
-:   Typ des Freistellung. Dies MUSS ein Verweis auf die `id` eines `exemptionType`-Objekts sein. 
+:   Typ des Freistellung. Dies MUSS ein Verweis auf die `id` eines `exemptionType`-Objekts sein. **Ist `exemptionType` angegeben, ist das Feld `refId` ERFORDERLICH**.
 
 **`appliesTo`** 
 
@@ -1619,7 +1706,7 @@ Das `gap`-Objekt repräsentiert eine Fehlstelle im Stundenplan:
 
 **`type`** 
 
-:   MUSS den Wert `gap` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `gap` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1717,7 +1804,7 @@ Das `group`-Objekt repräsentiert eine Gruppe (z.B. Klasse, Jahrgang, etc.), der
     
 **`groupType.refId`** 
 
-:   Typ der Gruppe. Dies MUSS ein Verweis auf die `id` eines `groupType`-Objekts sein. **Dieses Feld ist ERFORDERLICH**.
+:   Typ der Gruppe. Dies MUSS ein Verweis auf die `id` eines `groupType`-Objekts sein. **Ist `groupType` angegeben, ist das Feld `refId` ERFORDERLICH**.
 
 **`members`** 
 
@@ -1728,15 +1815,15 @@ Das `group`-Objekt repräsentiert eine Gruppe (z.B. Klasse, Jahrgang, etc.), der
 
 **`timeFrame.refId`** 
 
-:   Der Zeitrahmen des Teilnehmers. Dies MUSS ein Verweis auf die `id` eines `timeFrame`-Objekts sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht.
+:   Der Zeitrahmen der Gruppe. Dies MUSS ein Verweis auf die `id` eines `timeFrame`-Objekts sein. Diese Angabe macht nur Sinn, wenn sie vom Standardzeitrahmen des Stundenplans abweicht. **Ist `timeFrame` angegeben, ist das Feld `refId` ERFORDERLICH**.
 
-**`validFrom`** 
+**`validFrom`**
 
-:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit der Gruppe. 
+:   Definiert den inklusiven Beginn des Gültigkeitszeitraums der Gruppe. Die Angabe kann entweder ein Kalenderdatum (`date`) oder ein absoluter Zeitpunkt (`date-time` gemäß RFC 3339) sein. Kalenderdaten werden als 00:00 Uhr in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert.
 
-**`validTo`** 
+**`validTo`**
 
-:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit der Gruppe.
+:   Definiert das exklusive Ende des Gültigkeitszeitraums der Gruppe. Die Angabe kann entweder ein Kalenderdatum (`date`) oder ein absoluter Zeitpunkt (`date-time` gemäß RFC 3339) sein. Kalenderdaten werden als 00:00 Uhr in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert.
 
 **`externalIds`** 
 
@@ -1782,7 +1869,7 @@ Das `holiday`-Objekt repräsentiert eine schulfreie Zeit (Feiertage oder Schulfe
 
 **`type`** 
 
-:   MUSS den Wert `holiday` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `holiday` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1844,7 +1931,7 @@ Das `info`-Objekt enthält Metadaten zum Stundenplan:
 
 **`publishedBy`**
 
-:   Wem gehört der Stundenplan?
+:   Name der Person oder Organisation, die für die Veröffentlichung des Stundenplans verantwortlich ist.
 
 **`language`**
 
@@ -1891,7 +1978,7 @@ Das `lesson`-Objekt repräsentiert eine Veranstaltung bzw. Unterrichtseinheit, d
 
 **`type`** 
 
-:   MUSS den Wert `lesson` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `lesson` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -1956,7 +2043,7 @@ Das `oneTimeExpression`-Objekt definiert einen einmaligen zeitlichen Ausdruck:
 
 **`type`** 
 
-:   MUSS den Wert `onetime` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `onetime` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`startTimepoint`** 
 
@@ -2056,7 +2143,7 @@ Das `person`-Objekt repräsentiert Mitglieder einer Gruppe bzw. Teilnehmer eines
 
 **`birthdate`** 
 
-:   Geburtsdatum (RFC 3339) der Person. 
+:   Geburtsdatum (`date`) der Person. 
 
 **`electronicAddresses`** 
 
@@ -2158,13 +2245,17 @@ Dieses Objekt KANN erweitert werden.
 
 Das `schedule`-Objekt enthält die eigentliche zeitliche Verplanung:
 
-**`validFrom`** 
+**`timeZone`** 
 
-:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit des Stundenplans. **Dieses Feld ist ERFORDERLICH**.
+:   Definiert die Zeitzone des Stundenplans anhand eines Bezeichners aus der IANA Time Zone Database (z. B. Europe/Berlin). Die Zeitzone ist maßgeblich für die Interpretation lokaler Uhrzeiten und Kalenderdaten und berücksichtigt auch die Umstellung zwischen Sommer- und Winterzeit. **Dieses Feld ist ERFORDERLICH**.
 
-**`validTo`** 
+**`validFrom`**
 
-:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit des Stundenplans. **Dieses Feld ist ERFORDERLICH**.
+:   Definiert den inklusiven Beginn des Gültigkeitszeitraums des Stundenplans. Die Angabe kann entweder ein Kalenderdatum (`date`) oder ein absoluter Zeitpunkt (`date-time` gemäß RFC 3339) sein. Kalenderdaten werden als 00:00 Uhr in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert. **Dieses Feld ist ERFORDERLICH**.
+
+**`validTo`**
+
+:   Definiert das exklusive Ende des Gültigkeitszeitraums des Stundenplans. Die Angabe kann entweder ein Kalenderdatum (`date`) oder ein absoluter Zeitpunkt (`date-time` gemäß RFC 3339) sein. Kalenderdaten werden als 00:00 Uhr in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert. **Dieses Feld ist ERFORDERLICH**.
 
 **`defaultTimeFrame.refId`** 
 
@@ -2222,7 +2313,7 @@ Das `substitution`-Objekt definiert eine Vertretung:
 
 **`type`** 
 
-:   MUSS den Wert `substitution` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `substitution` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`message`** 
 
@@ -2256,7 +2347,7 @@ Das `supervision`-Objekt repräsentiert eine Aufsicht, die einem oder mehreren A
 
 **`type`** 
 
-:   MUSS den Wert `supervision` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `supervision` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
 **`id`** 
 
@@ -2423,10 +2514,6 @@ Das `timeFrame`-Objekt definiert einen Zeitrahmen, mit dessen Hilfe sich die Uhr
 
 :   Eine kurze Beschreibung des Zeitrahmens.
 
-**`color`** 
-
-:   Ein Farbwert (Hex-Kodierung) für den Zeitrahmen.
-
 **`scopeOfWeek`** 
 
 :   Die Menge der Wochentage, die bei einer wöchentlichen Darstellung des Stundenplans berücksichtigt werden sollen (z.B. nur Montag bis Samstag). Dies MUSS ein JSON-String-Array sein. **Dieses Feld ist ERFORDERLICH**.
@@ -2467,125 +2554,164 @@ Dieses Objekt KANN erweitert werden.
 
 #### timeSlot-Objekt
 
-Das `timeSlot`-Objekt definiert ein benanntes Zeitfenster für einen Zeitrahmen (z.B. 1. Stunde von 8:00 bis 8:45):
+Das `timeSlot`-Objekt definiert ein benanntes Zeitfenster für einen Zeitrahmen (z. B. 1. Stunde von 08:00 bis 08:45 Uhr). Die Uhrzeiten werden als lokale Uhrzeiten in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert.
 
-**`shortLabel`** 
+**`shortLabel`**
 
 :   Kürzel des Zeitfensters. **Dieses Feld ist ERFORDERLICH**.
 
-**`longLabel`** 
+**`longLabel`**
 
-:   Ausführlicher Name des Zeitfensters. 
+:   Ausführlicher Name des Zeitfensters.
 
-**`color`** 
+**`color`**
 
 :   Ein Farbwert (Hex-Kodierung) für das Zeitfenster.
 
-**`startTime`** 
+**`startTime`**
 
-:   Die Startuhrzeit (RFC 3339) des Zeitfensters. **Dieses Feld ist ERFORDERLICH**.
+:   Definiert die inklusive lokale Startuhrzeit des Zeitfensters (`localTime`), ohne Zeitzonenoffset. **Dieses Feld ist ERFORDERLICH**.
 
-**`endTime`** 
+**`endTime`**
 
-:   Die Enduhrzeit (RFC 3339) des Zeitfensters. **Dieses Feld ist ERFORDERLICH**.
+:   Definiert die exklusive lokale Enduhrzeit des Zeitfensters (`localTime`), ohne Zeitzonenoffset. **Dieses Feld ist ERFORDERLICH**.
 
 Dieses Objekt KANN erweitert werden.
 
 #### weeklyExpression-Objekt
 
-Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden zeitlichen Ausdruck:
+Das `weeklyExpression`-Objekt definiert einen sich wöchentlich wiederholenden zeitlichen Ausdruck. Die Wiederholung basiert auf einer Referenzveranstaltung, aus der der lokale Wochentag, die lokalen Uhrzeiten und gegebenenfalls ein Tagesversatz abgeleitet werden.
 
-**`type`** 
+**`type`**
 
-:   MUSS den Wert `weekly` haben. **Dieses Feld ist ERFORDERLICH und MUSS als erste Eigenschaft im JSON-Objekt definiert sein**.
+:   MUSS den Wert `weekly` haben. **Dieses Feld ist ERFORDERLICH und SOLLTE als erste Eigenschaft im JSON-Objekt definiert sein**.
 
-**`startTimepoint`** 
+**`startTimepoint`**
 
-:   Startzeitpunkt (RFC 3339) des zeitlichen Ausdrucks. **Dieses Feld ist ERFORDERLICH**.
+:   Definiert den inklusiven Startzeitpunkt der Referenzveranstaltung (`date-time` gemäß RFC 3339). Aus diesem absoluten Zeitpunkt werden der Wochentag und die lokale Startuhrzeit in der Zeitzone des Stundenplans (`schedule.timeZone`) abgeleitet. **Dieses Feld ist ERFORDERLICH**.
 
-**`endTimepoint`** 
+**`endTimepoint`**
 
-:   Endzeitpunkt (RFC 3339) des zeitlichen Ausdrucks. **Dieses Feld ist ERFORDERLICH**.
+:   Definiert den exklusiven Endzeitpunkt der Referenzveranstaltung (`date-time` gemäß RFC 3339). Aus diesem absoluten Zeitpunkt werden die lokale Enduhrzeit und gegebenenfalls der Tagesversatz zum Startzeitpunkt in der Zeitzone des Stundenplans (`schedule.timeZone`) abgeleitet. **Dieses Feld ist ERFORDERLICH**.
 
-**`validFrom`** 
+**`validFrom`**
 
-:   Definiert den Startzeitpunkt (RFC 3339) der Gültigkeit der wöchentlichen Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Startzeitpunkt der Gültigkeit des `schedule`-Objekts.
+:   Definiert den inklusiven Beginn des Gültigkeitszeitraums der wöchentlichen Wiederholung. Die Angabe kann entweder ein Kalenderdatum (`date`) oder ein absoluter Zeitpunkt (`date-time` gemäß RFC 3339) sein. Kalenderdaten werden als 00:00 Uhr in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert. Ist dieses Feld nicht definiert, gilt der Gültigkeitsbeginn des übergeordneten `schedule`-Objekts.
 
-**`validTo`** 
+**`validTo`**
 
-:   Definiert den Endzeitpunkt (RFC 3339) der Gültigkeit der wöchentlichen Wiederholung. Ist dieses Feld nicht definiert, dann gilt der Endzeitpunkt der Gültigkeit des `schedule`-Objekts.
+:   Definiert das exklusive Ende des Gültigkeitszeitraums der wöchentlichen Wiederholung. Die Angabe kann entweder ein Kalenderdatum (`date`) oder ein absoluter Zeitpunkt (`date-time` gemäß RFC 3339) sein. Kalenderdaten werden als 00:00 Uhr in der Zeitzone des Stundenplans (`schedule.timeZone`) interpretiert. Ist dieses Feld nicht definiert, gilt das Gültigkeitsende des übergeordneten `schedule`-Objekts.
 
-**`validWeeks`** 
+**`validWeeks`**
 
-:   Eine Liste von Kalenderwochen, an denen dieser zeitliche Ausdruck sich wiederholt. Ist dieses Feld nicht definiert, dann wiederholt sich dieser zeitliche Ausdruck in jeder Woche innerhalb der Gültigkeit. 
+:   Eine Liste von ISO-Kalenderwochen, in denen sich der zeitliche Ausdruck wiederholt. Maßgeblich ist die ISO-Kalenderwoche des lokalen Startdatums des jeweiligen Vorkommens in `schedule.timeZone`. Ist dieses Feld nicht definiert, findet die Wiederholung in jeder Woche innerhalb des Gültigkeitszeitraums statt.
 
-    Dieses Feld MUSS entweder ein JSON-String-Array mit eingebetteten Kalenderwochen oder ein JSON-Objekt mit einem Verweis (`validWeeks.refId`) auf die `id` eines `weeksPattern`-Objekts sein. Zum besseren Verständnis siehe auch die beiden Beispiele im weiteren Verlauf. 
+    Dieses Feld MUSS entweder ein JSON-String-Array mit eingebetteten Kalenderwochen oder ein JSON-Objekt mit einem Verweis (`validWeeks.refId`) auf die `id` eines `weeksPattern`-Objekts sein.
 
-**`operation`** 
+**`operation`**
 
-:   Soll der zeitliche Ausdruck hinzugefügt oder abgezogen werden? 
+: Legt fest, ob der zeitliche Ausdruck hinzugefügt oder ausgeschlossen werden soll.
 
-    + **`include`** : Findet statt (das ist der Standardwert)
-    + **`exclude`** : Findet nicht statt
+    + **`include`**: Findet statt (das ist der Standardwert).
+    + **`exclude`**: Findet nicht statt.
 
-Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das Jahr 2023 die Kalenderwochen 36, 38, 40, 42, 44, 46, 48 und 50, sowie für das Jahr 2024 die ersten 4 Wochen markiert sind:
+**Berechnung der Wiederholungen**
 
-``` json
+Die Eigenschaften `startTimepoint` und `endTimepoint` definieren ausschließlich die Referenzveranstaltung. Diese darf auch außerhalb des Gültigkeitszeitraums liegen.
+
+Wöchentliche Wiederholungen werden anhand des lokalen Wochentags und der lokalen Uhrzeiten der Referenzveranstaltung berechnet. Dadurch finden wiederkehrende Veranstaltungen unabhängig von Sommer- und Winterzeit immer zur gleichen lokalen Uhrzeit statt.
+
+Der tatsächlich gültige Zeitraum ergibt sich aus der Schnittmenge der Gültigkeitszeiträume des `schedule`-Objekts und des `weeklyExpression`-Objekts. Ob ein erzeugtes Vorkommen gültig ist, bestimmt sich anhand seines Startzeitpunkts.
+
+Bei Zeitumstellungen gelten folgende Regeln:
+
++ Existiert eine für das Vorkommen benötigte lokale Uhrzeit aufgrund der Umstellung auf Sommerzeit nicht, wird das betreffende Vorkommen übersprungen.
++ Kommt eine für das Vorkommen benötigte lokale Uhrzeit aufgrund der Umstellung auf Winterzeit zweimal vor, wird der frühere der beiden möglichen Zeitpunkte verwendet.
+
+**Beispiele**
+
+Das folgende Beispiel zeigt ein `weeklyExpression`-Objekt, bei dem für das ISO-Wochenjahr 2023 die Kalenderwochen 36, 38, 40, 42, 44, 46, 48 und 50 sowie für das ISO-Wochenjahr 2024 die ersten vier Wochen ausgewählt sind:
+
+```json
 "temporalExpressions": [
   {
     "type": "weekly",
-    "startTimepoint": "2023-09-08T10:30:00Z",
-    "endTimepoint": "2023-09-08T11:15:00Z",
+    "startTimepoint": "2023-09-08T10:30:00+02:00",
+    "endTimepoint": "2023-09-08T11:15:00+02:00",
     "validWeeks": [
       "2023:36,38,40,42,44,46,48,50",
       "2024:1-4"
     ]
   }
-]  
+]
 ```
 
-Und hier das gleiche Beispiel mit einem Verweis auf ein `weeksPattern`-Objekt:
+Bei `schedule.timeZone = "Europe/Berlin"` beschreibt die Referenzveranstaltung einen Freitag von 10:30 bis 11:15 Uhr. Die Wiederholungen finden in den ausgewählten Kalenderwochen jeweils freitags zur gleichen lokalen Uhrzeit statt, sofern sie innerhalb des Gültigkeitszeitraums des Stundenplans liegen.
 
-``` json
+Das gleiche Beispiel mit einem Verweis auf ein `weeksPattern`-Objekt:
+
+```json
 "temporalExpressions": [
   {
     "type": "weekly",
-    "startTimepoint": "2023-09-08T10:30:00Z",
-    "endTimepoint": "2023-09-08T11:15:00Z",
+    "startTimepoint": "2023-09-08T10:30:00+02:00",
+    "endTimepoint": "2023-09-08T11:15:00+02:00",
     "validWeeks": {
       "refId": "weeksPattern-1"
     }
   }
-]  
+]
 ```
+
+Im folgenden Beispiel liegt die Referenzveranstaltung außerhalb des Gültigkeitszeitraums:
+
+```json
+"temporalExpressions": [
+  {
+    "type": "weekly",
+    "startTimepoint": "2026-08-31T08:00:00+02:00",
+    "endTimepoint": "2026-08-31T08:45:00+02:00",
+    "validFrom": "2026-10-01",
+    "validTo": "2027-07-31"
+  }
+]
+```
+
+Bei `schedule.timeZone = "Europe/Berlin"` legt die Referenzveranstaltung eine wöchentliche Wiederholung am Montag von 08:00 bis 08:45 Uhr fest. Da der Gültigkeitszeitraum erst am 1. Oktober 2026 beginnt, findet das erste gültige Vorkommen am Montag, dem 5. Oktober 2026, statt, sofern der Gültigkeitszeitraum des Stundenplans dieses Datum einschließt.
 
 #### weeksPattern-Objekt
 
-Das `weeksPattern`-Objekt repräsentiert ein Kalenderwochenmuster, mit dem `weeklyExpression`-Objekte verknüpft werden können:
+Das `weeksPattern`-Objekt definiert ein benanntes Kalenderwochenmuster, auf das `weeklyExpression`-Objekte über die Eigenschaft `validWeeks` verweisen können. Ein Wochenmuster legt fest, in welchen ISO-Kalenderwochen eines oder mehrerer ISO-Wochenjahre wöchentliche Wiederholungen stattfinden.
 
-**`id`** 
+**`id`**
 
 :   Eindeutige Identifikation des Wochenmusters. **Dieses Feld ist ERFORDERLICH**.
 
-**`shortName`** 
+**`shortName`**
 
 :   Kürzel des Wochenmusters. **Dieses Feld ist ERFORDERLICH**.
 
-**`longName`** 
+**`longName`**
 
 :   Ausführlicher Name des Wochenmusters.
 
-**`description`** 
+**`description`**
 
 :   Eine kurze Beschreibung des Wochenmusters.
 
-**`weeks`** 
+**`weeks`**
 
-:   Eine Liste von Kalenderwochen, an denen dieser zeitliche Ausdruck sich wiederholt. Ist dieses Feld nicht definiert, dann wiederholt sich dieser zeitliche Ausdruck in jeder Woche innerhalb der Gültigkeit. Es MUSS ein JSON-String-Array sein. 
+:   Definiert die ISO-Kalenderwochen, für die das Wochenmuster gilt. Die Angabe MUSS ein JSON-String-Array sein. Jeder Eintrag enthält ein ISO-Wochenjahr sowie eine Liste einzelner Kalenderwochen oder Kalenderwochenbereiche. **Dieses Feld ist ERFORDERLICH**.
 
-Das folgende Beispiel zeigt zwei `weeksPattern`-Objekte. Das eine definiert ungerade Wochen, das andere gerade Wochen:
+    Ein `weeklyExpression`-Objekt, das auf dieses Wochenmuster verweist, wird nur in den angegebenen Kalenderwochen wiederholt, sofern das jeweilige Vorkommen innerhalb seines Gültigkeitszeitraums liegt. Maßgeblich ist die ISO-Kalenderwoche des lokalen Startdatums des jeweiligen Vorkommens in der Zeitzone des Stundenplans (`schedule.timeZone`).
 
-``` json
+    Kalenderwochen, die nicht ausdrücklich angegeben sind, werden nicht berücksichtigt. Das Wochenmuster wird nicht automatisch auf weitere ISO-Wochenjahre übertragen.
+
+**Beispiel**
+
+Das folgende Beispiel zeigt zwei `weeksPattern`-Objekte. Das erste definiert ausgewählte ungerade Kalenderwochen, das zweite ausgewählte gerade Kalenderwochen des ISO-Wochenjahres 2024:
+
+```json
 "weeksPatterns": [
   {
     "id": "pattern-A",
@@ -2603,6 +2729,16 @@ Das folgende Beispiel zeigt zwei `weeksPattern`-Objekte. Das eine definiert unge
   }
 ]
 ```
+
+Ein `weeklyExpression`-Objekt kann beispielsweise wie folgt auf das erste Wochenmuster verweisen:
+
+```json
+"validWeeks": {
+  "refId": "pattern-A"
+}
+```
+
+Die wöchentliche Wiederholung findet damit ausschließlich in den für `pattern-A` definierten Kalenderwochen statt.
 
 ### Erweiterung der Spezifikation
 

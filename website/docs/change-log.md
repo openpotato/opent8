@@ -1,5 +1,53 @@
 # Änderungslog
 
+## 0.8.0
+
+**Hinzugefügt**:
+
++ Breaking Change: Die neue, verpflichtende Eigenschaft `schedule.timeZone` legt die Zeitzone des Stundenplans fest. Verwendet werden Zeitzonenbezeichner aus der [IANA Time Zone Database](https://www.iana.org/time-zones) (z. B. `Europe/Berlin`).
+
+    + *Begründung*: Für die korrekte Berechnung wiederkehrender Termine und die Berücksichtigung von Sommer- und Winterzeit wird eine eindeutige Zeitzone benötigt.
+
++ Die neue Schemadefinition `localTime` beschreibt lokale Uhrzeiten ohne Zeitzonenoffset.
+
+**Geändert**:
+
++ Breaking Change: Die Eigenschaften `timeFrame.timeSlots[].startTime` und `timeFrame.timeSlots[].endTime` verwenden jetzt lokale Uhrzeiten ohne Zeitzonenoffset.
+
+    + *Begründung*: Zeitfenster eines Stundenrasters sollen unabhängig von Sommer- und Winterzeit immer dieselben lokalen Uhrzeiten beschreiben.
+
++ Breaking Change: Das Array `temporalExpressions` muss jetzt mindestens einen zeitlichen Ausdruck enthalten.
+
+    + *Begründung*: Ein Zeitelement ohne konkrete Zeitangaben macht keinen Sinn.
+
++ Breaking Change: Die zeitliche Interpretation von `weeklyExpression` wurde geändert und präzisiert. Die bisherigen Eigenschaften `startTimepoint` und `endTimepoint` bleiben erhalten und definieren eine Referenzveranstaltung durch zwei absolute Zeitpunkte. Aus dieser werden der lokale Wochentag, die lokalen Uhrzeiten und gegebenenfalls der Tagesversatz in `schedule.timeZone` abgeleitet. Wöchentliche Wiederholungen werden anhand lokaler Kalendertage und Uhrzeiten berechnet, nicht durch Addition einer festen Dauer von 168 Stunden.
+
+    + *Begründung*: Wöchentlich wiederkehrende Veranstaltungen sollen unabhängig von Sommer- und Winterzeit immer zur gleichen lokalen Uhrzeit stattfinden. Gleichzeitig bleibt das bisherige Modell einer Referenzveranstaltung erhalten.
+
++ Die optionalen Eigenschaften `weeklyExpression.validFrom` und `weeklyExpression.validTo` begrenzen ausschließlich den Gültigkeitszeitraum der Wiederholung. Sie können sowohl Kalenderdaten als auch absolute Zeitpunkte enthalten. Die Referenzveranstaltung darf auch außerhalb dieses Gültigkeitszeitraums liegen.
+
++ Die Gültigkeitsprüfung wöchentlicher Wiederholungen wurde präzisiert. Maßgeblich ist der Startzeitpunkt des jeweiligen Vorkommens. Der tatsächlich gültige Zeitraum ergibt sich aus der Schnittmenge der Gültigkeitszeiträume von `schedule` und `weeklyExpression`.
+
++ Die zeitliche Interpretation wurde vereinheitlicht: `oneTimeExpression` verwendet weiterhin absolute Zeitpunkte mit Zeitzonenoffset. `weeklyExpression` verwendet absolute Zeitpunkte als Referenzveranstaltung, berechnet die Wiederholungen jedoch anhand lokaler Uhrzeiten in `schedule.timeZone`. Auch `timeFrame.timeSlots` verwendet lokale Uhrzeiten.
+
++ Die Gültigkeitsgrenzen wurden präzisiert: `validFrom` ist inklusiv und `validTo` exklusiv zu verstehen. Kalenderdaten werden in der Zeitzone des Stundenplans interpretiert, während Datum-Uhrzeit-Werte absolute Zeitpunkte beschreiben.
+
++ Die Eigenschaften `weeklyExpression.validWeeks` und `weeksPattern.weeks` beziehen sich jetzt ausdrücklich auf ISO-Kalenderwochen und das jeweilige ISO-Wochenjahr. Maßgeblich ist das lokale Startdatum des jeweiligen Vorkommens.
+
++ Das Verhalten bei Sommerzeitumstellungen wurde festgelegt: Vorkommen mit nicht existierenden lokalen Uhrzeiten werden übersprungen. Bei doppelt vorkommenden lokalen Uhrzeiten wird der frühere der beiden möglichen Zeitpunkte verwendet.
+
+    + *Beispiel 1*: In `Europe/Berlin` wurde am 29. März 2026 die Uhr von 02:00 auf 03:00 Uhr vorgestellt. Eine wöchentliche Veranstaltung um 02:30 Uhr wird an diesem Tag übersprungen.
+
+    + *Beispiel 2*: In `Europe/Berlin` existiert am 25. Oktober 2026 die Uhrzeit 02:30 Uhr sowohl mit dem Offset `+02:00` als auch mit `+01:00`. In diesem Fall wird der frühere absolute Zeitpunkt (`02:30+02:00`) verwendet. Die Veranstaltung findet somit nur einmal statt.
+
+**Korrigiert**:
+
++ Die Validierung von Eigenschaften, die sowohl Kalenderdaten als auch Datum-Uhrzeit-Werte erlauben, wurde durch die Verwendung von `anyOf` anstelle von `oneOf` verbessert.
++ Die bisher fehlende Eigenschaft `event.eventUrl` wurde im JSON-Schema ergänzt.
++ Die Unterstützung von Erweiterungsfeldern (`x-*`) wurde für das `cancellation`-Objekt ergänzt.
++ Die Beschreibungen der Zeit- und Datumsangaben sowie der ISO-Kalenderwochen im JSON-Schema wurden vereinheitlicht und präzisiert.
++ Einige kleinere Fehler in den Eigenschaftsbeschreibungen wurden korrigiert.
+
 ## 0.7.0 <small>_ 20. August 2026</small>
 
 **Hinzugefügt**:

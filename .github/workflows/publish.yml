@@ -4,6 +4,8 @@ on:
     branches: 
       - main
   workflow_dispatch:  
+env:
+  SCHEMA_VERSION: v0.8
 permissions:
   contents: read
   pages: write
@@ -22,12 +24,24 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: 3.x
-      - run: pip install zensical
+      - name: Install dependencies
+        run: pip install zensical "jsonschema[format]"
+      - name: Validate samples files
+        shell: bash
+        run: | 
+          failed=0
+          while IFS= read -r -d '' file; do
+            python ../scripts/validate_json.py "$file" "../schemas/${SCHEMA_VERSION}/schema.json" || failed=1
+          done < <(find ../samples -type f -name '*.json' -print0)
+          exit "$failed"
+        working-directory: samples
+      - name: Build website
+        run: zensical build --clean
         working-directory: website
-      - run: zensical build --clean
-        working-directory: website
-      - uses: actions/upload-pages-artifact@v5
+      - name: Upload website as artifact
+        uses: actions/upload-pages-artifact@v5
         with:
           path: website/site
-      - uses: actions/deploy-pages@v5
+      - name: Deploy website to GitHub Pages
+        uses: actions/deploy-pages@v5
         id: deployment

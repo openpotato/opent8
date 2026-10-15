@@ -1,5 +1,5 @@
 {
-  "opent8": "0.7.0",
+  "opent8": "0.8.0",
   "info": {
     "title": "Stundenplan 2023/2024",
     "description": "Stundenplan für das Schuljahr 2023/2024",
@@ -338,7 +338,7 @@
       ]
     },
     {
-      "id": "KR/1B",
+      "id": "KR-1B",
       "shortName": "KR",
       "longName": "Klassenrat",
       "groups": [
@@ -510,8 +510,9 @@
     }
   ],
   "schedule": {
-    "validFrom": "2023-09-04T00:00:00Z",
-    "validTo": "2024-02-03T00:00:00Z",
+    "timeZone": "Europe/Berlin",
+    "validFrom": "2023-09-04",
+    "validTo": "2024-02-03",
     "defaultTimeFrame": {
       "refId": "default"
     },
@@ -531,38 +532,38 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T09:05:00Z",
-            "endTimepoint": "2023-09-04T09:50:00Z"
+            "startTimepoint": "2023-09-04T09:05:00+02:00",
+            "endTimepoint": "2023-09-04T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T09:05:00Z",
-            "endTimepoint": "2023-09-05T09:50:00Z"
+            "startTimepoint": "2023-09-05T09:05:00+02:00",
+            "endTimepoint": "2023-09-05T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T09:05:00Z",
-            "endTimepoint": "2023-09-06T09:50:00Z"
+            "startTimepoint": "2023-09-06T09:05:00+02:00",
+            "endTimepoint": "2023-09-06T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T10:10:00Z",
-            "endTimepoint": "2023-09-06T10:55:00Z"
+            "startTimepoint": "2023-09-06T10:10:00+02:00",
+            "endTimepoint": "2023-09-06T10:55:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T08:00:00Z",
-            "endTimepoint": "2023-09-07T08:45:00Z"
+            "startTimepoint": "2023-09-07T08:00:00+02:00",
+            "endTimepoint": "2023-09-07T08:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-08T09:05:00Z",
-            "endTimepoint": "2023-09-08T09:50:00Z"
+            "startTimepoint": "2023-09-08T09:05:00+02:00",
+            "endTimepoint": "2023-09-08T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-08T10:10:00Z",
-            "endTimepoint": "2023-09-08T10:55:00Z"
+            "startTimepoint": "2023-09-08T10:10:00+02:00",
+            "endTimepoint": "2023-09-08T10:55:00+02:00"
           }
         ]
       },
@@ -581,28 +582,28 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T10:10:00Z",
-            "endTimepoint": "2023-09-04T10:55:00Z"
+            "startTimepoint": "2023-09-04T10:10:00+02:00",
+            "endTimepoint": "2023-09-04T10:55:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T10:10:00Z",
-            "endTimepoint": "2023-09-05T10:55:00Z"
+            "startTimepoint": "2023-09-05T10:10:00+02:00",
+            "endTimepoint": "2023-09-05T10:55:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T08:00:00Z",
-            "endTimepoint": "2023-09-06T08:45:00Z"
+            "startTimepoint": "2023-09-06T08:00:00+02:00",
+            "endTimepoint": "2023-09-06T08:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T09:05:00Z",
-            "endTimepoint": "2023-09-07T09:50:00Z"
+            "startTimepoint": "2023-09-07T09:05:00+02:00",
+            "endTimepoint": "2023-09-07T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-08T08:00:00Z",
-            "endTimepoint": "2023-09-08T08:45:00Z"
+            "startTimepoint": "2023-09-08T08:00:00+02:00",
+            "endTimepoint": "2023-09-08T08:45:00+02:00"
           }
         ]
       },
@@ -621,13 +622,13 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T11:00:00Z",
-            "endTimepoint": "2023-09-04T11:45:00Z"
+            "startTimepoint": "2023-09-04T11:00:00+02:00",
+            "endTimepoint": "2023-09-04T11:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T12:20:00Z",
-            "endTimepoint": "2023-09-04T13:05:00Z"
+            "startTimepoint": "2023-09-04T12:20:00+02:00",
+            "endTimepoint": "2023-09-04T13:05:00+02:00"
           }
         ]
       },
@@ -646,13 +647,13 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T11:00:00Z",
-            "endTimepoint": "2023-09-06T11:45:00Z"
+            "startTimepoint": "2023-09-06T11:00:00+02:00",
+            "endTimepoint": "2023-09-06T11:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T12:20:00Z",
-            "endTimepoint": "2023-09-07T13:05:00Z"
+            "startTimepoint": "2023-09-07T12:20:00+02:00",
+            "endTimepoint": "2023-09-07T13:05:00+02:00"
           }
         ]
       },
@@ -671,13 +672,13 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T11:00:00Z",
-            "endTimepoint": "2023-09-05T11:45:00Z"
+            "startTimepoint": "2023-09-05T11:00:00+02:00",
+            "endTimepoint": "2023-09-05T11:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T10:10:00Z",
-            "endTimepoint": "2023-09-07T10:55:00Z"
+            "startTimepoint": "2023-09-07T10:10:00+02:00",
+            "endTimepoint": "2023-09-07T10:55:00+02:00"
           }
         ]
       },
@@ -696,8 +697,8 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-08T11:00:00Z",
-            "endTimepoint": "2023-09-08T11:45:00Z",
+            "startTimepoint": "2023-09-08T11:00:00+02:00",
+            "endTimepoint": "2023-09-08T11:45:00+02:00",
             "validWeeks": [
               "2023:36,38,40,42,44,46,48,50",
               "2024:1-4"
@@ -720,38 +721,38 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T09:05:00Z",
-            "endTimepoint": "2023-09-04T09:50:00Z"
+            "startTimepoint": "2023-09-04T09:05:00+02:00",
+            "endTimepoint": "2023-09-04T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T10:10:00Z",
-            "endTimepoint": "2023-09-04T10:55:00Z"
+            "startTimepoint": "2023-09-04T10:10:00+02:00",
+            "endTimepoint": "2023-09-04T10:55:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T09:05:00Z",
-            "endTimepoint": "2023-09-05T09:50:00Z"
+            "startTimepoint": "2023-09-05T09:05:00+02:00",
+            "endTimepoint": "2023-09-05T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T10:10:00Z",
-            "endTimepoint": "2023-09-05T10:55:00Z"
+            "startTimepoint": "2023-09-05T10:10:00+02:00",
+            "endTimepoint": "2023-09-05T10:55:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T09:05:00Z",
-            "endTimepoint": "2023-09-06T09:50:00Z"
+            "startTimepoint": "2023-09-06T09:05:00+02:00",
+            "endTimepoint": "2023-09-06T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T08:00:00Z",
-            "endTimepoint": "2023-09-07T08:45:00Z"
+            "startTimepoint": "2023-09-07T08:00:00+02:00",
+            "endTimepoint": "2023-09-07T08:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-08T09:05:00Z",
-            "endTimepoint": "2023-09-08T09:50:00Z"
+            "startTimepoint": "2023-09-08T09:05:00+02:00",
+            "endTimepoint": "2023-09-08T09:50:00+02:00"
           }
         ]
       },
@@ -770,28 +771,28 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T08:00:00Z",
-            "endTimepoint": "2023-09-04T08:45:00Z"
+            "startTimepoint": "2023-09-04T11:00:00+02:00",
+            "endTimepoint": "2023-09-04T11:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T08:00:00Z",
-            "endTimepoint": "2023-09-05T08:45:00Z"
+            "startTimepoint": "2023-09-05T12:20:00+02:00",
+            "endTimepoint": "2023-09-05T13:05:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T10:10:00Z",
-            "endTimepoint": "2023-09-06T10:55:00Z"
+            "startTimepoint": "2023-09-06T10:10:00+02:00",
+            "endTimepoint": "2023-09-06T10:55:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T09:05:00Z",
-            "endTimepoint": "2023-09-07T09:50:00Z"
+            "startTimepoint": "2023-09-07T09:05:00+02:00",
+            "endTimepoint": "2023-09-07T09:50:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-08T10:10:00Z",
-            "endTimepoint": "2023-09-08T10:55:00Z"
+            "startTimepoint": "2023-09-08T10:10:00+02:00",
+            "endTimepoint": "2023-09-08T10:55:00+02:00"
           }
         ]
       },
@@ -810,13 +811,13 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T11:00:00Z",
-            "endTimepoint": "2023-09-06T11:45:00Z"
+            "startTimepoint": "2023-09-06T11:00:00+02:00",
+            "endTimepoint": "2023-09-06T11:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T12:20:00Z",
-            "endTimepoint": "2023-09-06T13:05:00Z"
+            "startTimepoint": "2023-09-08T08:00:00+02:00",
+            "endTimepoint": "2023-09-08T08:45:00+02:00"
           }
         ]
       },
@@ -835,13 +836,13 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T11:00:00Z",
-            "endTimepoint": "2023-09-05T11:45:00Z"
+            "startTimepoint": "2023-09-05T11:00:00+02:00",
+            "endTimepoint": "2023-09-05T11:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T10:10:00Z",
-            "endTimepoint": "2023-09-07T10:55:00Z"
+            "startTimepoint": "2023-09-07T10:10:00+02:00",
+            "endTimepoint": "2023-09-07T10:55:00+02:00"
           }
         ]
       },
@@ -854,19 +855,19 @@
         },
         "rooms": [
           {
-            "refId": "100"
+            "refId": "101"
           }
         ],
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T12:20:00Z",
-            "endTimepoint": "2023-09-07T13:05:00Z"
+            "startTimepoint": "2023-09-07T12:20:00+02:00",
+            "endTimepoint": "2023-09-07T13:05:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-08T11:00:00Z",
-            "endTimepoint": "2023-09-08T11:45:00Z"
+            "startTimepoint": "2023-09-08T11:00:00+02:00",
+            "endTimepoint": "2023-09-08T11:45:00+02:00"
           }
         ]
       },
@@ -885,10 +886,11 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T11:00:00Z",
-            "endTimepoint": "2023-09-07T11:45:00Z"
+            "startTimepoint": "2023-09-07T11:00:00+02:00",
+            "endTimepoint": "2023-09-07T11:45:00+02:00"
           }
-        ]
+        ],
+        "notes": "Parallelangebot für Teilgruppen: Religion oder Lebenskunde."
       },
       {
         "type": "lesson",
@@ -905,10 +907,11 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T11:00:00Z",
-            "endTimepoint": "2023-09-07T11:45:00Z"
+            "startTimepoint": "2023-09-07T11:00:00+02:00",
+            "endTimepoint": "2023-09-07T11:45:00+02:00"
           }
-        ]
+        ],
+        "notes": "Parallelangebot für Teilgruppen: Religion oder Lebenskunde."
       },
       {
         "type": "lesson",
@@ -925,18 +928,18 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T08:00:00Z",
-            "endTimepoint": "2023-09-04T08:45:00Z"
+            "startTimepoint": "2023-09-04T08:00:00+02:00",
+            "endTimepoint": "2023-09-04T08:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T08:00:00Z",
-            "endTimepoint": "2023-09-05T08:45:00Z"
+            "startTimepoint": "2023-09-05T08:00:00+02:00",
+            "endTimepoint": "2023-09-05T08:45:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T12:20:00Z",
-            "endTimepoint": "2023-09-06T13:05:00Z"
+            "startTimepoint": "2023-09-06T12:20:00+02:00",
+            "endTimepoint": "2023-09-06T13:05:00+02:00"
           }
         ]
       },
@@ -964,28 +967,28 @@
         "temporalExpressions": [
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-04T12:20:00Z",
-            "endTimepoint": "2023-09-04T16:30:00Z"
+            "startTimepoint": "2023-09-04T13:05:00+02:00",
+            "endTimepoint": "2023-09-04T16:30:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-05T12:20:00Z",
-            "endTimepoint": "2023-09-05T16:30:00Z"
+            "startTimepoint": "2023-09-05T13:05:00+02:00",
+            "endTimepoint": "2023-09-05T16:30:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-06T12:20:00Z",
-            "endTimepoint": "2023-09-06T16:30:00Z"
+            "startTimepoint": "2023-09-06T13:05:00+02:00",
+            "endTimepoint": "2023-09-06T16:30:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-07T12:20:00Z",
-            "endTimepoint": "2023-09-07T16:30:00Z"
+            "startTimepoint": "2023-09-07T13:05:00+02:00",
+            "endTimepoint": "2023-09-07T16:30:00+02:00"
           },
           {
             "type": "weekly",
-            "startTimepoint": "2023-09-08T12:20:00Z",
-            "endTimepoint": "2023-09-08T16:00:00Z"
+            "startTimepoint": "2023-09-08T13:05:00+02:00",
+            "endTimepoint": "2023-09-08T16:00:00+02:00"
           }
         ]
       },
@@ -998,8 +1001,8 @@
         "temporalExpressions": [
           {
             "type": "onetime",
-            "startTimepoint": "2023-11-04T12:00:00Z",
-            "endTimepoint": "2023-11-23T12:00:00Z"
+            "startTimepoint": "2023-11-04T00:00:00+01:00",
+            "endTimepoint": "2023-11-24T00:00:00+01:00"
           }
         ]
       },
@@ -1012,8 +1015,8 @@
         "temporalExpressions": [
           {
             "type": "onetime",
-            "startTimepoint": "2023-12-23T12:00:00Z",
-            "endTimepoint": "2024-01-05T12:00:00Z"
+            "startTimepoint": "2023-12-23T00:00:00+01:00",
+            "endTimepoint": "2024-01-06T00:00:00+01:00"
           }
         ]
       },
@@ -1051,8 +1054,8 @@
         "temporalExpressions": [
           {
             "type": "onetime",
-            "startTimepoint": "2023-09-04T08:00:00Z",
-            "endTimepoint": "2023-09-04T08:45:00Z"
+            "startTimepoint": "2023-09-04T09:05:00+02:00",
+            "endTimepoint": "2023-09-04T09:50:00+02:00"
           }
         ]
       },
@@ -1080,8 +1083,8 @@
         "temporalExpressions": [
           {
             "type": "onetime",
-            "startTimepoint": "2023-09-04T08:00:00Z",
-            "endTimepoint": "2023-09-04T08:45:00Z"
+            "startTimepoint": "2023-09-04T09:05:00+02:00",
+            "endTimepoint": "2023-09-04T09:50:00+02:00"
           }
         ]
       }
